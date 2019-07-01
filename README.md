@@ -1,0 +1,2 @@
+# BibTrek
+Bibliography exploration tool
