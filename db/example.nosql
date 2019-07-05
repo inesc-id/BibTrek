@@ -1,0 +1,122 @@
+CREATE (Memway:Paper {title:"Memway: In-Memory Waylaying Acceleration for
+Practical Rowhammer Attacks Against Binaries", institution:"TSINGHUA SCIENCE AND TECHNOLOGY", year:2019, library:"IEEE Xplore"})
+CREATE (Rowhammer:Subject {subject:"Rowhammer"})
+CREATE (Lai_Xu:Author {fname:"Lai", surname:"Xu"})
+CREATE (Rongwei_Yu:Author {fname:"Rongwei", surname:"Yu"})
+CREATE (Lina_Wang:Author {fname:"Lina", surname:"Wang"})
+CREATE (Weijie_Liu:Author {fname:"Weijie", surname:"Liu"})
+
+CREATE 
+  (Lai_Xu)-[:WROTE]->(Memway),
+  (Rongwei_Yu)-[:WROTE]->(Memway),
+  (Lina_Wang)-[:WROTE]->(Memway),
+  (Weijie_Liu)-[:WROTE]->(Memway)
+
+CREATE (CATTmew:Paper {title:"CATTmew: Defeating Software-onlyPhysical Kernel Isolation", institution:"", year:2019, library:"ArXiv"})
+
+CREATE (Yueqiang_Cheng:Author {fname:"Yueqiang", surname:"Cheng"})
+CREATE (Zhi_Zhang:Author {fname:"Zhi", surname:"Zhang"})
+CREATE (Surya_Nepal:Author {fname:"Surya", surname:"Nepal"})
+CREATE (Zhi_Wang:Author {fname:"Zhi", surname:"Wang"})
+
+CREATE 
+  (Yueqiang_Cheng)-[:WROTE]->(CATTmew),
+  (Zhi_Zhang)-[:WROTE]->(CATTmew),
+  (Surya_Nepal)-[:WROTE]->(CATTmew),
+  (Zhi_Wang)-[:WROTE]->(CATTmew)
+
+CREATE (MeltdownPaper:Paper {title:"Meltdown: Reading Kernel Memory from User Space", institution:"Graz University of Technology;", year:2018, library:"usenix"})
+
+CREATE (Moritz_Lipp:Author {fname:"Moritz", surname:"Lipp"})
+CREATE (Michael_Scharwz:Author {fname:"Michael", surname:"Schwarz"})
+CREATE (Daniel_Gruss:Author {fname:"Daniel", surname:"Gruss"})
+CREATE (Stefan_Mangard:Author {fname:"Stefan", surname:"Mangard"})
+
+CREATE (Graz_University_of_Technology:Institution)
+
+CREATE
+  (Moritz_Lipp)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
+  (Michael_Scharwz)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
+  (Daniel_Gruss)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
+  (Stefan_Mangard)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology)
+
+CREATE (Thomas_Prescher:Author {fname:"Thomas_Prescher", surname:"Prescher"})
+CREATE (Werner_Haas:Author {fname:"Werner", surname:"Haas"})
+
+CREATE (Cyberus_Technology:Institution)
+
+CREATE 
+  (Thomas_Prescher)-[:ASSOCIATED {during:2018}]->(Cyberus_Technology),
+  (Werner_Haas)-[:ASSOCIATED {during:2018}]->(Cyberus_Technology)
+
+CREATE (Anders_Fogh:Author {fname:"Anders", surname:"Fogh"})
+
+CREATE (G_DATA_Advanced_Analytics:Institution)
+
+CREATE
+  (Anders_Fogh)-[:ASSOCIATED {during:2018}]->(G_DATA_Advanced_Analytics)
+
+CREATE (Jann_Horn:Author {fname:"Jann", surname:"Horn"})
+
+CREATE (Google_Project_Zero:Institution)
+
+CREATE
+  (Jann_Horn)-[:ASSOCIATED {during:2018}]->(Google_Project_Zero)
+
+CREATE (Paul_Kocher:Author {fname:"Paul", surname:"Kocher"})
+
+CREATE (Daniel_Genkin:Author {fname:"Daniel", surname:"Genkin"})
+
+CREATE (University_of_Michigan:Institution)
+
+CREATE 
+  (Paul_Kocher)-[:ASSOCIATED {during:2018}]->(University_of_Michigan),
+  (Daniel_Genkin)-[:ASSOCIATED {during:2018}]->(University_of_Michigan)
+
+CREATE (Yuval_Yarom:Author {fname:"Yuval", surname:"Yarom"})
+
+CREATE (University_of_Adelaide:Institution)
+CREATE (Data61:Institution)
+
+CREATE 
+  (Yuval_Yarom)-[:ASSOCIATED {during:2018}]->(University_of_Adelaide)
+
+CREATE
+  (Yuval_Yarom)-[:ASSOCIATED {during:2018}]->(Data61)
+
+CREATE (Mike_Hamburg:Author {fname:"Mike", surname:"Hamburg"})
+
+CREATE (Rambus:Institution)
+
+CREATE (Cryptography_Research_Division:Institution)
+
+CREATE
+  (Mike_Hamburg)-[:ASSOCIATED {during:2018}]->(Rambus)
+
+CREATE
+  (Mike_Hamburg)-[:ASSOCIATED {during:2018}]->(Cryptography_Research_Division)
+
+CREATE (Meltdown:Subject {subject:"Meltdown"})
+
+CREATE 
+  (Rowhammer)-[:FOCUS_OF]->(Memway),
+  (Rowhammer)-[:FOCUS_OF]->(CATTmew),
+  (Meltdown)-[:FOCUS_OF]->(MeltdownPaper)
+
+CREATE
+  (Moritz_Lipp)-[:WROTE]->(MeltdownPaper),
+  (Michael_Scharwz)-[:WROTE]->(MeltdownPaper),
+  (Daniel_Gruss)-[:WROTE]->(MeltdownPaper),
+  (Thomas_Prescher)-[:WROTE]->(MeltdownPaper),
+  (Werner_Haas)-[:WROTE]->(MeltdownPaper),
+  (Anders_Fogh)-[:WROTE]->(MeltdownPaper),
+  (Jann_Horn)-[:WROTE]->(MeltdownPaper),
+  (Stefan_Mangard)-[:WROTE]->(MeltdownPaper),
+  (Paul_Kocher)-[:WROTE]->(MeltdownPaper),
+  (Daniel_Genkin)-[:WROTE]->(MeltdownPaper),
+  (Yuval_Yarom)-[:WROTE]->(MeltdownPaper),
+  (Mike_Hamburg)-[:WROTE]->(MeltdownPaper)
+
+RETURN *
+
+
