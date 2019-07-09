@@ -62,6 +62,7 @@ CREATE
  (Weizmann_Institute_of_Science:Institution {iname:"Weizmann Institute of Science"})
 
 // Papers
+CREATE
  (CATTmew:Paper {title:"CATTmew: Defeating Software-only Physical Kernel Isolation", year:2019, library:"ArXiv"}),
  (Cryptocomplexity_knapsack_cryptosystems_paper:Paper {title:"On the Cryptocomplexity of Knapsack Cryptosystems", year:1979, library:"ACM"}),
  (Embedded_Systems_Security_Designs_Paper:Paper {title:"Security in Embedded Systems:Design Challenges", year:2004, library:"ACM Digital Library"}),
@@ -75,6 +76,7 @@ CREATE
  (Spectre_Paper:Paper {title:"Spectre Attacks: Exploiting Speculative Execution", year:2018, library:"spectreattacks"})
 
 //Subjects
+CREATE 
  (Branch_Prediction:Subject {subject:"Branch Prediction"}),
  (CPU_Attacks:Subject {subject:"CPU Attacks"}),
  (Cryptocomplexity:Subject {subject:"Cryptocomplexity"}),
@@ -124,6 +126,8 @@ CREATE
 
   (Hard_Factorization)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
 
+  (Key_Extraction)-[:FOCUS_OF]->(Physical_Key_Extraction_Paper),
+
   (Meltdown)-[:FOCUS_OF]->(Meltdown_Paper),
 
   (Multivariate_Polynomials)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
@@ -171,7 +175,7 @@ CREATE
   (Daniel_Genkin)-[:WROTE]->(Meltdown_Paper),
   (Daniel_Gruss)-[:WROTE]->(Meltdown_Paper),
   (Jann_Horn)-[:WROTE]->(Meltdown_Paper),
-  (Mike_Hamburg)-[:WROTE]->(Meltdown_Paper)
+  (Mike_Hamburg)-[:WROTE]->(Meltdown_Paper),
   (Michael_Scharwz)-[:WROTE]->(Meltdown_Paper),
   (Moritz_Lipp)-[:WROTE]->(Meltdown_Paper),
   (Paul_Kocher)-[:WROTE]->(Meltdown_Paper),
