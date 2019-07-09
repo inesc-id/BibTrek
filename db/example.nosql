@@ -127,8 +127,8 @@ CREATE
 CREATE (Perceptron:Paper {title:"Perceptron Learning for Reuse Prediction", year:2016, library:"ACM Digital Library"})
 
 CREATE (Daniel_Jimenez:Author {fname:"Daniel", surname:"Jimenez"})
-CREATE (Elvira_Teran:Author {fname:"Elvira", sunrame:"Teran"})
-CREATE (Zhe_Wang:Author {fname:"Zhe", sunrame:"Wang"})
+CREATE (Elvira_Teran:Author {fname:"Elvira", surname:"Teran"})
+CREATE (Zhe_Wang:Author {fname:"Zhe", surname:"Wang"})
 
 CREATE (Texas_AM_University:Institution {iname:"Texas A&M University"})
 
