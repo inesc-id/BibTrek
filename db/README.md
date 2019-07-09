@@ -37,11 +37,22 @@ In this graph database we adhere to the following schema:
 Our main node types are:
  (1) Paper: with attributes "year" and "library" for the year in which it was published and the library in which it was published in 
  (2) Author: with attributes "fname" and "surname" for its first and last name respectively
- (3) Subject: the subject of the paper. It's only attribute is its own subject name
- (4) Institution: either an university, school or institute, or a company. It's only attribute is the institution's name
+ (3) Subject: the subject of the paper. It's only attribute is its own subject name. The attribute's field name is "subject".
+ (4) Institution: either an university, school or institute, or a company. It's only attribute is the institution's name. The attribute's field name is "iname".
 
 Our main relation types are:
  (1) FOCUS_OF: Unidirectional relation between a paper and subject. A subject is the focus of a paper
  (2) ASSOCIATED: Unidirectional relation between an author and an institution. An author is/was associated with an institution during a certain year. The year in which they were associated constitutes an attribute for this edge
  (3) WROTE: Unidirectional relation between an author and a paper. An author wrote a certain paper whilst being part of an institution during a certain year
  (4) REFERENCES: Last but not least, a paper might reference another paper. This might either be an unidirectional or bidirectional relationship (whenever two papers reference each other).
+
+# Examples queries
+
+To query the system, after you've created the graph database, insert any of the queries below on the Neo4J Browser's search bar.
+
+Let's start with some simple queries to the database:
+
+(1) Get all the nodes and edges of the graph: "MATCH (n) RETURN n"
+(2) Get the name of an author and the papers that the author has written. Let's exemplify this with Adi Shamir, one of the creators of the RSA cryptosystem: "MATCH (author:Author {fname:"Adi", surname:"Shamir"})-[:WROTE]->(papers) RETURN author, papers"
+
+Finally to delete all of the graph database's nodes and edges use the following query: "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r"

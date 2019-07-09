@@ -275,4 +275,64 @@ CREATE
 CREATE 
   (Spectre_Paper)-[:REFERENCES]->(Physical_Key_Extraction_Paper)
 
+CREATE 
+  (RSA_Cryptosystem:Subject {subject:"RSA Cryptosystem"}),
+  (Public_Key_Cryptosystems:Subject {subject:"Public Key Cryptosystems"}),
+  (Digital_Signatures:Subject {subject:"Digital Signatures"})
+
+CREATE (RSA_Paper:Paper {title:"A Method for Obtaining Digital Signatures and Public-Key Cryptosystems", year:1978, library:"ACM Digital Library"})
+
+CREATE 
+  (Ronald_Rivest:Author {fname:"Ronald", surname:"Rivest"}),
+  (Leonard_Adleman:Author {fname:"Leonard", surname:"Adleman"})
+
+CREATE (Massachusetts_Institute_of_Technology:Institution {iname:"Massachusetts Institute of Technology"})
+
+CREATE 
+  (Ronald_Rivest)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology),
+  (Adi_Shamir)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology),
+  (Leonard_Adleman)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology)
+
+CREATE
+  (Adi_Shamir)-[:WROTE]->(RSA_Paper),
+  (Leonard_Adleman)-[:WROTE]->(RSA_Paper),
+  (Ronald_Rivest)-[:WROTE]->(RSA_Paper)
+
+CREATE
+  (RSA_Cryptosystem)-[:SUBJECT]->(RSA_Paper),
+  (Public_Key_Cryptosystems)-[:SUBJECT]->(RSA_Paper),
+  (Digital_Signatures)-[:SUBJECT]->(RSA_Paper)
+
+CREATE 
+  (Knapsack_Cryptosystems:Subject {subject:"Knapsack Cryptosystems"}),
+  (Cryptocomplexity:Subject {subject:"Cryptocomplexity"})
+
+CREATE 
+  (Cryptocomplexity_knapsack_cryptosystems_paper:Paper {title:"On the Cryptocomplexity of Knapsack Cryptosystems", year:1979, library:"ACM"}),
+  (Knapsack_Cryptosystems)-[:SUBJECT]->(Cryptocomplexity_knapsack_cryptosystems_paper),
+  (Cryptocomplexity)-[:SUBJECT]->(Cryptocomplexity_knapsack_cryptosystems_paper)
+
+CREATE (Adi_Shamir)-[:ASSOCIATED {during: 1979}]->(Massachusetts_Institute_of_Technology)
+
+CREATE (Adi_Shamir)-[:WROTE]->(Cryptocomplexity_knapsack_cryptosystems_paper)
+
+CREATE (Cryptocomplexity_knapsack_cryptosystems_paper)-[:REFERENCES]->(RSA_Paper)
+
+CREATE 
+  (Number_Generation:Subject {subject:"Number Generation"}),
+  (Hard_Factorization:Subject {subject:"Hard Factorizations"}),
+  (Multivariate_Polynomials:Subject {subject:"Multivariate Polynomials"})
+
+CREATE 
+  (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper:Paper {title:"On the Generation of Multivariate Polynomials which are Hard to Factor", year: 1993, library:"ACM Digital Library"}),
+  (Number_Generation)-[:SUBJECT]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
+  (Hard_Factorization)-[:SUBJECT]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
+  (Multivariate_Polynomials)-[:SUBJECT]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)
+
+CREATE (Adi_Shamir)-[:WROTE]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)
+
+CREATE (Adi_Shamir)-[:ASSOCIATED {during:"1993"}]->(Weizmann_Institute_of_Science)
+
+CREATE (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)-[:REFERENCES]-(RSA_Paper)
+
 RETURN *
