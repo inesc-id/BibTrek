@@ -40,7 +40,7 @@ CREATE (Michael_Scharwz:Author {fname:"Michael", surname:"Schwarz"})
 CREATE (Daniel_Gruss:Author {fname:"Daniel", surname:"Gruss"})
 CREATE (Stefan_Mangard:Author {fname:"Stefan", surname:"Mangard"})
 
-CREATE (Graz_University_of_Technology:Institution)
+CREATE (Graz_University_of_Technology:Institution {iname:"Graz University of Technology"})
 
 CREATE
   (Moritz_Lipp)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
@@ -59,7 +59,7 @@ CREATE
 
 CREATE (Anders_Fogh:Author {fname:"Anders", surname:"Fogh"})
 
-CREATE (G_DATA_Advanced_Analytics:Institution)
+CREATE (G_DATA_Advanced_Analytics:Institution {iname: "G DATA Advanced Analytics"})
 
 CREATE
   (Anders_Fogh)-[:ASSOCIATED {during:2018}]->(G_DATA_Advanced_Analytics)
@@ -149,7 +149,7 @@ CREATE
 CREATE (Spectre_Paper:Paper {title:"Spectre Attacks: Exploiting Speculative Execution", year:2018, library:"spectreattacks"})
 
 CREATE 
-  (Spectre:Subject {title:"Spectre"}),
+  (Spectre:Subject {subject:"Spectre"}),
   (Spectre)-[:FOCUS_OF]->(Spectre_Paper)
 
 CREATE 
