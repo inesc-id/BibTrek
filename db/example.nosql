@@ -1,184 +1,112 @@
-CREATE (Memway:Paper {title:"Memway: In-Memory Waylaying Acceleration for
-Practical Rowhammer Attacks Against Binaries", year:2019, library:"IEEE Xplore"})
-CREATE (Rowhammer:Subject {subject:"Rowhammer"})
-CREATE (Lai_Xu:Author {fname:"Lai", surname:"Xu"})
-CREATE (Rongwei_Yu:Author {fname:"Rongwei", surname:"Yu"})
-CREATE (Lina_Wang:Author {fname:"Lina", surname:"Wang"})
-CREATE (Weijie_Liu:Author {fname:"Weijie", surname:"Liu"})
-
-CREATE (Tsinghua_Science_and_Technology:Institution {iname:"Tsinghua Science and Technology"})
-
-CREATE (CATTmew:Paper {title:"CATTmew: Defeating Software-only Physical Kernel Isolation", year:2019, library:"ArXiv"})
-
-CREATE (RAM_Attacks:Subject {subject:"RAM Attacks"})
-
-CREATE (Yueqiang_Cheng:Author {fname:"Yueqiang", surname:"Cheng"})
-CREATE (Zhi_Zhang:Author {fname:"Zhi", surname:"Zhang"})
-CREATE (Surya_Nepal:Author {fname:"Surya", surname:"Nepal"})
-CREATE (Zhi_Wang:Author {fname:"Zhi", surname:"Wang"})
-
-CREATE 
-  
-
-CREATE (Meltdown_Paper:Paper {title:"Meltdown: Reading Kernel Memory from User Space", institution:"Graz University of Technology;", year:2018, library:"usenix"})
-
-CREATE (Moritz_Lipp:Author {fname:"Moritz", surname:"Lipp"})
-CREATE (Michael_Scharwz:Author {fname:"Michael", surname:"Schwarz"})
-CREATE (Daniel_Gruss:Author {fname:"Daniel", surname:"Gruss"})
-CREATE (Stefan_Mangard:Author {fname:"Stefan", surname:"Mangard"})
-
-CREATE (Graz_University_of_Technology:Institution {iname:"Graz University of Technology"})
-
-CREATE (Thomas_Prescher:Author {fname:"Thomas", surname:"Prescher"})
-CREATE (Werner_Haas:Author {fname:"Werner", surname:"Haas"})
-
-CREATE (Cyberus_Technology:Institution {iname:"Cyberus Technology"})
-
-
-CREATE (Anders_Fogh:Author {fname:"Anders", surname:"Fogh"})
-
-CREATE (G_DATA_Advanced_Analytics:Institution {iname: "G DATA Advanced Analytics"})
-
+//Authors
 CREATE
-  
+ (Adi_Shamir:Author {fname:"Adi", surname:"Shamir"}),
+ (Anand_Raghunathannec:Author {fname:"Arnand", surname:"Raghunathannec"}),
+ (Anders_Fogh:Author {fname:"Anders", surname:"Fogh"}),
+ (Daniel_Genkin:Author {fname:"Daniel", surname:"Genkin"}),
+ (Daniel_Gruss:Author {fname:"Daniel", surname:"Gruss"}),
+ (Daniel_Jimenez:Author {fname:"Daniel", surname:"Jimenez"}),
+ (Elvira_Teran:Author {fname:"Elvira", surname:"Teran"}),
+ (Eran_Tromer:Author {fname:"Eran", surname:"Tromer"}),
+ (Itamar_Pipman:Author {fname:"Itamar", surname:"Pipman"}),
+ (Jann_Horn:Author {fname:"Jann", surname:"Horn"}),
+ (Jeremie_Kim:Author {fname:"Jeremie", surname:"Kim"}),
+ (Lai_Xu:Author {fname:"Lai", surname:"Xu"}),
+ (Leonard_Adleman:Author {fname:"Leonard", surname:"Adleman"}),
+ (Lev_Pachmanov:Author {fname:"Lev", surname:"Pachmanov"}),
+ (Lina_Wang:Author {fname:"Lina", surname:"Wang"}),
+ (Michael_Scharwz:Author {fname:"Michael", surname:"Schwarz"}),
+ (Mike_Hamburg:Author {fname:"Mike", surname:"Hamburg"}),
+ (Moritz_Lipp:Author {fname:"Moritz", surname:"Lipp"}),
+ (Onur_Mutlu:Author {fname:"Onur", surname:"Mutlu"}),
+ (Paul_Kocher:Author {fname:"Paul", surname:"Kocher"}),
+ (Ronald_Rivest:Author {fname:"Ronald", surname:"Rivest"}),
+ (Rongwei_Yu:Author {fname:"Rongwei", surname:"Yu"}),
+ (Srivaths_Ravi:Author {fname:"Srivaths", surname:"Ravi"}),
+ (Stefan_Mangard:Author {fname:"Stefan", surname:"Mangard"}),
+ (Sunil_Hattangady:Author {fname:"Sunil", surname:"Hattangady"}),
+ (Surya_Nepal:Author {fname:"Surya", surname:"Nepal"}),
+ (Thomas_Prescher:Author {fname:"Thomas", surname:"Prescher"}),
+ (Weijie_Liu:Author {fname:"Weijie", surname:"Liu"}),
+ (Werner_Haas:Author {fname:"Werner", surname:"Haas"}),
+ (Yueqiang_Cheng:Author {fname:"Yueqiang", surname:"Cheng"}),
+ (Yuval_Yarom:Author {fname:"Yuval", surname:"Yarom"}),
+ (Zhe_Wang:Author {fname:"Zhe", surname:"Wang"}),
+ (Zhi_Wang:Author {fname:"Zhi", surname:"Wang"}),
+ (Zhi_Zhang:Author {fname:"Zhi", surname:"Zhang"})
 
-CREATE (Jann_Horn:Author {fname:"Jann", surname:"Horn"})
-
-CREATE (Google_Project_Zero:Institution {iname:"Google Project Zero"})
-
-CREATE (Paul_Kocher:Author {fname:"Paul", surname:"Kocher"})
-
-CREATE (Daniel_Genkin:Author {fname:"Daniel", surname:"Genkin"})
-
-CREATE (University_of_Michigan:Institution {iname:"University of Michigan"})
-
-CREATE (Yuval_Yarom:Author {fname:"Yuval", surname:"Yarom"})
-
-CREATE (University_of_Adelaide:Institution {iname:"University of Adelaide"})
-CREATE (Data61:Institution {iname:"Data 61"})
-
-CREATE (Mike_Hamburg:Author {fname:"Mike", surname:"Hamburg"})
-
-CREATE (Rambus:Institution {iname:"Rambus"})
-
-CREATE (Cryptography_Research_Division:Institution {iname:"Cryptography Research Division"})
-
-CREATE (Meltdown:Subject {subject:"Meltdown"})
-
-
-CREATE (Branch_Prediction:Subject {subject:"Branch Prediction"})
-
-CREATE 
-  (Perceptron:Paper {title:"Perceptron Learning for Reuse Prediction", year:2016, library:"ACM Digital Library"}),
-
-CREATE (Daniel_Jimenez:Author {fname:"Daniel", surname:"Jimenez"})
-CREATE (Elvira_Teran:Author {fname:"Elvira", surname:"Teran"})
-CREATE (Zhe_Wang:Author {fname:"Zhe", surname:"Wang"})
-
-CREATE (Texas_AM_University:Institution {iname:"Texas A&M University"})
-
-CREATE (Intel_Labs:Institution {iname:"Intel Labs"})
-
-CREATE (Spectre_Paper:Paper {title:"Spectre Attacks: Exploiting Speculative Execution", year:2018, library:"spectreattacks"})
-
-CREATE 
-  (Spectre:Subject {subject:"Spectre"}),
-
-CREATE (University_of_Pennsylvania:Institution {iname:"University of Pennsylvania"})
-CREATE (University_of_Maryland:Institution {iname:"University of Maryland"})
-
-CREATE (Independent:Institution {iname:"Independent"})
-
-CREATE 
-  (Meltdown_Paper)-[:REFERENCES]->(Perceptron),
-  (Memway)-[:REFERENCES]->(CATTmew),
-  (Spectre_Paper)-[:REFERENCES]->(Meltdown_Paper),
-  (Meltdown_Paper)-[:REFERENCES]->(Spectre_Paper),
-  (Memway)-[:REFERENCES]->(Spectre_Paper),
-  (Memway)-[:REFERENCES]->(Meltdown_Paper)
-
-CREATE 
-  (Rowhammer_Retrospective_Paper:Paper {title:"RowHammer: A Retrospective", year:2019, library:"ArXiv"}),
-  (Rowhammer_Retrospective_Paper)-[:REFERENCES]->(Meltdown_Paper),
-  (Rowhammer_Retrospective_Paper)-[:REFERENCES]->(Spectre_Paper)
-
-CREATE (Carnegie_Mellon_University:Institution {iname:"Carnegie Melon University"})
-CREATE (ETH_Zurich:Institution {iname:"ETH Zurich"})
-
-
-CREATE 
-  (Onur_Mutlu:Author {fname:"Onur", surname:"Mutlu"})
-
-CREATE 
-  (Jeremie_Kim:Author {fname:"Jeremie", surname:"Kim"})
-
-CREATE (Embedded_Systems_Security_Designs_Paper:Paper {title:"Security in Embedded Systems:Design Challenges", year:2004, library:"ACM Digital Library"})
-
-CREATE 
-  (Srivaths_Ravi:Author {fname:"Srivaths", surname:"Ravi"}),
-  (Anand_Raghunathannec:Author {fname:"Arnand", surname:"Raghunathannec"}),
-  (Sunil_Hattangady:Author {fname:"Sunil", surname:"Hattangady"})
-
-CREATE 
-  (NEC_Laboratories_America:Institution {iname:"NEC Laboratories America"}),
-  (Texas_Instruments_Inc:Institution {iname:"Texas Instruments Inc."})
-
-CREATE 
-  (Embedded_Systems:Subject {subject:"Embedded Systems"}),
-
-CREATE (Physical_Key_Extraction_Paper:Paper {title:"Physical Key Extraction Attacks on PCs", year:2016, library:"ACM Digital Library"})
-
-CREATE 
-  (Key_Extraction:Subject:Subject {subject:"Key Extraction"})
-
-CREATE 
- (Technion_Israel_Institute_of_Technology:Institution {iname:"Technion Israel Institute of Technology"}),
+//Institutions
+CREATE
  (Blavatnik_School_of_Computer_Science:Institution {iname:"Blavatnik School of Computer Science"}),
+ (Carnegie_Mellon_University:Institution {iname:"Carnegie Melon University"}),
+ (Cryptography_Research_Division:Institution {iname:"Cryptography Research Division"}),
+ (Cyberus_Technology:Institution {iname:"Cyberus Technology"}),
+ (Data61:Institution {iname:"Data 61"}),
+ (ETH_Zurich:Institution {iname:"ETH Zurich"}),
+ (G_DATA_Advanced_Analytics:Institution {iname:"G DATA Advanced Analytics"}),
+ (Google_Project_Zero:Institution {iname:"Google Project Zero"}),
+ (Graz_University_of_Technology:Institution {iname:"Graz University of Technology"}),
+ (Independent:Institution {iname:"Independent"}),
+ (Intel_Labs:Institution {iname:"Intel Labs"}),
+ (Massachusetts_Institute_of_Technology:Institution {iname:"Massachusetts Institute of Technology"}),
+ (NEC_Laboratories_America:Institution {iname:"NEC Laboratories America"}),
+ (Rambus:Institution {iname:"Rambus"}),
+ (Technion_Israel_Institute_of_Technology:Institution {iname:"Technion Israel Institute of Technology"}),
+ (Texas_AM_University:Institution {iname:"Texas A&M University"}),
+ (Texas_Instruments_Inc:Institution {iname:"Texas Instruments Inc."}),
+ (Tsinghua_Science_and_Technology:Institution {iname:"Tsinghua Science and Technology"}),
+ (University_of_Adelaide:Institution {iname:"University of Adelaide"}),
+ (University_of_Maryland:Institution {iname:"University of Maryland"}),
+ (University_of_Michigan:Institution {iname:"University of Michigan"}),
+ (University_of_Pennsylvania:Institution {iname:"University of Pennsylvania"}),
  (Weizmann_Institute_of_Science:Institution {iname:"Weizmann Institute of Science"})
 
-CREATE 
-  (Lev_Pachmanov:Author {fname:"Lev", surname:"Pachmanov"}),
-  (Itamar_Pipman:Author {fname:"Itamar", surname:"Pipman"}),
-  (Adi_Shamir:Author {fname:"Adi", surname:"Shamir"}),
-  (Eran_Tromer:Author {fname:"Eran", surname:"Tromer"})
+// Papers
+ (CATTmew:Paper {title:"CATTmew: Defeating Software-only Physical Kernel Isolation", year:2019, library:"ArXiv"}),
+ (Cryptocomplexity_knapsack_cryptosystems_paper:Paper {title:"On the Cryptocomplexity of Knapsack Cryptosystems", year:1979, library:"ACM"}),
+ (Embedded_Systems_Security_Designs_Paper:Paper {title:"Security in Embedded Systems:Design Challenges", year:2004, library:"ACM Digital Library"}),
+ (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper:Paper {title:"On the Generation of Multivariate Polynomials which are Hard to Factor", year: 1993, library:"ACM Digital Library"}),
+ (Meltdown_Paper:Paper {title:"Meltdown: Reading Kernel Memory from User Space", institution:"Graz University of Technology;", year:2018, library:"usenix"}),
+ (Memway:Paper {title:"Memway: In-Memory Waylaying Acceleration for Practical Rowhammer Attacks Against Binaries", year:2019, library:"IEEE Xplore"}),
+ (Perceptron:Paper {title:"Perceptron Learning for Reuse Prediction", year:2016, library:"ACM Digital Library"}),
+ (Physical_Key_Extraction_Paper:Paper {title:"Physical Key Extraction Attacks on PCs", year:2016, library:"ACM Digital Library"}),
+ (RSA_Paper:Paper {title:"A Method for Obtaining Digital Signatures and Public-Key Cryptosystems", year:1978, library:"ACM Digital Library"}),
+ (Rowhammer_Retrospective_Paper:Paper {title:"RowHammer: A Retrospective", year:2019, library:"ArXiv"}),
+ (Spectre_Paper:Paper {title:"Spectre Attacks: Exploiting Speculative Execution", year:2018, library:"spectreattacks"})
 
+//Subjects
+ (Branch_Prediction:Subject {subject:"Branch Prediction"}),
+ (CPU_Attacks:Subject {subject:"CPU Attacks"}),
+ (Cryptocomplexity:Subject {subject:"Cryptocomplexity"}),
+ (Digital_Signatures:Subject {subject:"Digital Signatures"}),
+ (Embedded_Systems:Subject {subject:"Embedded Systems"}),
+ (Hard_Factorization:Subject {subject:"Hard Factorizations"}),
+ (Key_Extraction:Subject:Subject {subject:"Key Extraction"}),
+ (Knapsack_Cryptosystems:Subject {subject:"Knapsack Cryptosystems"}),
+ (Meltdown:Subject {subject:"Meltdown"}),
+ (Multivariate_Polynomials:Subject {subject:"Multivariate Polynomials"}),
+ (Number_Generation:Subject {subject:"Number Generation"}),
+ (Public_Key_Cryptosystems:Subject {subject:"Public Key Cryptosystems"}),
+ (RAM_Attacks:Subject {subject:"RAM Attacks"}),
+ (Rowhammer:Subject {subject:"Rowhammer"}),
+ (RSA_Cryptosystem:Subject {subject:"RSA Cryptosystem"}),
+ (Spectre:Subject {subject:"Spectre"})
+
+//PAPER X REFERENCES PAPER Y 
+//PAPER Y MIGHT ALSO REFERENCE PAPER X
 CREATE 
+  (Cryptocomplexity_knapsack_cryptosystems_paper)-[:REFERENCES]->(RSA_Paper),
+  (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)-[:REFERENCES]->(RSA_Paper),
+  (Meltdown_Paper)-[:REFERENCES]->(Perceptron),
+  (Meltdown_Paper)-[:REFERENCES]->(Spectre_Paper),
+  (Memway)-[:REFERENCES]->(CATTmew),
+  (Memway)-[:REFERENCES]->(Meltdown_Paper),
+  (Memway)-[:REFERENCES]->(Spectre_Paper),
+  (Rowhammer_Retrospective_Paper)-[:REFERENCES]->(Meltdown_Paper),
+  (Rowhammer_Retrospective_Paper)-[:REFERENCES]->(Spectre_Paper),
+  (Spectre_Paper)-[:REFERENCES]->(Meltdown_Paper),
   (Spectre_Paper)-[:REFERENCES]->(Physical_Key_Extraction_Paper)
 
-CREATE 
-  (RSA_Cryptosystem:Subject {subject:"RSA Cryptosystem"}),
-  (Public_Key_Cryptosystems:Subject {subject:"Public Key Cryptosystems"}),
-  (Digital_Signatures:Subject {subject:"Digital Signatures"})
-
-CREATE (RSA_Paper:Paper {title:"A Method for Obtaining Digital Signatures and Public-Key Cryptosystems", year:1978, library:"ACM Digital Library"})
-
-CREATE 
-  (Ronald_Rivest:Author {fname:"Ronald", surname:"Rivest"}),
-  (Leonard_Adleman:Author {fname:"Leonard", surname:"Adleman"})
-
-CREATE (Massachusetts_Institute_of_Technology:Institution {iname:"Massachusetts Institute of Technology"})
-
-
-CREATE 
-  (Knapsack_Cryptosystems:Subject {subject:"Knapsack Cryptosystems"}),
-  (Cryptocomplexity:Subject {subject:"Cryptocomplexity"})
-
-CREATE 
-  (Cryptocomplexity_knapsack_cryptosystems_paper:Paper {title:"On the Cryptocomplexity of Knapsack Cryptosystems", year:1979, library:"ACM"})
-
-CREATE (Cryptocomplexity_knapsack_cryptosystems_paper)-[:REFERENCES]->(RSA_Paper)
-
-CREATE 
-  (Number_Generation:Subject {subject:"Number Generation"}),
-  (Hard_Factorization:Subject {subject:"Hard Factorizations"}),
-  (Multivariate_Polynomials:Subject {subject:"Multivariate Polynomials"})
-
-CREATE 
-  (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper:Paper {title:"On the Generation of Multivariate Polynomials which are Hard to Factor", year: 1993, library:"ACM Digital Library"}),
-
-CREATE (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)-[:REFERENCES]->(RSA_Paper)
-
-CREATE (CPU_Attacks:Subject {subject:"CPU Attacks"})
 
 //SUBJECT X IS FOCUS OF PAPER Y
 CREATE 
