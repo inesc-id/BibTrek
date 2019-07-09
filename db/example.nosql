@@ -6,19 +6,7 @@ CREATE (Rongwei_Yu:Author {fname:"Rongwei", surname:"Yu"})
 CREATE (Lina_Wang:Author {fname:"Lina", surname:"Wang"})
 CREATE (Weijie_Liu:Author {fname:"Weijie", surname:"Liu"})
 
-CREATE (TSINGHUA_SCIENCE_AND_TECHNOLOGY:Institution {iname:"Tsinghua Science and Technology"})
-
-CREATE 
-  (Lai_Xu)-[:ASSOCIATED {during:2016}]->(TSINGHUA_SCIENCE_AND_TECHNOLOGY),
-  (Rongwei_Yu)-[:ASSOCIATED {during:2016}]->(TSINGHUA_SCIENCE_AND_TECHNOLOGY),
-  (Lina_Wang)-[:ASSOCIATED {during:2016}]->(TSINGHUA_SCIENCE_AND_TECHNOLOGY),
-  (Weijie_Liu)-[:ASSOCIATED {during:2016}]->(TSINGHUA_SCIENCE_AND_TECHNOLOGY)
-
-CREATE 
-  (Lai_Xu)-[:WROTE]->(Memway),
-  (Rongwei_Yu)-[:WROTE]->(Memway),
-  (Lina_Wang)-[:WROTE]->(Memway),
-  (Weijie_Liu)-[:WROTE]->(Memway)
+CREATE (Tsinghua_Science_and_Technology:Institution {iname:"Tsinghua Science and Technology"})
 
 CREATE (CATTmew:Paper {title:"CATTmew: Defeating Software-only Physical Kernel Isolation", year:2019, library:"ArXiv"})
 
@@ -30,10 +18,7 @@ CREATE (Surya_Nepal:Author {fname:"Surya", surname:"Nepal"})
 CREATE (Zhi_Wang:Author {fname:"Zhi", surname:"Wang"})
 
 CREATE 
-  (Yueqiang_Cheng)-[:WROTE]->(CATTmew),
-  (Zhi_Zhang)-[:WROTE]->(CATTmew),
-  (Surya_Nepal)-[:WROTE]->(CATTmew),
-  (Zhi_Wang)-[:WROTE]->(CATTmew)
+  
 
 CREATE (Meltdown_Paper:Paper {title:"Meltdown: Reading Kernel Memory from User Space", institution:"Graz University of Technology;", year:2018, library:"usenix"})
 
@@ -44,34 +29,22 @@ CREATE (Stefan_Mangard:Author {fname:"Stefan", surname:"Mangard"})
 
 CREATE (Graz_University_of_Technology:Institution {iname:"Graz University of Technology"})
 
-CREATE
-  (Moritz_Lipp)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
-  (Michael_Scharwz)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
-  (Daniel_Gruss)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
-  (Stefan_Mangard)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology)
-
 CREATE (Thomas_Prescher:Author {fname:"Thomas", surname:"Prescher"})
 CREATE (Werner_Haas:Author {fname:"Werner", surname:"Haas"})
 
 CREATE (Cyberus_Technology:Institution {iname:"Cyberus Technology"})
 
-CREATE 
-  (Thomas_Prescher)-[:ASSOCIATED {during:2018}]->(Cyberus_Technology),
-  (Werner_Haas)-[:ASSOCIATED {during:2018}]->(Cyberus_Technology)
 
 CREATE (Anders_Fogh:Author {fname:"Anders", surname:"Fogh"})
 
 CREATE (G_DATA_Advanced_Analytics:Institution {iname: "G DATA Advanced Analytics"})
 
 CREATE
-  (Anders_Fogh)-[:ASSOCIATED {during:2018}]->(G_DATA_Advanced_Analytics)
+  
 
 CREATE (Jann_Horn:Author {fname:"Jann", surname:"Horn"})
 
 CREATE (Google_Project_Zero:Institution {iname:"Google Project Zero"})
-
-CREATE
-  (Jann_Horn)-[:ASSOCIATED {during:2018}]->(Google_Project_Zero)
 
 CREATE (Paul_Kocher:Author {fname:"Paul", surname:"Kocher"})
 
@@ -79,19 +52,10 @@ CREATE (Daniel_Genkin:Author {fname:"Daniel", surname:"Genkin"})
 
 CREATE (University_of_Michigan:Institution {iname:"University of Michigan"})
 
-CREATE 
-  (Daniel_Genkin)-[:ASSOCIATED {during:2018}]->(University_of_Michigan)
-
 CREATE (Yuval_Yarom:Author {fname:"Yuval", surname:"Yarom"})
 
 CREATE (University_of_Adelaide:Institution {iname:"University of Adelaide"})
 CREATE (Data61:Institution {iname:"Data 61"})
-
-CREATE 
-  (Yuval_Yarom)-[:ASSOCIATED {during:2018}]->(University_of_Adelaide)
-
-CREATE
-  (Yuval_Yarom)-[:ASSOCIATED {during:2018}]->(Data61)
 
 CREATE (Mike_Hamburg:Author {fname:"Mike", surname:"Hamburg"})
 
@@ -99,38 +63,13 @@ CREATE (Rambus:Institution {iname:"Rambus"})
 
 CREATE (Cryptography_Research_Division:Institution {iname:"Cryptography Research Division"})
 
-CREATE
-  (Mike_Hamburg)-[:ASSOCIATED {during:2018}]->(Rambus)
-
-CREATE
-  (Mike_Hamburg)-[:ASSOCIATED {during:2018}]->(Cryptography_Research_Division)
-
 CREATE (Meltdown:Subject {subject:"Meltdown"})
 
-CREATE 
-  (Rowhammer)-[:FOCUS_OF]->(Memway),
-  (Rowhammer)-[:FOCUS_OF]->(CATTmew),
-  (Meltdown)-[:FOCUS_OF]->(Meltdown_Paper)
-
-CREATE
-  (Moritz_Lipp)-[:WROTE]->(Meltdown_Paper),
-  (Michael_Scharwz)-[:WROTE]->(Meltdown_Paper),
-  (Daniel_Gruss)-[:WROTE]->(Meltdown_Paper),
-  (Thomas_Prescher)-[:WROTE]->(Meltdown_Paper),
-  (Werner_Haas)-[:WROTE]->(Meltdown_Paper),
-  (Anders_Fogh)-[:WROTE]->(Meltdown_Paper),
-  (Jann_Horn)-[:WROTE]->(Meltdown_Paper),
-  (Stefan_Mangard)-[:WROTE]->(Meltdown_Paper),
-  (Paul_Kocher)-[:WROTE]->(Meltdown_Paper),
-  (Daniel_Genkin)-[:WROTE]->(Meltdown_Paper),
-  (Yuval_Yarom)-[:WROTE]->(Meltdown_Paper),
-  (Mike_Hamburg)-[:WROTE]->(Meltdown_Paper)
 
 CREATE (Branch_Prediction:Subject {subject:"Branch Prediction"})
 
 CREATE 
   (Perceptron:Paper {title:"Perceptron Learning for Reuse Prediction", year:2016, library:"ACM Digital Library"}),
-  (Branch_Prediction)-[:FOCUS_OF]->(Perceptron)
 
 CREATE (Daniel_Jimenez:Author {fname:"Daniel", surname:"Jimenez"})
 CREATE (Elvira_Teran:Author {fname:"Elvira", surname:"Teran"})
@@ -140,49 +79,15 @@ CREATE (Texas_AM_University:Institution {iname:"Texas A&M University"})
 
 CREATE (Intel_Labs:Institution {iname:"Intel Labs"})
 
-CREATE 
-  (Daniel_Jimenez)-[:ASSOCIATED {during: 2016}]->(Texas_AM_University),
-  (Elvira_Teran)-[:ASSOCIATED {during: 2016}]->(Texas_AM_University)
-
-CREATE 
-  (Zhe_Wang)-[:ASSOCIATED {during: 2016}]->(Intel_Labs)
-
-CREATE 
-  (Daniel_Jimenez)-[:WROTE]->(Perceptron),
-  (Elvira_Teran)-[:WROTE]->(Perceptron),
-  (Zhe_Wang)-[:WROTE]->(Perceptron)
-
 CREATE (Spectre_Paper:Paper {title:"Spectre Attacks: Exploiting Speculative Execution", year:2018, library:"spectreattacks"})
 
 CREATE 
   (Spectre:Subject {subject:"Spectre"}),
-  (Spectre)-[:FOCUS_OF]->(Spectre_Paper)
-
-CREATE 
-  (Paul_Kocher)-[:WROTE]->(Spectre_Paper),
-  (Jann_Horn)-[:WROTE]->(Spectre_Paper),
-  (Anders_Fogh)-[:WROTE]->(Spectre_Paper),
-  (Daniel_Genkin)-[:WROTE]->(Spectre_Paper),
-  (Daniel_Gruss)-[:WROTE]->(Spectre_Paper),
-  (Werner_Haas)-[:WROTE]->(Spectre_Paper),
-  (Mike_Hamburg)-[:WROTE]->(Spectre_Paper),
-  (Moritz_Lipp)-[:WROTE]->(Spectre_Paper),
-  (Stefan_Mangard)-[:WROTE]->(Spectre_Paper),
-  (Thomas_Prescher)-[:WROTE]->(Spectre_Paper),
-  (Michael_Scharwz)-[:WROTE]->(Spectre_Paper),
-  (Yuval_Yarom)-[:WROTE]->(Spectre_Paper)
 
 CREATE (University_of_Pennsylvania:Institution {iname:"University of Pennsylvania"})
 CREATE (University_of_Maryland:Institution {iname:"University of Maryland"})
 
-CREATE 
-  (Daniel_Genkin)-[:ASSOCIATED {during:2018}]->(University_of_Pennsylvania),
-  (Daniel_Genkin)-[:ASSOCIATED {during:2018}]->(University_of_Maryland)
-
 CREATE (Independent:Institution {iname:"Independent"})
-
-CREATE 
-  (Paul_Kocher)-[:ASSOCIATED {during: 2018}]->(Independent)
 
 CREATE 
   (Meltdown_Paper)-[:REFERENCES]->(Perceptron),
@@ -194,7 +99,6 @@ CREATE
 
 CREATE 
   (Rowhammer_Retrospective_Paper:Paper {title:"RowHammer: A Retrospective", year:2019, library:"ArXiv"}),
-  (Rowhammer)-[:FOCUS_OF]->(Rowhammer_Retrospective_Paper),
   (Rowhammer_Retrospective_Paper)-[:REFERENCES]->(Meltdown_Paper),
   (Rowhammer_Retrospective_Paper)-[:REFERENCES]->(Spectre_Paper)
 
@@ -203,18 +107,10 @@ CREATE (ETH_Zurich:Institution {iname:"ETH Zurich"})
 
 
 CREATE 
-  (Onur_Mutlu:Author {fname:"Onur", surname:"Mutlu"}),
-  (Onur_Mutlu)-[:ASSOCIATED {during:2019}]->(Carnegie_Mellon_University),
-  (Onur_Mutlu)-[:ASSOCIATED {during:2019}]->(ETH_Zurich)
+  (Onur_Mutlu:Author {fname:"Onur", surname:"Mutlu"})
 
 CREATE 
-  (Jeremie_Kim:Author {fname:"Jeremie", surname:"Kim"}),
-  (Jeremie_Kim)-[:ASSOCIATED {during:2019}]->(Carnegie_Mellon_University),
-  (Jeremie_Kim)-[:ASSOCIATED {during:2019}]->(ETH_Zurich)
-
-CREATE 
-  (Onur_Mutlu)-[:WROTE]->(Rowhammer_Retrospective_Paper),
-  (Jeremie_Kim)-[:WROTE]->(Rowhammer_Retrospective_Paper)
+  (Jeremie_Kim:Author {fname:"Jeremie", surname:"Kim"})
 
 CREATE (Embedded_Systems_Security_Designs_Paper:Paper {title:"Security in Embedded Systems:Design Challenges", year:2004, library:"ACM Digital Library"})
 
@@ -227,31 +123,13 @@ CREATE
   (NEC_Laboratories_America:Institution {iname:"NEC Laboratories America"}),
   (Texas_Instruments_Inc:Institution {iname:"Texas Instruments Inc."})
 
-CREATE
-  (Srivaths_Ravi)-[:ASSOCIATED {during:2004}]->(NEC_Laboratories_America),
-  (Anand_Raghunathannec)-[:ASSOCIATED {during:2004}]->(NEC_Laboratories_America)
-
-CREATE 
-  (Paul_Kocher)-[:ASSOCIATED {during:2004}]->(Cryptography_Research_Division),
-  (Srivaths_Ravi)-[:ASSOCIATED {during:2004}]->(NEC_Laboratories_America),
-  (Anand_Raghunathannec)-[:ASSOCIATED {during:2004}]->(NEC_Laboratories_America),
-  (Sunil_Hattangady)-[:ASSOCIATED {during:2004}]->(Texas_Instruments_Inc)
-
-CREATE 
-  (Paul_Kocher)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper),
-  (Srivaths_Ravi)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper),
-  (Anand_Raghunathannec)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper),
-  (Sunil_Hattangady)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper)
-
 CREATE 
   (Embedded_Systems:Subject {subject:"Embedded Systems"}),
-  (Embedded_Systems)-[:FOCUS_OF]->(Embedded_Systems_Security_Designs_Paper)
 
 CREATE (Physical_Key_Extraction_Paper:Paper {title:"Physical Key Extraction Attacks on PCs", year:2016, library:"ACM Digital Library"})
 
 CREATE 
-  (Key_Extraction:Subject:Subject {subject:"Key Extraction"}),
-  (Key_Extraction)-[:FOCUS_OF]->(Physical_Key_Extraction_Paper)
+  (Key_Extraction:Subject:Subject {subject:"Key Extraction"})
 
 CREATE 
  (Technion_Israel_Institute_of_Technology:Institution {iname:"Technion Israel Institute of Technology"}),
@@ -263,20 +141,6 @@ CREATE
   (Itamar_Pipman:Author {fname:"Itamar", surname:"Pipman"}),
   (Adi_Shamir:Author {fname:"Adi", surname:"Shamir"}),
   (Eran_Tromer:Author {fname:"Eran", surname:"Tromer"})
-
-CREATE
-  (Daniel_Genkin)-[:ASSOCIATED {during:2016}]->(Technion_Israel_Institute_of_Technology),
-  (Lev_Pachmanov)-[:ASSOCIATED {during:2016}]->(Blavatnik_School_of_Computer_Science),
-  (Itamar_Pipman)-[:ASSOCIATED {during:2016}]->(Blavatnik_School_of_Computer_Science),
-  (Adi_Shamir)-[:ASSOCIATED {during:2016}]->(Weizmann_Institute_of_Science),
-  (Eran_Tromer)-[:ASSOCIATED {during:2016}]->(Blavatnik_School_of_Computer_Science)
-
-CREATE 
-  (Daniel_Genkin)-[:WROTE]->(Physical_Key_Extraction_Paper),
-  (Lev_Pachmanov)-[:WROTE]->(Physical_Key_Extraction_Paper),
-  (Itamar_Pipman)-[:WROTE]->(Physical_Key_Extraction_Paper),
-  (Adi_Shamir)-[:WROTE]->(Physical_Key_Extraction_Paper),
-  (Eran_Tromer)-[:WROTE]->(Physical_Key_Extraction_Paper)
 
 CREATE 
   (Spectre_Paper)-[:REFERENCES]->(Physical_Key_Extraction_Paper)
@@ -294,33 +158,13 @@ CREATE
 
 CREATE (Massachusetts_Institute_of_Technology:Institution {iname:"Massachusetts Institute of Technology"})
 
-CREATE 
-  (Ronald_Rivest)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology),
-  (Adi_Shamir)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology),
-  (Leonard_Adleman)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology)
-
-CREATE
-  (Adi_Shamir)-[:WROTE]->(RSA_Paper),
-  (Leonard_Adleman)-[:WROTE]->(RSA_Paper),
-  (Ronald_Rivest)-[:WROTE]->(RSA_Paper)
-
-CREATE
-  (RSA_Cryptosystem)-[:FOCUS_OF]->(RSA_Paper),
-  (Public_Key_Cryptosystems)-[:FOCUS_OF]->(RSA_Paper),
-  (Digital_Signatures)-[:FOCUS_OF]->(RSA_Paper)
 
 CREATE 
   (Knapsack_Cryptosystems:Subject {subject:"Knapsack Cryptosystems"}),
   (Cryptocomplexity:Subject {subject:"Cryptocomplexity"})
 
 CREATE 
-  (Cryptocomplexity_knapsack_cryptosystems_paper:Paper {title:"On the Cryptocomplexity of Knapsack Cryptosystems", year:1979, library:"ACM"}),
-  (Knapsack_Cryptosystems)-[:FOCUS_OF]->(Cryptocomplexity_knapsack_cryptosystems_paper),
-  (Cryptocomplexity)-[:FOCUS_OF]->(Cryptocomplexity_knapsack_cryptosystems_paper)
-
-CREATE (Adi_Shamir)-[:ASSOCIATED {during: 1979}]->(Massachusetts_Institute_of_Technology)
-
-CREATE (Adi_Shamir)-[:WROTE]->(Cryptocomplexity_knapsack_cryptosystems_paper)
+  (Cryptocomplexity_knapsack_cryptosystems_paper:Paper {title:"On the Cryptocomplexity of Knapsack Cryptosystems", year:1979, library:"ACM"})
 
 CREATE (Cryptocomplexity_knapsack_cryptosystems_paper)-[:REFERENCES]->(RSA_Paper)
 
@@ -331,24 +175,237 @@ CREATE
 
 CREATE 
   (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper:Paper {title:"On the Generation of Multivariate Polynomials which are Hard to Factor", year: 1993, library:"ACM Digital Library"}),
-  (Number_Generation)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
-  (Hard_Factorization)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
-  (Multivariate_Polynomials)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)
-
-CREATE (Adi_Shamir)-[:WROTE]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)
-
-CREATE (Adi_Shamir)-[:ASSOCIATED {during:"1993"}]->(Weizmann_Institute_of_Science)
 
 CREATE (Generation_of_Multivariate_Polynomials_Hard_Factor_Paper)-[:REFERENCES]->(RSA_Paper)
 
 CREATE (CPU_Attacks:Subject {subject:"CPU Attacks"})
 
+//SUBJECT X IS FOCUS OF PAPER Y
 CREATE 
-  (RAM_Attacks)-[:FOCUS_OF]->(Memway),
-  (RAM_Attacks)-[:FOCUS_OF]->(CATTmew),
-  (RAM_Attacks)-[:FOCUS_OF]->(Rowhammer_Retrospective_Paper),
-  (CPU_Attacks)-[:FOCUS_OF]->(Rowhammer_Retrospective_Paper),
+  (Branch_Prediction)-[:FOCUS_OF]->(Perceptron),
+
   (CPU_Attacks)-[:FOCUS_OF]->(Meltdown),
-  (CPU_Attacks)-[:FOCUS_OF]->(Spectre)
+  (CPU_Attacks)-[:FOCUS_OF]->(Rowhammer_Retrospective_Paper),
+  (CPU_Attacks)-[:FOCUS_OF]->(Spectre),
+
+  (Cryptocomplexity)-[:FOCUS_OF]->(Cryptocomplexity_knapsack_cryptosystems_paper),
+  
+  (Digital_Signatures)-[:FOCUS_OF]->(RSA_Paper),
+
+  (Embedded_Systems)-[:FOCUS_OF]->(Embedded_Systems_Security_Designs_Paper),
+
+  (Hard_Factorization)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
+
+  (Meltdown)-[:FOCUS_OF]->(Meltdown_Paper),
+
+  (Multivariate_Polynomials)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
+
+  (Number_Generation)-[:FOCUS_OF]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
+
+  (Knapsack_Cryptosystems)-[:FOCUS_OF]->(Cryptocomplexity_knapsack_cryptosystems_paper),
+
+  (Public_Key_Cryptosystems)-[:FOCUS_OF]->(RSA_Paper),
+
+  (RAM_Attacks)-[:FOCUS_OF]->(CATTmew),
+  (RAM_Attacks)-[:FOCUS_OF]->(Memway),
+  (RAM_Attacks)-[:FOCUS_OF]->(Rowhammer_Retrospective_Paper),
+
+  (Rowhammer)-[:FOCUS_OF]->(CATTmew),
+  (Rowhammer)-[:FOCUS_OF]->(Memway),
+  (Rowhammer)-[:FOCUS_OF]->(Rowhammer_Retrospective_Paper),
+
+  (RSA_Cryptosystem)-[:FOCUS_OF]->(RSA_Paper),
+
+  (Spectre)-[:FOCUS_OF]->(Spectre_Paper)
+  
+//AUTHOR X WROTE PAPER Y
+CREATE 
+  //CATTmew Paper
+  (Surya_Nepal)-[:WROTE]->(CATTmew),
+  (Yueqiang_Cheng)-[:WROTE]->(CATTmew),
+  (Zhi_Wang)-[:WROTE]->(CATTmew),
+  (Zhi_Zhang)-[:WROTE]->(CATTmew),
+  
+  //Cryptocomplexity Knapsack Cryptosystems Paper
+  (Adi_Shamir)-[:WROTE]->(Cryptocomplexity_knapsack_cryptosystems_paper),
+
+  //Embedded Systems Paper
+  (Anand_Raghunathannec)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper),
+  (Paul_Kocher)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper),
+  (Srivaths_Ravi)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper),
+  (Sunil_Hattangady)-[:WROTE]->(Embedded_Systems_Security_Designs_Paper),
+  
+  //Generation of Multivariate Polynomials Paper
+  (Adi_Shamir)-[:WROTE]->(Generation_of_Multivariate_Polynomials_Hard_Factor_Paper),
+
+  //Meltdown Paper
+  (Anders_Fogh)-[:WROTE]->(Meltdown_Paper),
+  (Daniel_Genkin)-[:WROTE]->(Meltdown_Paper),
+  (Daniel_Gruss)-[:WROTE]->(Meltdown_Paper),
+  (Jann_Horn)-[:WROTE]->(Meltdown_Paper),
+  (Mike_Hamburg)-[:WROTE]->(Meltdown_Paper)
+  (Michael_Scharwz)-[:WROTE]->(Meltdown_Paper),
+  (Moritz_Lipp)-[:WROTE]->(Meltdown_Paper),
+  (Paul_Kocher)-[:WROTE]->(Meltdown_Paper),
+  (Stefan_Mangard)-[:WROTE]->(Meltdown_Paper),
+  (Thomas_Prescher)-[:WROTE]->(Meltdown_Paper),
+  (Werner_Haas)-[:WROTE]->(Meltdown_Paper),
+  (Yuval_Yarom)-[:WROTE]->(Meltdown_Paper),
+
+  //Memway Paper
+  (Lai_Xu)-[:WROTE]->(Memway),
+  (Lina_Wang)-[:WROTE]->(Memway),
+  (Rongwei_Yu)-[:WROTE]->(Memway),
+  (Weijie_Liu)-[:WROTE]->(Memway),
+
+  //Perceptron Paper
+  (Daniel_Jimenez)-[:WROTE]->(Perceptron),
+  (Elvira_Teran)-[:WROTE]->(Perceptron),
+  (Zhe_Wang)-[:WROTE]->(Perceptron),
+  
+  //Physical Key Extraction Paper
+  (Adi_Shamir)-[:WROTE]->(Physical_Key_Extraction_Paper),
+  (Daniel_Genkin)-[:WROTE]->(Physical_Key_Extraction_Paper),
+  (Eran_Tromer)-[:WROTE]->(Physical_Key_Extraction_Paper),
+  (Lev_Pachmanov)-[:WROTE]->(Physical_Key_Extraction_Paper),
+  (Itamar_Pipman)-[:WROTE]->(Physical_Key_Extraction_Paper),
+
+  //Rowhammer Retrospective Paper
+  (Jeremie_Kim)-[:WROTE]->(Rowhammer_Retrospective_Paper),
+  (Onur_Mutlu)-[:WROTE]->(Rowhammer_Retrospective_Paper),
+
+  //Spectre Paper
+  (Anders_Fogh)-[:WROTE]->(Spectre_Paper),
+  (Daniel_Genkin)-[:WROTE]->(Spectre_Paper),
+  (Daniel_Gruss)-[:WROTE]->(Spectre_Paper),
+  (Jann_Horn)-[:WROTE]->(Spectre_Paper),
+  (Michael_Scharwz)-[:WROTE]->(Spectre_Paper),
+  (Mike_Hamburg)-[:WROTE]->(Spectre_Paper),
+  (Moritz_Lipp)-[:WROTE]->(Spectre_Paper),
+  (Stefan_Mangard)-[:WROTE]->(Spectre_Paper),
+  (Thomas_Prescher)-[:WROTE]->(Spectre_Paper),
+  (Werner_Haas)-[:WROTE]->(Spectre_Paper),
+  (Yuval_Yarom)-[:WROTE]->(Spectre_Paper),
+
+  //RSA Paper
+  (Adi_Shamir)-[:WROTE]->(RSA_Paper),
+  (Leonard_Adleman)-[:WROTE]->(RSA_Paper),
+  (Ronald_Rivest)-[:WROTE]->(RSA_Paper)
+
+//AUTHOR X IS/WAS ASSOCIATED WITH INSTITUTION Y
+CREATE 
+  //Blavatnik School of Computer Science
+    //2016
+    (Eran_Tromer)-[:ASSOCIATED {during:2016}]->(Blavatnik_School_of_Computer_Science),
+    (Itamar_Pipman)-[:ASSOCIATED {during:2016}]->(Blavatnik_School_of_Computer_Science),
+    (Lev_Pachmanov)-[:ASSOCIATED {during:2016}]->(Blavatnik_School_of_Computer_Science),
+  
+  //Carnegie Mellon University
+    //2019
+    (Jeremie_Kim)-[:ASSOCIATED {during:2019}]->(Carnegie_Mellon_University),
+    (Onur_Mutlu)-[:ASSOCIATED {during:2019}]->(Carnegie_Mellon_University),
+
+  //Crypography Research Division
+    //2004
+    (Paul_Kocher)-[:ASSOCIATED {during:2004}]->(Cryptography_Research_Division),  
+    //2018
+    (Mike_Hamburg)-[:ASSOCIATED {during:2018}]->(Cryptography_Research_Division),
+
+  //Cyberus Technology
+    //2018
+    (Thomas_Prescher)-[:ASSOCIATED {during:2018}]->(Cyberus_Technology),
+    (Werner_Haas)-[:ASSOCIATED {during:2018}]->(Cyberus_Technology),
+
+  //Data 61
+    //2018
+    (Yuval_Yarom)-[:ASSOCIATED {during:2018}]->(Data61),
+
+  //ETH Zurich
+    //2019
+    (Jeremie_Kim)-[:ASSOCIATED {during:2019}]->(ETH_Zurich),
+    (Onur_Mutlu)-[:ASSOCIATED {during:2019}]->(ETH_Zurich),
+  
+  //G DATA Advanced Analytics
+    //2018
+    (Anders_Fogh)-[:ASSOCIATED {during:2018}]->(G_DATA_Advanced_Analytics),
+
+  //Google Project Zero
+    //2018
+    (Jann_Horn)-[:ASSOCIATED {during:2018}]->(Google_Project_Zero),
+  
+  //Graz University of Technology 
+    //2018
+    (Daniel_Gruss)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
+    (Michael_Scharwz)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
+    (Moritz_Lipp)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
+    (Stefan_Mangard)-[:ASSOCIATED {during:2018}]->(Graz_University_of_Technology),
+
+  //Intel Labs
+    //2016
+    (Zhe_Wang)-[:ASSOCIATED {during: 2016}]->(Intel_Labs),
+
+  //Massachusetts Institute of Technology 
+    //1978
+    (Adi_Shamir)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology),
+    (Leonard_Adleman)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology),
+    (Ronald_Rivest)-[:ASSOCIATED {during:1978}]->(Massachusetts_Institute_of_Technology),
+
+    //1979
+    (Adi_Shamir)-[:ASSOCIATED {during: 1979}]->(Massachusetts_Institute_of_Technology),
+  
+  //NEC Laboratories America
+    //2004
+    (Anand_Raghunathannec)-[:ASSOCIATED {during:2004}]->(NEC_Laboratories_America),
+    (Srivaths_Ravi)-[:ASSOCIATED {during:2004}]->(NEC_Laboratories_America),
+
+  //Rambus
+    //2018
+    (Mike_Hamburg)-[:ASSOCIATED {during:2018}]->(Rambus),
+
+  //Technion Israel Institute of Technology
+    //2016
+    (Daniel_Genkin)-[:ASSOCIATED {during:2016}]->(Technion_Israel_Institute_of_Technology),
+  
+  //Texas AM University
+    //2016
+    (Daniel_Jimenez)-[:ASSOCIATED {during: 2016}]->(Texas_AM_University),
+    (Elvira_Teran)-[:ASSOCIATED {during: 2016}]->(Texas_AM_University),
+
+  //Texas Instruments Inc
+    //2004
+    (Sunil_Hattangady)-[:ASSOCIATED {during:2004}]->(Texas_Instruments_Inc),
+  
+  //Tsinghua Science and Technology 
+    //2016
+    (Lai_Xu)-[:ASSOCIATED {during:2016}]->(Tsinghua_Science_and_Technology),
+    (Lina_Wang)-[:ASSOCIATED {during:2016}]->(Tsinghua_Science_and_Technology),
+    (Rongwei_Yu)-[:ASSOCIATED {during:2016}]->(Tsinghua_Science_and_Technology),
+    (Weijie_Liu)-[:ASSOCIATED {during:2016}]->(Tsinghua_Science_and_Technology),
+
+  //University of Adelaide 
+    //2018
+    (Yuval_Yarom)-[:ASSOCIATED {during:2018}]->(University_of_Adelaide),
+
+  //University of Maryland
+    //2018
+    (Daniel_Genkin)-[:ASSOCIATED {during:2018}]->(University_of_Maryland),
+
+  //University of Michigan 
+    //2018
+    (Daniel_Genkin)-[:ASSOCIATED {during:2018}]->(University_of_Michigan),
+  
+  //University of Pennsylvania
+    //2018
+    (Daniel_Genkin)-[:ASSOCIATED {during:2018}]->(University_of_Pennsylvania),
+
+  //Weizmann Institute of Science
+    //1993
+    (Adi_Shamir)-[:ASSOCIATED {during:1993}]->(Weizmann_Institute_of_Science),
+    //2016
+    (Adi_Shamir)-[:ASSOCIATED {during:2016}]->(Weizmann_Institute_of_Science),
+
+  //Independent Researcher
+    //2018
+    (Paul_Kocher)-[:ASSOCIATED {during: 2018}]->(Independent)
 
 RETURN *
