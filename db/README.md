@@ -54,5 +54,17 @@ Let's start with some simple queries to the database:
 
 (1) Get all the nodes and edges of the graph: "MATCH (n) RETURN n"
 (2) Get the name of an author and the papers that the author has written. Let's exemplify this with Adi Shamir, one of the creators of the RSA cryptosystem: "MATCH (author:Author {fname:"Adi", surname:"Shamir"})-[:WROTE]->(papers) RETURN author, papers"
+(3) Get all papers written in the current year (2019): "MATCH (n:Paper) WHERE (n.year=2019) RETURN n"
+
+Okay, now let's start mixing things up a bit.
+
+(4) Get papers with more than 2 references: "MATCH (:Paper)-[references:REFERENCES]->(paper_y:Paper) WITH paper_y, count(references) AS number_of_references WHERE number_of_references > 1 RETURN paper_y"
+(5) Get the authors who have contributed to more than 3 papers in the database: "MATCH (authors:Author)-[:WROTE]->(papers:Paper) WITH authors, count(papers) AS paper_count WHERE paper_count>3 RETURN authors"
+(6) Get all the papers written by the authors of the paper that our current paper references. Let's exemplify with the "Rowhammer: A Retrospective" paper: "MATCH (:Paper {title:"RowHammer: A Retrospective"})-[:REFERENCES]->(:Paper)<-[:WROTE]-(authors:Author)-[:WROTE]->(papers:Paper) RETURN authors, papers"
+
+Let's try a more complex one.
+
+(7) Get the papers and their subjects that were written by an author with more than 2 papers in our database: "MATCH (authors:Author)-[:WROTE]->(papers:Paper) WITH authors, count(papers) AS paper_count WHERE paper_count>2 WITH authors MATCH (authors)-[:WROTE]->(papers:Paper)<-[:FOCUS_OF]-(subjects:Subject) RETURN authors, papers, subjects"
+
 
 Finally to delete all of the graph database's nodes and edges use the following query: "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r"
