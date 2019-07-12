@@ -30,7 +30,7 @@ public class ExampleApp implements AutoCloseable {
     private static final String EXIT = "4";
 
     private final Driver driver;
-
+    
     public ExampleApp(String uri, String user, String password) {
         driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
     }
@@ -44,8 +44,6 @@ public class ExampleApp implements AutoCloseable {
         	String line;
             File file = new File(GRAPH_DATABASE_FILE);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));            
-            
-            System.out.println("database query");
             
             String createDatabase = "";
             
@@ -76,12 +74,14 @@ public class ExampleApp implements AutoCloseable {
                 @Override
                 public String execute( Transaction tx )
                 {	                	
-                	StatementResult result = tx.run(createDatabaseTransaction,
+                	tx.run(createDatabaseTransaction,
                             parameters());
-                    return "The example database was successfully imported.";
+                   return "Success: the example database was successfully imported.";                	
                 }
             } );
+            System.out.println("");
             System.out.println(message);
+            System.out.println("");   
         }
     	catch (ExampleAppException e) {
 			throw new ExampleAppException("createExampleDatabase(): Could not get the database from the \"" + 
@@ -89,9 +89,30 @@ public class ExampleApp implements AutoCloseable {
 		}
     }
     
+    public void deleteDatabase() {
+    	String deleteDatabaseQuery = "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r", message;
+    	try ( Session session = driver.session() )
+        {	    		
+            message = session.writeTransaction( new TransactionWork<String>()
+            {
+                @Override
+                public String execute( Transaction tx )
+                {
+                    StatementResult result = tx.run(deleteDatabaseQuery, parameters());
+                    return "Success: the example database was successfully deleted.";
+                }
+            });
+            System.out.println("");
+            System.out.println(message);
+            System.out.println("");          
+        }
+    }
+    
+   
     public static void main(String argv[]) throws Exception
     {	
-        Scanner clientInputScanner = new Scanner(System.in);
+        @SuppressWarnings("resource")
+		Scanner clientInputScanner = new Scanner(System.in);
 
         System.out.print("Insert the port on which your local graph database is running: ");
         String localport = clientInputScanner.nextLine();
@@ -102,8 +123,12 @@ public class ExampleApp implements AutoCloseable {
         System.out.print("Insert your password: ");
         String password = clientInputScanner.nextLine();
 
-        ExampleApp queryAgent = new ExampleApp("bolt://localhost:" + localport, username, password);    
-
+        @SuppressWarnings("resource")
+		ExampleApp queryAgent = new ExampleApp("bolt://localhost:" + localport, username, password);    
+        
+        boolean databaseCreated = false;
+        queryAgent.deleteDatabase();
+        
         while(true) {
         	 System.out.println("##### BIBTREK EXAMPLE #####");
              System.out.println("");
@@ -125,17 +150,29 @@ public class ExampleApp implements AutoCloseable {
             String option = clientInputScanner.nextLine();
 
             switch(option) {
-                case CREATE_GRAPH_DATABASE:                
-                    queryAgent.createExampleDatabase();
+                case CREATE_GRAPH_DATABASE:
+                	if(databaseCreated == false) {
+	                    queryAgent.createExampleDatabase();
+	                    databaseCreated = true;
+                	} else {
+                		System.out.println("");
+                		System.out.println("Error: the database is already created!");
+                		System.out.println("");
+                	}
                     break;
-                case DELETE_GRAPH_DATABASE:
-                    String deleteDatabaseQuery = "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r";
-                    //queryAgent.doTransaction(option, deleteDatabaseQuery);
-                    break;
+                case DELETE_GRAPH_DATABASE:       
+                	if(databaseCreated == true) {
+	                    queryAgent.deleteDatabase();
+	                    databaseCreated = false;
+	                    break;
+                	} else {
+                		System.out.println("");
+                		System.out.println("Error: the database has not been created.");
+                		System.out.println("");
+                	}
                 case QUERY_GRAPH_DATABASE:
-                    System.out.println("Query the database:");
+                    System.out.println("Introduce a query: ");
                     String query = clientInputScanner.nextLine();
-                    //queryAgent.doTransaction(option, query);
                     break;
                 case EXIT:
                     return;                    
