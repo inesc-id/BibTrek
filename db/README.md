@@ -66,5 +66,21 @@ Let's try a more complex one.
 
 (7) Get the papers and their subjects that were written by an author with more than 2 papers in our database: "MATCH (authors:Author)-[:WROTE]->(papers:Paper) WITH authors, count(papers) AS paper_count WHERE paper_count>2 WITH authors MATCH (authors)-[:WROTE]->(papers:Paper)<-[:FOCUS_OF]-(subjects:Subject) RETURN authors, papers, subjects"
 
-
 Finally to delete all of the graph database's nodes and edges use the following query: "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r"
+
+# Java Example
+
+In this directory we also present a demo Java application.
+
+This app sets up the example Neo4J database locally on a JVM and allows you to create it, query it, and delete it.
+
+The queries available at the moment are a preset sample of basic queries which will eventually be extended in official release of the BibTrek program.
+
+To run the demo Java application follow these steps.
+
+(1) Run the Neo4J desktop application
+(2) Open its browser window
+(3) Run the demo Java app
+  (a) First be sure to install maven on your computer. If you have not already install it, here is the download link https://maven.apache.org/download.cgi
+  (b) To run the demo Java app open a terminal window
+

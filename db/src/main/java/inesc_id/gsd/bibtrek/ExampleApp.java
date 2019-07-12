@@ -78,7 +78,7 @@ public class ExampleApp {
     	createDatabaseTransaction = getGraphDatabase();
     	
     	// tag::execute[]
-		try (Transaction ignored = graphDb.beginTx();
+		try (Transaction tx = graphDb.beginTx();
 						
 				Result result = graphDb.execute(createDatabaseTransaction, params)							
 			) {
@@ -89,7 +89,7 @@ public class ExampleApp {
 					}
 					rows += "\n";
 				}
-				ignored.success();
+				tx.success();
 		}
 		
 		// end::execute[]
@@ -99,23 +99,30 @@ public class ExampleApp {
     }
     
     public void deleteDatabase() {
-    	/*String deleteDatabaseQuery = "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r", message;
-    	try ( Session session = driver.session() )
-        {	    		
-            message = session.writeTransaction( new TransactionWork<String>()
-            {
-                @Override
-                public String execute( Transaction tx )
-                {
-                    StatementResult result = tx.run(deleteDatabaseQuery, parameters());
-                    return "Success: the example database was successfully deleted.";
-                }
-            });
-            System.out.println("");
-            System.out.println(message);
-            System.out.println("");          
-        }*/
-    }      
+    	String deleteDatabaseQuery = "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r", message, rows = "";
+    	
+    	Map<String, Object> params = new HashMap<>();
+    	
+    	// tag::execute[]
+		try (Transaction tx = graphDb.beginTx();
+						
+				Result result = graphDb.execute(deleteDatabaseQuery, params)							
+			) {
+				while ( result.hasNext() ) {
+					Map<String,Object> row = result.next();
+					for ( Entry<String,Object> column : row.entrySet()) {
+						rows += column.getKey() + ": " + column.getValue() + "; ";
+					}
+					rows += "\n";
+				}
+				tx.success();
+		}
+		
+		// end::execute[]
+		
+		System.out.println("Success: the database was successfully deleted!");
+		System.out.println(""); 
+    }          
     
     private static void registerShutdownHook( final GraphDatabaseService graphDb )
     {
