@@ -130,23 +130,23 @@ public class ExampleApp implements AutoCloseable {
         queryAgent.deleteDatabase();
         
         while(true) {
-        	 System.out.println("##### BIBTREK EXAMPLE #####");
-             System.out.println("");
-             System.out.println("===================================");
-             System.out.println("");
-             System.out.println("(*): Pick one of the available options:");
-             System.out.println("");
-             System.out.println("(1): Create an example database.");
-             System.out.println("");
-             System.out.println("(2): Delete the example database.");
-             System.out.println("");
-             System.out.println("(3): Query the database.");
-             System.out.println("");
-             System.out.println("(4): Exits the program.");
-             System.out.println("");
-             System.out.println("===================================");
-             System.out.println("");
-             System.out.print("Insert your choice: ");
+        	System.out.println("##### BIBTREK EXAMPLE #####");
+            System.out.println("");
+            System.out.println("===================================");
+            System.out.println("");
+            System.out.println("(*): Pick one of the available options:");
+            System.out.println("");
+            System.out.println("(1): Create an example database.");
+            System.out.println("");
+            System.out.println("(2): Delete the example database.");
+            System.out.println("");
+            System.out.println("(3): Query the database.");
+            System.out.println("");
+            System.out.println("(4): Exits the program.");
+            System.out.println("");
+            System.out.println("===================================");
+            System.out.println("");
+            System.out.print("Insert your choice: "); 
             String option = clientInputScanner.nextLine();
 
             switch(option) {
