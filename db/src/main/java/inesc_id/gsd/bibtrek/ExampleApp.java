@@ -37,6 +37,7 @@ public class ExampleApp {
     private static final String GET_ALL_PAPERS = "4";
     private static final String GET_ALL_INSTITUTIONS = "5";
     private static final String GET_ALL_SUBJECTS = "6";
+    private static final String PAPERS_BY_AUTHOR = "7";
     private static final String EXIT = "0";
     
     private static GraphDatabaseService graphDb;
@@ -158,7 +159,7 @@ public class ExampleApp {
     	System.out.println(rows);
     }
     
-    // getInstitutions(): Simply allows the user to pick all papers from the database
+    // getInstitutions(): Simply allows the user to pick all institutions from the database
     public void getInstitutions() {
     	String attribute, iname = "", node = "", rows = ""; 
     	
@@ -222,7 +223,7 @@ public class ExampleApp {
     	System.out.println(rows);
     }
     
-    // getInstitutions(): Simply allows the user to pick all papers from the database
+    // getSubjects(): Simply allows the user to pick all subjects from the database
     public void getSubjects() {
     	String attribute, subject = "", node = "", rows = ""; 
     	
@@ -244,6 +245,80 @@ public class ExampleApp {
                 	}
                 }
                 rows += node + " :  " + subject + "\n";
+           }
+    	}
+    	
+    	System.out.println(rows);
+    }
+    
+    // getAuthorsPapers(): get all the papers written by a certain Author
+    public void getAuthorsPapers(String fname, String surname) {
+    	String attribute, node = "", rows = "", library = "", year = "", title = ""; 
+    	
+    	try ( Transaction ignored = graphDb.beginTx();
+             Result result = graphDb.execute( "MATCH (authors:Author {fname:\"" + fname + "\",surname:\"" + surname + "\"})"
+             		+ "-[:WROTE]-(papers:Paper) RETURN papers.title, papers.year, papers.library, papers" ) )
+    	{
+    		while ( result.hasNext() )
+    		{
+    			Map<String,Object> row = result.next();
+                for ( Entry<String,Object> column : row.entrySet() )
+                {	
+                	attribute = column.getKey();
+                	switch(attribute) {
+	                	case "papers.library":
+	            			library = (String) column.getValue();
+	            			break;
+	                	case "papers.title":
+	            			title = (String) column.getValue();
+	            			break;
+                		case "papers.year":
+                			year = Long.toString((long) column.getValue());
+                			break;                		
+                		default:  
+                			if(attribute.contains("Node")) {
+                				node = column.getValue() + "";
+                			}
+                	}
+                }
+                rows += node + " :  [T] " + title + " [L] " + library + " [Y] " + year + "\n";
+           }
+    	}
+    	
+    	System.out.println(rows);
+    }
+    
+ // getAuthorsPapers(): get all the papers written by a certain Author
+    public void getAuthorsPapers(String fname, String surname) {
+    	String attribute, node = "", rows = "", library = "", year = "", title = ""; 
+    	
+    	try ( Transaction ignored = graphDb.beginTx();
+             Result result = graphDb.execute( "MATCH (authors:Author {fname:\"" + fname + "\",surname:\"" + surname + "\"})"
+             		+ "-[:WROTE]-(papers:Paper) RETURN papers.title, papers.year, papers.library, papers" ) )
+    	{
+    		while ( result.hasNext() )
+    		{
+    			Map<String,Object> row = result.next();
+                for ( Entry<String,Object> column : row.entrySet() )
+                {	
+                	attribute = column.getKey();
+                	switch(attribute) {
+	                	case "papers.library":
+	            			library = (String) column.getValue();
+	            			break;
+	                	case "papers.title":
+	            			title = (String) column.getValue();
+	            			break;
+                		case "papers.year":
+                			year = Long.toString((long) column.getValue());
+                			break;                		
+                		default:  
+                			if(attribute.contains("Node")) {
+                				node = column.getValue() + "";
+                			}
+                	}
+                }
+                rows += node + " :  [T] " + title + " [L] " + library + " [Y] " + year + "\n";
            }
     	}
     	
@@ -276,7 +351,8 @@ public class ExampleApp {
     
     public static void main(String argv[]) throws Exception
     {	
-    	
+    	System.out.println("##### BIBTREK EXAMPLE #####");
+        System.out.println("");
         
         @SuppressWarnings("resource")
 		Scanner clientInputScanner = new Scanner(System.in);
@@ -292,8 +368,6 @@ public class ExampleApp {
         queryAgent.deleteDatabase();
         
         while(true) {
-        	System.out.println("##### BIBTREK EXAMPLE #####");
-            System.out.println("");
             System.out.println("===================================");
             System.out.println("");
             System.out.println("(*): Pick one of the available options:");
@@ -309,6 +383,8 @@ public class ExampleApp {
             System.out.println("(5): Get all institutions.");
             System.out.println("");
             System.out.println("(6): Get all subjects.");
+            System.out.println("");
+            System.out.println("(7): Get author's papers.");
             System.out.println("");
             System.out.println("(0): Exits the program.");
             System.out.println("");
@@ -366,6 +442,20 @@ public class ExampleApp {
                 case GET_ALL_SUBJECTS:
                 	if(databaseCreated == true) {
 	                    queryAgent.getSubjects();
+                	} else {
+                		System.out.println("Error: the database is not created!");
+                		System.out.println("");
+                	}
+                    break;
+                case PAPERS_BY_AUTHOR:
+                	if(databaseCreated == true) {
+                		String fname, surname;
+                		System.out.print("Insert the author's first name: ");                                  
+                        fname = clientInputScanner.nextLine();
+                        System.out.print("Insert the author's surname name: ");
+                        System.out.print("");
+                        surname = clientInputScanner.nextLine();
+	                    queryAgent.getAuthorsPapers(fname, surname);
                 	} else {
                 		System.out.println("Error: the database is not created!");
                 		System.out.println("");
