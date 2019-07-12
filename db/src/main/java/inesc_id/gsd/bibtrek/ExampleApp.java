@@ -38,6 +38,8 @@ public class ExampleApp {
     private static final String GET_ALL_INSTITUTIONS = "5";
     private static final String GET_ALL_SUBJECTS = "6";
     private static final String PAPERS_BY_AUTHOR = "7";
+    private static final String AUTHORS_BY_PAPER = "8";
+    private static final String SUBJECTS_BY_PAPER = "9";
     private static final String EXIT = "0";
     
     private static GraphDatabaseService graphDb;
@@ -288,13 +290,14 @@ public class ExampleApp {
     	System.out.println(rows);
     }
     
- // getAuthorsPapers(): get all the papers written by a certain Author
-    public void getAuthorsPapers(String fname, String surname) {
-    	String attribute, node = "", rows = "", library = "", year = "", title = ""; 
+    // getPapersAuthors(): get all the authors of a paper
+    public void getPaperAuthors(String title) {
+    	String attribute, node = "", rows = "", fname = "", surname = ""; 
     	
     	try ( Transaction ignored = graphDb.beginTx();
-             Result result = graphDb.execute( "MATCH (authors:Author {fname:\"" + fname + "\",surname:\"" + surname + "\"})"
-             		+ "-[:WROTE]-(papers:Paper) RETURN papers.title, papers.year, papers.library, papers" ) )
+             Result result = graphDb.execute( "MATCH (papers:Paper {title:\"" + title + "\"})"
+             		+ "<-[:WROTE]-(authors:Author) WHERE papers.title =~ \".*" + title
+             		+ ".*\" RETURN authors.fname, authors.surname, authors" ) )
     	{
     		while ( result.hasNext() )
     		{
@@ -303,22 +306,47 @@ public class ExampleApp {
                 {	
                 	attribute = column.getKey();
                 	switch(attribute) {
-	                	case "papers.library":
-	            			library = (String) column.getValue();
-	            			break;
-	                	case "papers.title":
-	            			title = (String) column.getValue();
-	            			break;
-                		case "papers.year":
-                			year = Long.toString((long) column.getValue());
-                			break;                		
-                		default:  
-                			if(attribute.contains("Node")) {
-                				node = column.getValue() + "";
-                			}
+                		case "authors.fname":
+                			fname = (String) column.getValue();
+                			break;
+                		case "authors.surname":
+                			surname = (String) column.getValue();      
+                			break;
+                		default:                			
+                			node = column.getValue() + "";
                 	}
                 }
-                rows += node + " :  [T] " + title + " [L] " + library + " [Y] " + year + "\n";
+                rows += node + " :  " + fname + " " + surname + "\n";
+           }
+    	}
+    	
+    	System.out.println(rows);
+    }
+    
+    // getPapersAuthors(): get all the authors of a paper
+    public void getPapersSubjects(String title) {
+    	String attribute, node = "", rows = "", subject = ""; 
+    	
+    	try ( Transaction ignored = graphDb.beginTx();
+             Result result = graphDb.execute( "MATCH (papers:Paper {title:\"" + title + "\"})"
+             		+ "<-[:FOCUS_OF]-(subjects:Subject) WHERE papers.title =~ \".*" + title
+             		+ ".*\" RETURN subjects.subject, subjects" ) )
+    	{
+    		while ( result.hasNext() )
+    		{
+    			Map<String,Object> row = result.next();
+                for ( Entry<String,Object> column : row.entrySet() )
+                {	
+                	attribute = column.getKey();
+                	switch(attribute) {
+                		case "subjects.subject":
+                			subject = (String) column.getValue();
+                			break;
+                		default:                			
+                			node = column.getValue() + "";
+                	}
+                }
+                rows += node + " :  " + subject + "\n";
            }
     	}
     	
@@ -385,6 +413,10 @@ public class ExampleApp {
             System.out.println("(6): Get all subjects.");
             System.out.println("");
             System.out.println("(7): Get author's papers.");
+            System.out.println("");
+            System.out.println("(8): Get paper's authors.");
+            System.out.println("");
+            System.out.println("(9): Get paper's subjects.");
             System.out.println("");
             System.out.println("(0): Exits the program.");
             System.out.println("");
@@ -456,6 +488,28 @@ public class ExampleApp {
                         System.out.print("");
                         surname = clientInputScanner.nextLine();
 	                    queryAgent.getAuthorsPapers(fname, surname);
+                	} else {
+                		System.out.println("Error: the database is not created!");
+                		System.out.println("");
+                	}
+                    break;
+                case AUTHORS_BY_PAPER:
+                	if(databaseCreated == true) {
+                		String title;
+                		System.out.print("Insert the paper's title: ");                                  
+                        title = clientInputScanner.nextLine();                        
+	                    queryAgent.getPaperAuthors(title);
+                	} else {
+                		System.out.println("Error: the database is not created!");
+                		System.out.println("");
+                	}
+                    break;
+                case SUBJECTS_BY_PAPER:
+                	if(databaseCreated == true) {
+                		String title;
+                		System.out.print("Insert the paper's title: ");                                  
+                        title = clientInputScanner.nextLine();                        
+	                    queryAgent.getPapersSubjects(title);
                 	} else {
                 		System.out.println("Error: the database is not created!");
                 		System.out.println("");
