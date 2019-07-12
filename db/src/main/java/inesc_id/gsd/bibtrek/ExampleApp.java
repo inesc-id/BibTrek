@@ -99,7 +99,7 @@ public class ExampleApp {
 		
 		// end::execute[]
 		
-		System.out.println("Success: the example database was successfully created!");
+		System.out.println("Success: the database was successfully populated!");
 		System.out.println(""); 
     }
     
@@ -258,7 +258,8 @@ public class ExampleApp {
     	
     	try ( Transaction ignored = graphDb.beginTx();
              Result result = graphDb.execute( "MATCH (authors:Author {fname:\"" + fname + "\",surname:\"" + surname + "\"})"
-             		+ "-[:WROTE]-(papers:Paper) RETURN papers.title, papers.year, papers.library, papers" ) )
+             		+ "-[:WROTE]-(papers:Paper) RETURN papers.title, papers.year, papers.library, papers"
+             		+ "authors.fname, authors.surname, authors" ) )
     	{
     		while ( result.hasNext() )
     		{
@@ -426,7 +427,6 @@ public class ExampleApp {
         
         ExampleApp queryAgent = new ExampleApp("7687");
         
-        queryAgent.deleteDatabase();
         queryAgent.createExampleDatabase();
         
         while(true) {
@@ -499,14 +499,12 @@ public class ExampleApp {
                     queryAgent.getPapersReferences(title);
                     break;
                 case EXIT:
-                    return;   
+                	queryAgent.deleteDatabase();
+                    System.exit(0);              
                 default:
                     System.out.println("main(): That option does not exist. Please insert another command...");
                     break;
-            }
-            
-            queryAgent.deleteDatabase();
-            registerShutdownHook(graphDb);
+            }                        
         }
     }
 }
