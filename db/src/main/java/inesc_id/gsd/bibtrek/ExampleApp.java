@@ -40,6 +40,7 @@ public class ExampleApp {
     private static final String PAPERS_BY_AUTHOR = "7";
     private static final String AUTHORS_BY_PAPER = "8";
     private static final String SUBJECTS_BY_PAPER = "9";
+    private static final String PAPERS_REFERENCES = "10";
     private static final String EXIT = "0";
     
     private static GraphDatabaseService graphDb;
@@ -295,7 +296,7 @@ public class ExampleApp {
     	String attribute, node = "", rows = "", fname = "", surname = ""; 
     	
     	try ( Transaction ignored = graphDb.beginTx();
-             Result result = graphDb.execute( "MATCH (papers:Paper {title:\"" + title + "\"})"
+             Result result = graphDb.execute( "MATCH (papers:Paper)"
              		+ "<-[:WROTE]-(authors:Author) WHERE papers.title =~ \".*" + title
              		+ ".*\" RETURN authors.fname, authors.surname, authors" ) )
     	{
@@ -323,12 +324,12 @@ public class ExampleApp {
     	System.out.println(rows);
     }
     
-    // getPapersAuthors(): get all the authors of a paper
+    // getPapersAuthors(): get all the subjects of a paper
     public void getPapersSubjects(String title) {
     	String attribute, node = "", rows = "", subject = ""; 
     	
     	try ( Transaction ignored = graphDb.beginTx();
-             Result result = graphDb.execute( "MATCH (papers:Paper {title:\"" + title + "\"})"
+             Result result = graphDb.execute( "MATCH (papers:Paper)"
              		+ "<-[:FOCUS_OF]-(subjects:Subject) WHERE papers.title =~ \".*" + title
              		+ ".*\" RETURN subjects.subject, subjects" ) )
     	{
@@ -347,6 +348,44 @@ public class ExampleApp {
                 	}
                 }
                 rows += node + " :  " + subject + "\n";
+           }
+    	}
+    	
+    	System.out.println(rows);
+    }
+    
+    // getPapersReferences(): get all the references of a paper
+    public void getPapersReferences(String title) {
+    	String attribute, node = "", rows = "", library = "", refsTitle = "", year = ""; 
+    	
+    	try ( Transaction ignored = graphDb.beginTx();
+             Result result = graphDb.execute( "MATCH (papers:Paper)"
+             		+ "-[:REFERENCES]->(references:Paper) WHERE papers.title =~ \".*" + title
+             		+ ".*\" RETURN references.title" ) )
+    	{
+    		while ( result.hasNext() )
+    		{
+    			Map<String,Object> row = result.next();
+                for ( Entry<String,Object> column : row.entrySet() )
+                {	
+                	attribute = column.getKey();
+                	switch(attribute) {
+	                	case "references.library":
+	            			library = (String) column.getValue();
+	            			break;
+	                	case "references.title":
+	            			refsTitle = (String) column.getValue();
+	            			break;
+                		case "references.year":
+                			year = Long.toString((long) column.getValue());
+                			break;                		
+                		default:  
+                			if(attribute.contains("Node")) {
+                				node = column.getValue() + "";
+                			}
+                	}
+                }
+                rows += node + " :  [T] " + refsTitle + " [L] " + library + " [Y] " + year + "\n";
            }
     	}
     	
@@ -417,6 +456,8 @@ public class ExampleApp {
             System.out.println("(8): Get paper's authors.");
             System.out.println("");
             System.out.println("(9): Get paper's subjects.");
+            System.out.println("");
+            System.out.println("(10): Get paper's references.");
             System.out.println("");
             System.out.println("(0): Exits the program.");
             System.out.println("");
@@ -510,6 +551,17 @@ public class ExampleApp {
                 		System.out.print("Insert the paper's title: ");                                  
                         title = clientInputScanner.nextLine();                        
 	                    queryAgent.getPapersSubjects(title);
+                	} else {
+                		System.out.println("Error: the database is not created!");
+                		System.out.println("");
+                	}
+                    break;
+                case PAPERS_REFERENCES:
+                	if(databaseCreated == true) {
+                		String title;
+                		System.out.print("Insert the paper's title: ");                                  
+                        title = clientInputScanner.nextLine();                        
+	                    queryAgent.getPapersReferences(title);
                 	} else {
                 		System.out.println("Error: the database is not created!");
                 		System.out.println("");
