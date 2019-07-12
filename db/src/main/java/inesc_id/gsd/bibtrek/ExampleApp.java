@@ -31,16 +31,14 @@ public class ExampleApp {
     
     private static final File NEO4J_DATABASE = new File(GRAPH_DATABASE_PATH);
     
-    private static final String CREATE_GRAPH_DATABASE = "1";
-    private static final String DELETE_GRAPH_DATABASE = "2";
-    private static final String GET_ALL_AUTHORS = "3";
-    private static final String GET_ALL_PAPERS = "4";
-    private static final String GET_ALL_INSTITUTIONS = "5";
-    private static final String GET_ALL_SUBJECTS = "6";
-    private static final String PAPERS_BY_AUTHOR = "7";
-    private static final String AUTHORS_BY_PAPER = "8";
-    private static final String SUBJECTS_BY_PAPER = "9";
-    private static final String PAPERS_REFERENCES = "10";
+    private static final String GET_ALL_AUTHORS = "1";
+    private static final String GET_ALL_PAPERS = "2";
+    private static final String GET_ALL_INSTITUTIONS = "3";
+    private static final String GET_ALL_SUBJECTS = "4";
+    private static final String PAPERS_BY_AUTHOR = "5";
+    private static final String AUTHORS_BY_PAPER = "6";
+    private static final String SUBJECTS_BY_PAPER = "7";
+    private static final String PAPERS_REFERENCES = "8";
     private static final String EXIT = "0";
     
     private static GraphDatabaseService graphDb;
@@ -418,46 +416,39 @@ public class ExampleApp {
     
     public static void main(String argv[]) throws Exception
     {	
+		String fname, surname, title;
+		
     	System.out.println("##### BIBTREK EXAMPLE #####");
         System.out.println("");
         
         @SuppressWarnings("resource")
 		Scanner clientInputScanner = new Scanner(System.in);
-        /*
-        System.out.print("Insert the (BOLT) port on which your local graph database is running: ");
-        String localport = clientInputScanner.nextLine();
         
-		ExampleApp queryAgent = new ExampleApp(localport);    
-        */
         ExampleApp queryAgent = new ExampleApp("7687");
         
-        boolean databaseCreated = false;
         queryAgent.deleteDatabase();
+        queryAgent.createExampleDatabase();
         
         while(true) {
             System.out.println("===================================");
             System.out.println("");
             System.out.println("(*): Pick one of the available options:");
             System.out.println("");
-            System.out.println("(1): Create an example database.");
+            System.out.println("(1): Get all authors.");
             System.out.println("");
-            System.out.println("(2): Delete the example database.");
+            System.out.println("(2): Get all papers.");
             System.out.println("");
-            System.out.println("(3): Get all authors.");
+            System.out.println("(3): Get all institutions.");
             System.out.println("");
-            System.out.println("(4): Get all papers.");
+            System.out.println("(4): Get all subjects.");
             System.out.println("");
-            System.out.println("(5): Get all institutions.");
+            System.out.println("(5): Get author's papers.");
             System.out.println("");
-            System.out.println("(6): Get all subjects.");
+            System.out.println("(6): Get paper's authors.");
             System.out.println("");
-            System.out.println("(7): Get author's papers.");
+            System.out.println("(7): Get paper's subjects.");
             System.out.println("");
-            System.out.println("(8): Get paper's authors.");
-            System.out.println("");
-            System.out.println("(9): Get paper's subjects.");
-            System.out.println("");
-            System.out.println("(10): Get paper's references.");
+            System.out.println("(8): Get paper's references.");
             System.out.println("");
             System.out.println("(0): Exits the program.");
             System.out.println("");
@@ -469,103 +460,43 @@ public class ExampleApp {
             
             System.out.println("");
             
-            switch(option) {
-                case CREATE_GRAPH_DATABASE:
-                	if(databaseCreated == false) {
-	                    queryAgent.createExampleDatabase();
-	                    databaseCreated = true;
-                	} else {
-                		System.out.println("Error: the database is already created!");
-                		System.out.println("");
-                	}
-                    break;
-                case DELETE_GRAPH_DATABASE:       
-                	if(databaseCreated == true) {
-	                    queryAgent.deleteDatabase();
-	                    databaseCreated = false;
-	                    break;
-                	} else {
-                		System.out.println("Error: the database has not been created.");
-                		System.out.println("");
-                	}
+            switch(option) {                
                 case GET_ALL_AUTHORS:
-                	if(databaseCreated == true) {
-	                    queryAgent.getAuthors();
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+	                queryAgent.getAuthors();                	
                     break;
                 case GET_ALL_PAPERS:
-                	if(databaseCreated == true) {
-	                    queryAgent.getPapers();
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+                    queryAgent.getPapers();                
                     break;
                 case GET_ALL_INSTITUTIONS:
-                	if(databaseCreated == true) {
-	                    queryAgent.getInstitutions();
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+                    queryAgent.getInstitutions();
                     break;
                 case GET_ALL_SUBJECTS:
-                	if(databaseCreated == true) {
-	                    queryAgent.getSubjects();
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+                    queryAgent.getSubjects();
+            		System.out.println("Error: the database is not created!");
+            		System.out.println("");
                     break;
                 case PAPERS_BY_AUTHOR:
-                	if(databaseCreated == true) {
-                		String fname, surname;
-                		System.out.print("Insert the author's first name: ");                                  
-                        fname = clientInputScanner.nextLine();
-                        System.out.print("Insert the author's surname name: ");
-                        System.out.print("");
-                        surname = clientInputScanner.nextLine();
-	                    queryAgent.getAuthorsPapers(fname, surname);
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+            		System.out.print("Insert the author's first name: ");                                  
+                    fname = clientInputScanner.nextLine();
+                    System.out.print("Insert the author's surname name: ");
+                    System.out.print("");
+                    surname = clientInputScanner.nextLine();
+                    queryAgent.getAuthorsPapers(fname, surname);
                     break;
                 case AUTHORS_BY_PAPER:
-                	if(databaseCreated == true) {
-                		String title;
-                		System.out.print("Insert the paper's title: ");                                  
-                        title = clientInputScanner.nextLine();                        
-	                    queryAgent.getPaperAuthors(title);
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+            		System.out.print("Insert the paper's title: ");                                  
+                    title = clientInputScanner.nextLine();                        
+                    queryAgent.getPaperAuthors(title);
                     break;
                 case SUBJECTS_BY_PAPER:
-                	if(databaseCreated == true) {
-                		String title;
-                		System.out.print("Insert the paper's title: ");                                  
-                        title = clientInputScanner.nextLine();                        
-	                    queryAgent.getPapersSubjects(title);
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+            		System.out.print("Insert the paper's title: ");                                  
+                    title = clientInputScanner.nextLine();                        
+                    queryAgent.getPapersSubjects(title);
                     break;
                 case PAPERS_REFERENCES:
-                	if(databaseCreated == true) {
-                		String title;
-                		System.out.print("Insert the paper's title: ");                                  
-                        title = clientInputScanner.nextLine();                        
-	                    queryAgent.getPapersReferences(title);
-                	} else {
-                		System.out.println("Error: the database is not created!");
-                		System.out.println("");
-                	}
+            		System.out.print("Insert the paper's title: ");                                  
+                    title = clientInputScanner.nextLine();                        
+                    queryAgent.getPapersReferences(title);
                     break;
                 case EXIT:
                     return;   
@@ -574,6 +505,7 @@ public class ExampleApp {
                     break;
             }
             
+            queryAgent.deleteDatabase();
             registerShutdownHook(graphDb);
         }
     }
