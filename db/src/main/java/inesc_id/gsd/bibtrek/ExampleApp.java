@@ -1,16 +1,16 @@
 package inesc_id.gsd.bibtrek;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Session;
-import org.neo4j.driver.v1.StatementResult;
-import org.neo4j.driver.v1.Transaction;
-import org.neo4j.driver.v1.TransactionWork;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Result;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 
 import inesc_id.gsd.bibtrek.exceptions.ExampleAppException;
 
 import static org.neo4j.driver.v1.Values.parameters;
+import static org.neo4j.io.fs.FileUtils.deleteRecursively;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,31 +18,37 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
-public class ExampleApp implements AutoCloseable {
-    private static final String GRAPH_DATABASE_FILE = "example.nosql";
+public class ExampleApp {
+    private static final String EXAMPLE_DATABASE = "example.nosql";
+    
+    private static final String GRAPH_DATABASE_PATH = "target" + File.separator + "example-db";
+    
+    private static final File NEO4J_DATABASE = new File(GRAPH_DATABASE_PATH);
     
     private static final String CREATE_GRAPH_DATABASE = "1";
     private static final String DELETE_GRAPH_DATABASE = "2";
     private static final String QUERY_GRAPH_DATABASE = "3";
     private static final String EXIT = "4";
-
-    private final Driver driver;
     
-    public ExampleApp(String uri, String user, String password) {
-        driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
-    }
-
-    public void close() throws Exception {
-        driver.close();
-    } 
+    private static GraphDatabaseService graphDb;
+    
+	@SuppressWarnings("deprecation")
+	public ExampleApp(String port) {
+		clearDbPath();		
+		GraphDatabaseSettings.BoltConnector bolt = GraphDatabaseSettings.boltConnector("0");    	
+    	graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(NEO4J_DATABASE).setConfig( bolt.type, "BOLT").setConfig( bolt.enabled, "true").setConfig( bolt.address, "localhost:" + port).newGraphDatabase();
+	}
     
     public String getGraphDatabase() throws ExampleAppException {
         try {
         	String line;
-            File file = new File(GRAPH_DATABASE_FILE);
+            File file = new File(EXAMPLE_DATABASE);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));            
             
             String createDatabase = "";
@@ -56,41 +62,44 @@ public class ExampleApp implements AutoCloseable {
             
             return createDatabase;
         } catch (FileNotFoundException fnfe) {
-            throw new ExampleAppException("getGraphDatabase(): The file you were looking for with name:\"" + GRAPH_DATABASE_FILE
+            throw new ExampleAppException("getGraphDatabase(): The file you were looking for with name:\"" + EXAMPLE_DATABASE
                     + "\" does not exist.");
         } catch (IOException ioe) {
             throw new ExampleAppException("getGraphDatabase(): Could not close the Input Stream");
         }
     }
     
+    
     public void createExampleDatabase() throws ExampleAppException { 
-    	String createDatabaseTransaction, message;
+    	String createDatabaseTransaction, message, rows = "";    	
     	
-    	try ( Session session = driver.session() )
-        {	    		
-			createDatabaseTransaction = getGraphDatabase();			
-            message = session.writeTransaction( new TransactionWork<String>()
-            {
-                @Override
-                public String execute( Transaction tx )
-                {	                	
-                	tx.run(createDatabaseTransaction,
-                            parameters());
-                   return "Success: the example database was successfully imported.";                	
-                }
-            } );
-            System.out.println("");
-            System.out.println(message);
-            System.out.println("");   
-        }
-    	catch (ExampleAppException e) {
-			throw new ExampleAppException("createExampleDatabase(): Could not get the database from the \"" + 
-					GRAPH_DATABASE_FILE + "\" file...");
+    	Map<String, Object> params = new HashMap<>();
+    	
+    	createDatabaseTransaction = getGraphDatabase();
+    	
+    	// tag::execute[]
+		try (Transaction ignored = graphDb.beginTx();
+						
+				Result result = graphDb.execute(createDatabaseTransaction, params)							
+			) {
+				while ( result.hasNext() ) {
+					Map<String,Object> row = result.next();
+					for ( Entry<String,Object> column : row.entrySet()) {
+						rows += column.getKey() + ": " + column.getValue() + "; ";
+					}
+					rows += "\n";
+				}
+				ignored.success();
 		}
+		
+		// end::execute[]
+		
+		System.out.println("Success: the example database was successfully created!");
+		System.out.println(""); 
     }
     
     public void deleteDatabase() {
-    	String deleteDatabaseQuery = "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r", message;
+    	/*String deleteDatabaseQuery = "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r", message;
     	try ( Session session = driver.session() )
         {	    		
             message = session.writeTransaction( new TransactionWork<String>()
@@ -105,26 +114,44 @@ public class ExampleApp implements AutoCloseable {
             System.out.println("");
             System.out.println(message);
             System.out.println("");          
+        }*/
+    }      
+    
+    private static void registerShutdownHook( final GraphDatabaseService graphDb )
+    {
+        Runtime.getRuntime().addShutdownHook( new Thread()
+        {
+            @Override
+            public void run()
+            {
+                graphDb.shutdown();
+            }
+        });
+    }
+    
+    private void clearDbPath()
+    {
+        try
+        {
+            deleteRecursively(NEO4J_DATABASE);
+        }
+        catch ( IOException e )
+        {
+            throw new RuntimeException( e );
         }
     }
     
-   
     public static void main(String argv[]) throws Exception
     {	
+    	
+        
         @SuppressWarnings("resource")
 		Scanner clientInputScanner = new Scanner(System.in);
 
-        System.out.print("Insert the port on which your local graph database is running: ");
+        System.out.print("Insert the (BOLT) port on which your local graph database is running: ");
         String localport = clientInputScanner.nextLine();
 
-        System.out.print("Insert your NEO4J username: ");
-        String username = clientInputScanner.nextLine();
-
-        System.out.print("Insert your password: ");
-        String password = clientInputScanner.nextLine();
-
-        @SuppressWarnings("resource")
-		ExampleApp queryAgent = new ExampleApp("bolt://localhost:" + localport, username, password);    
+		ExampleApp queryAgent = new ExampleApp(localport);    
         
         boolean databaseCreated = false;
         queryAgent.deleteDatabase();
@@ -146,9 +173,12 @@ public class ExampleApp implements AutoCloseable {
             System.out.println("");
             System.out.println("===================================");
             System.out.println("");
-            System.out.print("Insert your choice: "); 
+            System.out.print("Insert your choice: ");          
+            
             String option = clientInputScanner.nextLine();
-
+            
+            System.out.println("");
+            
             switch(option) {
                 case CREATE_GRAPH_DATABASE:
                 	if(databaseCreated == false) {
@@ -175,11 +205,13 @@ public class ExampleApp implements AutoCloseable {
                     String query = clientInputScanner.nextLine();
                     break;
                 case EXIT:
-                    return;                    
+                    return;   
                 default:
                     System.out.println("main(): That option does not exist. Please insert another command...");
                     break;
             }
+            
+            registerShutdownHook(graphDb);
         }
     }
 }
