@@ -255,11 +255,11 @@ public class ExampleApp {
     // getAuthorsPapers(): get all the papers written by a certain Author
     public void getAuthorsPapers(String fname, String surname) {
     	String attribute, node = "", rows = "", library = "", year = "", title = ""; 
+    	boolean displayAuthorsName = true;
     	
     	try ( Transaction ignored = graphDb.beginTx();
              Result result = graphDb.execute( "MATCH (authors:Author {fname:\"" + fname + "\",surname:\"" + surname + "\"})"
-             		+ "-[:WROTE]-(papers:Paper) RETURN papers.title, papers.year, papers.library, papers"
-             		+ "authors.fname, authors.surname, authors" ) )
+             		+ "-[:WROTE]-(papers:Paper) RETURN papers.title, papers.year, papers.library, papers") )
     	{
     		while ( result.hasNext() )
     		{
@@ -283,6 +283,11 @@ public class ExampleApp {
                 			}
                 	}
                 }
+                if(displayAuthorsName) {
+                	System.out.println("");
+                	System.out.println("Author: " + fname + " " + surname);
+                	displayAuthorsName = false;
+                }
                 rows += node + " :  [T] " + title + " [L] " + library + " [Y] " + year + "\n";
            }
     	}
@@ -292,12 +297,13 @@ public class ExampleApp {
     
     // getPapersAuthors(): get all the authors of a paper
     public void getPaperAuthors(String title) {
-    	String attribute, node = "", rows = "", fname = "", surname = ""; 
+    	String attribute, node = "", rows = "", fname = "", surname = "", displayTitle = ""; 
+    	boolean displayPapersTitle = true; 
     	
     	try ( Transaction ignored = graphDb.beginTx();
              Result result = graphDb.execute( "MATCH (papers:Paper)"
              		+ "<-[:WROTE]-(authors:Author) WHERE papers.title =~ \".*" + title
-             		+ ".*\" RETURN authors.fname, authors.surname, authors" ) )
+             		+ ".*\" RETURN authors.fname, authors.surname, authors, papers.title" ) )
     	{
     		while ( result.hasNext() )
     		{
@@ -312,9 +318,17 @@ public class ExampleApp {
                 		case "authors.surname":
                 			surname = (String) column.getValue();      
                 			break;
+                		case "papers.title":
+                			if(displayPapersTitle)
+                				displayTitle = (String) column.getValue();      
                 		default:                			
                 			node = column.getValue() + "";
                 	}
+                }
+                if(displayPapersTitle) {
+                	System.out.println("");
+                	System.out.println("Paper: " + displayTitle);
+                	displayPapersTitle = false;
                 }
                 rows += node + " :  " + fname + " " + surname + "\n";
            }
@@ -325,12 +339,13 @@ public class ExampleApp {
     
     // getPapersAuthors(): get all the subjects of a paper
     public void getPapersSubjects(String title) {
-    	String attribute, node = "", rows = "", subject = ""; 
+    	String attribute, node = "", rows = "", subject = "", displayTitle = ""; 
+    	boolean displayPapersTitle = true; 
     	
     	try ( Transaction ignored = graphDb.beginTx();
              Result result = graphDb.execute( "MATCH (papers:Paper)"
              		+ "<-[:FOCUS_OF]-(subjects:Subject) WHERE papers.title =~ \".*" + title
-             		+ ".*\" RETURN subjects.subject, subjects" ) )
+             		+ ".*\" RETURN subjects.subject, subjects, papers.title" ) )
     	{
     		while ( result.hasNext() )
     		{
@@ -342,9 +357,17 @@ public class ExampleApp {
                 		case "subjects.subject":
                 			subject = (String) column.getValue();
                 			break;
+                		case "papers.title":
+                			if(displayPapersTitle)
+                				displayTitle = (String) column.getValue();   
                 		default:                			
                 			node = column.getValue() + "";
                 	}
+                }
+                if(displayPapersTitle) {
+                	System.out.println("");
+                	System.out.println("Paper: " + displayTitle);
+                	displayPapersTitle = false;
                 }
                 rows += node + " :  " + subject + "\n";
            }
@@ -355,12 +378,13 @@ public class ExampleApp {
     
     // getPapersReferences(): get all the references of a paper
     public void getPapersReferences(String title) {
-    	String attribute, node = "", rows = "", library = "", refsTitle = "", year = ""; 
+    	String attribute, node = "", rows = "", library = "", refsTitle = "", year = "", displayTitle = ""; 
+    	boolean displayPapersTitle = true; 
     	
     	try ( Transaction ignored = graphDb.beginTx();
              Result result = graphDb.execute( "MATCH (papers:Paper)"
              		+ "-[:REFERENCES]->(references:Paper) WHERE papers.title =~ \".*" + title
-             		+ ".*\" RETURN references.title" ) )
+             		+ ".*\" RETURN references.title, references.year, references.library, references, papers.title" ) )
     	{
     		while ( result.hasNext() )
     		{
@@ -377,12 +401,20 @@ public class ExampleApp {
 	            			break;
                 		case "references.year":
                 			year = Long.toString((long) column.getValue());
-                			break;                		
+                			break;  
+                		case "papers.title":
+                			if(displayPapersTitle)
+                				displayTitle = (String) column.getValue();   
                 		default:  
                 			if(attribute.contains("Node")) {
                 				node = column.getValue() + "";
                 			}
                 	}
+                }
+                if(displayPapersTitle) {
+                	System.out.println("");
+                	System.out.println("Paper: " + displayTitle);
+                	displayPapersTitle = false;
                 }
                 rows += node + " :  [T] " + refsTitle + " [L] " + library + " [Y] " + year + "\n";
            }
