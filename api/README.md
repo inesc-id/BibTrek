@@ -49,3 +49,60 @@ Finally we can also format our API responses in different formats. For example, 
   - formatApiResponseAsXml(): Returns the ApiResponse as an XML string
 
 # DBLP 
+
+DBLP can be found in the following link: "https://dblp.uni-trier.de/"
+
+DBLP API allows us to query its database with XML requests with the following formats for:
+  
+  - Publications: "http://dblp.org/search/publ/api"
+  - Authors: "http://dblp.org/search/author/api"
+  - Venues: "http://dblp.org/search/venue/api"
+
+In the following link is also showed how to use the API to query the system: "https://dblp.org/faq/How+can+I+fetch+all+publications+of+one+specific+author"
+
+The requests are made using XML. The responses are in the XML format as well.
+
+DBLP also allows us to query its website as it can be read here: "https://dblp.org/faq/Am+I+allowed+to+crawl+the+dblp+website"
+
+Finally there are numerous python wrappers under the GPL license avaible throughout github. Scholrly would be the most popular example: "https://github.com/scholrly/dblp-python".
+
+# Google Scholar 
+
+Google Scholar: "https://scholar.google.pt/"
+
+Unfortunately Google Scholar does not allow us to either crawl its website or use an API to query its database.
+Surprisingly the use of a crawler on the Scholar website is against Google's Terms of Service.
+There are some discussions about this topic on the Stack Overflow forums on which the links can be found below:
+  
+  - "https://code.google.com/archive/p/google-ajax-apis/issues/109"
+  - "https://academia.stackexchange.com/questions/34970/how-to-get-permission-from-google-to-use-google-scholar-data-if-needed"
+  - "https://academia.stackexchange.com/questions/2567/api-eula-and-scraping-for-google-scholar"
+
+Google's terms of service and privacy policy can be found below as well. These apply to all of their services, Google Scholar being one of them.
+
+  - https://policies.google.com/terms?hl=en
+  - https://policies.google.com/privacy?hl=en
+
+The terms of service read :
+  
+  Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.
+
+Since no API is provided, we assume we cannot use any other service to query their services other than their interface.
+Finally Google Scholar's "robots.txt" which can be found here: "https://scholar.google.ca/robots.txt"; disallows bots. Which means we cannot crawl their website.
+
+# ArXiv
+
+Arxiv can be found in the following link: "https://arxiv.org/"
+
+Finally ArXiv allows the developers to use an API. The API calls are made using HTTP with the GET and POST methods.
+ArXiv responses use the Atom 1.0 format. This format is an easily readable format extended from XML.
+In the website we are pointed to several languages that easily call the API and parse the Atom 1.0 results. These languages are: Perl, Python, Ruby and PHP. ArXiv also includes examples using the API for each one of this languages in the links below:
+
+  - Perl: "https://arxiv.org/help/api#perl_simple_example"
+  - Python: "https://arxiv.org/help/api#python_simple_example"
+  - Ruby: "https://arxiv.org/help/api#ruby_simple_example"
+  - PHP: "https://arxiv.org/help/api#php_simple_example"
+
+It is also worth mentioning that ArXiv terms of service can be found in the following link: "https://arxiv.org/help/api/tou"; and information about bulk data access can be found here: "https://arxiv.org/help/bulk_data"
+
+We are also allowed the use of crawlers to some extent. The "robots.txt" file can be found here: "https://arxiv.org/robots.txt".
