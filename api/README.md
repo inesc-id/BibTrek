@@ -85,7 +85,7 @@ Google's terms of service and privacy policy can be found below as well. These a
 
 The terms of service read :
   
-  Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.
+    Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.
 
 Since no API is provided, we assume we cannot use any other service to query their services other than their interface.
 Finally Google Scholar's "robots.txt" which can be found here: "https://scholar.google.ca/robots.txt"; disallows bots. Which means we cannot crawl their website.
@@ -94,7 +94,7 @@ Finally Google Scholar's "robots.txt" which can be found here: "https://scholar.
 
 Arxiv can be found in the following link: "https://arxiv.org/"
 
-Finally ArXiv allows the developers to use an API. The API calls are made using HTTP with the GET and POST methods.
+ArXiv allows the developers to use an API. The API calls are made using HTTP with GET and POST requests.
 ArXiv responses use the Atom 1.0 format. This format is an easily readable format extended from XML.
 In the website we are pointed to several languages that easily call the API and parse the Atom 1.0 results. These languages are: Perl, Python, Ruby and PHP. ArXiv also includes examples using the API for each one of this languages in the links below:
 
