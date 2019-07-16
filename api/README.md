@@ -52,15 +52,9 @@ Finally we can also format our API responses in different formats. For example, 
 
 DBLP can be found in the following link: "https://dblp.uni-trier.de/"
 
-DBLP API allows us to query its database with XML requests with the following formats for:
-  
-  - Publications: "http://dblp.org/search/publ/api"
-  - Authors: "http://dblp.org/search/author/api"
-  - Venues: "http://dblp.org/search/venue/api"
+DBLP API allows us to query its database through HTTP requests like is showed in this link in the table below: "https://dblp.uni-trier.de/faq/How+to+use+the+dblp+search+API?q=rowhammer";. 
 
-In the following link is also showed how to use the API to query the system: "https://dblp.org/faq/How+can+I+fetch+all+publications+of+one+specific+author"
-
-The requests are made using XML. The responses are in the XML format as well.
+In the following link is also showed how the XML results are proccessed from the database: "https://dblp.org/faq/How+can+I+fetch+all+publications+of+one+specific+author"
 
 DBLP also allows us to query its website as it can be read here: "https://dblp.org/faq/Am+I+allowed+to+crawl+the+dblp+website"
 
