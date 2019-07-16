@@ -56,7 +56,7 @@ DBLP API allows us to query its database through HTTP requests like is showed in
 
 In the following link is also showed how the XML results are proccessed from the database: "https://dblp.org/faq/How+can+I+fetch+all+publications+of+one+specific+author"
 
-DBLP also allows us to query its website as it can be read here: "https://dblp.org/faq/Am+I+allowed+to+crawl+the+dblp+website"
+DBLP also allows us to crawl its website as it can be read here: "https://dblp.org/faq/Am+I+allowed+to+crawl+the+dblp+website"
 
 Finally there are numerous python wrappers under the GPL license avaible throughout github. Scholrly would be the most popular example: "https://github.com/scholrly/dblp-python".
 
