@@ -102,11 +102,7 @@ public class DBLPInterface {
 	
 	private void chooseAuthorsToAdd(ArrayList<Object[]> tupleArrayList) {
 		String authorChoice;
-		Object[] tuple;
-		ArrayList<Object[]> addedAuthors;
 		
-		addedAuthors = new ArrayList();
-				
 		while(true) {
 			System.out.println("");
 			System.out.println("(a)");
@@ -119,25 +115,50 @@ public class DBLPInterface {
 			authorChoice = this.userInput.nextLine();
 			//if the string is an integer use it to choose an author
 			if(StringToIntegerUtils.isInteger(authorChoice)) {
-				tuple = tupleArrayList.get(Integer.valueOf(authorChoice)-1);					
-				
-				if(addedAuthors.contains(tuple)) {
-					System.out.println("");
-					System.out.println("You cannot pick the same author twice!");
-				} else {				
-					addedAuthors.add(tuple);
-				}
+				tupleArrayList = chooseAuthorsToAddIntegerCondition(authorChoice, tupleArrayList);
 			} else {
-				if(authorChoice.equals("a")) {
-					// TODO passes the original array to add all authors instead
-				} else if(authorChoice.equals("e")) {
-					return;
-				} else {
-					System.out.println("");
-					System.out.println("You must insert a valid option!");
-				}
+				chooseAuthorsToAddCharacterCondition(authorChoice, tupleArrayList);
 			}			
-
+		}
+	}
+	
+	private ArrayList<Object[]> chooseAuthorsToAddIntegerCondition(String authorChoice, ArrayList<Object[]> tupleArrayList) {
+		Object[] tuple;
+		ArrayList<Object[]> addedAuthors;
+		
+		addedAuthors = new ArrayList<Object[]>();
+		
+		try {
+			tuple = tupleArrayList.get(Integer.valueOf(authorChoice)-1);	
+			if(addedAuthors.contains(tuple)) {
+				System.out.println("");
+				System.out.println("You cannot pick the same author twice!");
+			} else {				
+				addedAuthors.add(tuple);
+			}
+			
+		} catch(IndexOutOfBoundsException ioobe) {
+			System.out.println("");
+			System.out.println("You must insert a valid option!");
+		} catch(NumberFormatException nfe) {
+			System.out.println("");
+			System.out.println("You must insert a valid option!");
+		}
+		
+		return addedAuthors;
+	}
+	
+	private void chooseAuthorsToAddCharacterCondition(String authorChoice, ArrayList<Object[]> tupleArrayList) {
+		if(authorChoice.equals("a")) {
+			// TODO passes the original array to add all authors instead
+			
+		} else if(authorChoice.equals("e")) {
+			// TODO passes the array list
+			
+			
+		} else {
+			System.out.println("");
+			System.out.println("You must insert a valid option!");
 		}
 	}
 	
