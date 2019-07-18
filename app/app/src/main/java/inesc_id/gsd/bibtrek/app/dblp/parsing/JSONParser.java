@@ -1,7 +1,11 @@
 package inesc_id.gsd.bibtrek.app.dblp.parsing;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import inesc_id.gsd.bibtrek.app.utils.JSONUtils;
 
 public abstract class JSONParser {
 		
@@ -25,9 +29,10 @@ public abstract class JSONParser {
 		return this.rawString;
 	}
 	
-	public void parseString() {
+	public ArrayList<Object[]> parseString() {
 		int completion;
 		JSONObject result, hit, hits;
+		ArrayList<Object[]> tupleArrayList; 				
 		
 		result = new JSONObject(this.rawString);
 		hits = (JSONObject) result.get(RESULT);
@@ -35,25 +40,36 @@ public abstract class JSONParser {
 		completion = checkCompletions(hits);
 		if(completion>0) {
 			hit = (JSONObject) hits.get(HITS);
-			displayHits(hit);
+			tupleArrayList = displayHits(hit);
 		} else {
 			//TODO display message
+			tupleArrayList = new ArrayList();
 		}		
+		
+		return tupleArrayList;
 	}
 	
-	private void displayHits(JSONObject hit) {
+	private ArrayList<Object[]> displayHits(JSONObject hit) {
+		Object[] tuple;
 		JSONArray hitArray;
-		JSONObject data, info; 
+		JSONObject data, info;
+		ArrayList<Object[]> tupleArrayList; 
 		
+		tupleArrayList = new ArrayList();
+		tuple = new Object[0];
 		hitArray = (JSONArray) hit.get(HIT);
 		for(int i = 0; i<hitArray.length(); i++) {
 			data = (JSONObject) hitArray.get(i);
 			info = (JSONObject) data.get(INFO);
-			displayInfo(info);
-		}
+			System.out.println("");
+			tuple = displayInfo(info, i);
+			tupleArrayList.add(tuple);
+		}		
+
+		return tupleArrayList;
 	}
 	
-	abstract void displayInfo(JSONObject info);
+	abstract Object[] displayInfo(JSONObject info, int counter);
 	
 	private int checkCompletions(JSONObject hits) {
 		int value;

@@ -11,10 +11,22 @@ public class AuthorJSONParser extends JSONParser {
 	}
 
 	@Override
-	void displayInfo(JSONObject info) {
-		System.out.print("Author: ");
-		System.out.println(info.get(AUTHOR));
-		System.out.print("URL: ");
-		System.out.println(info.get(URL));		
+	Object[] displayInfo(JSONObject info, int counter) {
+		Object[] tuple;
+		String author, url;
+		
+		author = (String) info.get(AUTHOR);
+		url = (String) info.get(URL);
+		
+		
+		System.out.println("(" + (counter+1) + ")");
+		System.out.print("- Author: ");
+		System.out.println(author);
+		System.out.print("- URL: ");
+		System.out.println(url);
+		
+		tuple = new Object[]{author, url};		
+		
+		return tuple;
 	}
 }
