@@ -3,16 +3,14 @@ package inesc_id.gsd.bibtrek.app.dblp.parsing;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class JSONParser {
-	
-	private static final String AUTHOR = "author";
+public abstract class JSONParser {
+		
 	private static final String COMPLETIONS = "completions";
 	private static final String HIT = "hit";
 	private static final String HITS = "hits";
 	private static final String INFO = "info";
 	private static final String RESULT = "result";	
 	private static final String TOTAL = "@total";
-	private static final String URL = "url";
 	
 	private String rawString;
 	
@@ -51,17 +49,11 @@ public class JSONParser {
 		for(int i = 0; i<hitArray.length(); i++) {
 			data = (JSONObject) hitArray.get(i);
 			info = (JSONObject) data.get(INFO);
-			//TODO Comportamento Individualizado
-			displayAuthorInfo(info);
+			displayInfo(info);
 		}
 	}
 	
-	private void displayAuthorInfo(JSONObject info) {
-		System.out.print("Author: ");
-		System.out.println(info.get(AUTHOR));
-		System.out.print("URL: ");
-		System.out.println(info.get(URL));
-	}
+	abstract void displayInfo(JSONObject info);
 	
 	private int checkCompletions(JSONObject hits) {
 		int value;
