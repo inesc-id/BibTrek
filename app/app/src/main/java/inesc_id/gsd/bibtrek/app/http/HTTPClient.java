@@ -17,7 +17,7 @@ public class HTTPClient {
 	}
 	
     // HTTP GET request
- 	public void getRequest(String query) throws HTTPClientException { 		
+ 	public String getRequest(String query) throws HTTPClientException { 		
  		
  		URL url;
  		
@@ -48,7 +48,7 @@ public class HTTPClient {
 	 		in.close();
 
 	 		//print result
-	 		System.out.println(response.toString());
+	 		return response.toString();
 	 		
 		} catch (MalformedURLException murle) {
 			throw new HTTPClientException("getRequest(): the url: \"" 

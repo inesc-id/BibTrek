@@ -13,7 +13,14 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
+  
+  <dependencies>  
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20180813</version>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
 	  <plugin>
@@ -29,7 +36,7 @@
 		  </execution>
 		</executions>
 		<configuration>
-		  <mainClass>inesc_id.gsd.bibtrek.app.App</mainClass>
+		  <mainClass>inesc_id.gsd.bibtrek.app.main.MainClass</mainClass>
 		</configuration>
 	  </plugin>
 	</plugins>
