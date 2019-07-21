@@ -39,8 +39,10 @@ public class AuthorByNameSearch extends Search {
 			throw new AuthorByNameSearchException("search(): could not execute the query: \"" + query + "\".");
 		}
 		authorJSONParser.setString(getRequest);
+		System.out.println("");
+		System.out.println("(*) Authors Found: ");
 		tupleArrayList = authorJSONParser.parseString();
-		if(!tupleArrayList.isEmpty()) {
+		if(!tupleArrayList.isEmpty()) {		
 			chooseAuthorsToAdd(tupleArrayList);
 		}		
 	}
@@ -51,6 +53,8 @@ public class AuthorByNameSearch extends Search {
 		
 		ArrayList<Object[]> addedAuthors = new ArrayList<Object[]>();
 		while(true) {
+			System.out.println("");
+			System.out.println("Author's Menu");
 			System.out.println("");
 			System.out.println("(a)");
 			System.out.println("- Add all of the authors and exits the menu ; ");
