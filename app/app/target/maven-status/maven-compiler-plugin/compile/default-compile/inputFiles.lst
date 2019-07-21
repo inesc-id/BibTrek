@@ -1,16 +1,21 @@
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/main/MainInterface.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/parsing/JSONParser.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/utils/StringToIntegerUtils.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/http/HTTPClient.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/DBLPInterfaceException.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/utils/JSONUtils.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/MainClassException.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/DBLPQueryCreator.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/HTTPClientException.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/sanitizer/TitleSanitizer.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/sanitizer/NameSanitizer.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/parsing/AuthorJSONParser.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/sanitizer/QuerySanitizer.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/MainInterfaceException.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/DBLPInterface.java
-/afs/.ist.utl.pt/users/6/9/ist182069/Documents/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/main/MainClass.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\sanitizer\TitleSanitizer.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\DBLPInterfaceException.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\HTTPClientException.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\sanitizer\QuerySanitizer.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\utils\TimeUtils.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\MainInterfaceException.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\writer\DBLPNoSQLWriter.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\DBLPInterface.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\sanitizer\NameSanitizer.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\main\MainClass.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\utils\StringToIntegerUtils.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\MainClassException.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\neo4j\WriteNoSQL.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\DBLPQueryCreator.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\parsing\JSONParser.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\http\HTTPClient.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\DBLPNoSQLWriterException.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\utils\JSONUtils.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\parsing\AuthorJSONParser.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\parsing\AuthorsPublicationsJSONParser.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\main\MainInterface.java

@@ -6,7 +6,10 @@ import java.util.Scanner;
 import inesc_id.gsd.bibtrek.app.http.HTTPClient;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorJSONParser;
+import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorsPublicationsJSONParser;
+import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
+import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.HTTPClientException;
 
 public class DBLPInterface {
@@ -41,7 +44,9 @@ public class DBLPInterface {
 		
         queryCreator = new DBLPQueryCreator();                        		   
         
-		while(true) {			
+		while(true) {
+			System.out.println("");
+			System.out.println("(*)  : DBLP MENU");
 			System.out.println("");
 		    System.out.println("(a)  : Searches for an author by name ;");
 		    System.out.println("(ap) : Searches for an author's publications by name ;");
@@ -59,12 +64,7 @@ public class DBLPInterface {
 					searchAuthorByName(queryCreator);
 					break;
 				case SEARCH_AUTHORS_PUBLICATIONS:
-					System.out.print("Type the author's name: ");	
-					authorName = this.userInput.nextLine(); 
-					query = queryCreator.searchAuthorsPublications(authorName);
-					getRequest = this.executeQuery(query);
-					/*jsonParser.setString(getRequest);
-					jsonParser.parseString();*/
+					searchAuthorsPublicationByName(queryCreator);
 					break;
 				case SEARCH_PUBLICATION: 
 					System.out.print("Type the publication's title: ");	
@@ -100,24 +100,52 @@ public class DBLPInterface {
 			
 	}
 	
-	private void chooseAuthorsToAdd(ArrayList<Object[]> tupleArrayList) {
-		String authorChoice;
+	private void searchAuthorsPublicationByName(DBLPQueryCreator queryCreator) throws DBLPInterfaceException {
+		String query, authorName, getRequest;		
+		AuthorsPublicationsJSONParser authorsPublicationsJSONParser;	
+		ArrayList<Object[]> tupleArrayList;
 		
+				
+		authorsPublicationsJSONParser = new AuthorsPublicationsJSONParser();					
+		System.out.print("Type the author's name: ");	            									
+		authorName = this.userInput.nextLine(); 
+		query = queryCreator.searchAuthorsPublications(authorName);
+		getRequest = this.executeQuery(query);
+		System.out.println(getRequest);		
+		authorsPublicationsJSONParser.setString(getRequest);		
+		tupleArrayList = authorsPublicationsJSONParser.parseString();
+		if(!tupleArrayList.isEmpty()) {
+			//chooseAuthorsToAdd(tupleArrayList);
+		}
+				
+	}
+	
+	private void chooseAuthorsToAdd(ArrayList<Object[]> tupleArrayList) throws DBLPInterfaceException {
+		String authorChoice;
+		boolean exit = false;
+		
+		ArrayList<Object[]> addedAuthors = new ArrayList<Object[]>();
 		while(true) {
 			System.out.println("");
 			System.out.println("(a)");
-			System.out.println("- Add all of the authors ; ");
+			System.out.println("- Add all of the authors and exits the menu ; ");
 			System.out.println("");
-			System.out.println("(e)");
-			System.out.println("- Exit the choice menu ;");
+			System.out.println("(es)");
+			System.out.println("- Exits the choice menu and saves the configuration you have chosen ;");
+			System.out.println("");
+			System.out.println("(e!)");
+			System.out.println("- Exits the choice menu without saving ;");
 			System.out.println(""); 
 			System.out.print("Pick one of the authors to insert in the database: ");	            									
 			authorChoice = this.userInput.nextLine();
 			//if the string is an integer use it to choose an author
 			if(StringToIntegerUtils.isInteger(authorChoice)) {
-				tupleArrayList = chooseAuthorsToAddIntegerCondition(authorChoice, tupleArrayList);
+				addedAuthors = chooseAuthorsToAddIntegerCondition(authorChoice, tupleArrayList);				
 			} else {
-				chooseAuthorsToAddCharacterCondition(authorChoice, tupleArrayList);
+				exit = chooseAuthorsToAddCharacterCondition(authorChoice, tupleArrayList, addedAuthors);
+				
+				if(exit)
+					return;
 			}			
 		}
 	}
@@ -148,19 +176,31 @@ public class DBLPInterface {
 		return addedAuthors;
 	}
 	
-	private void chooseAuthorsToAddCharacterCondition(String authorChoice, ArrayList<Object[]> tupleArrayList) {
-		if(authorChoice.equals("a")) {
-			// TODO passes the original array to add all authors instead
-			
-		} else if(authorChoice.equals("e")) {
-			// TODO passes the array list
-			
-			
-		} else {
-			System.out.println("");
-			System.out.println("You must insert a valid option!");
+	private boolean chooseAuthorsToAddCharacterCondition(String authorChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedAuthors) throws DBLPInterfaceException {				
+		DBLPNoSQLWriter dblpNoSQLWriter;
+		
+		try {
+			if(authorChoice.equals("a")) {
+				dblpNoSQLWriter = new DBLPNoSQLWriter(tupleArrayList);
+				dblpNoSQLWriter.writeToFile();
+				return true;
+			} else if(authorChoice.equals("es") && !addedAuthors.isEmpty()) {
+				dblpNoSQLWriter = new DBLPNoSQLWriter(addedAuthors);
+				dblpNoSQLWriter.writeToFile();
+				return true;
+			} else if(authorChoice.equals("es") && addedAuthors.isEmpty()) {			
+				return true;
+			} else if(authorChoice.equals("e!")) {			
+				return true;
+			} else {
+				System.out.println("");
+				System.out.println("You must insert a valid option!");
+				return false;
+			}
+		} catch(DBLPNoSQLWriterException dblpnosqlwe) {
+			throw new DBLPInterfaceException("chooseAuthorsToAddCharacterCondition(): could not execute a valid option!");
 		}
-	}
+	}	
 	
 }
 
