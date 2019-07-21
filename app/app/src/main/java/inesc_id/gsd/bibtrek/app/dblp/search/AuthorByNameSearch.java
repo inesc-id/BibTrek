@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import inesc_id.gsd.bibtrek.app.dblp.DBLPQueryCreator;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorJSONParser;
+import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorByNameDBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.AuthorByNameSearchException;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
@@ -110,11 +110,11 @@ public class AuthorByNameSearch extends Search {
 		
 		try {
 			if(authorChoice.equals("a")) {
-				dblpNoSQLWriter = new DBLPNoSQLWriter(tupleArrayList);
+				dblpNoSQLWriter = new AuthorByNameDBLPNoSQLWriter(tupleArrayList);
 				dblpNoSQLWriter.writeToFile();
 				return true;
 			} else if(authorChoice.equals("es") && !addedAuthors.isEmpty()) {
-				dblpNoSQLWriter = new DBLPNoSQLWriter(addedAuthors);
+				dblpNoSQLWriter = new AuthorByNameDBLPNoSQLWriter(addedAuthors);
 				dblpNoSQLWriter.writeToFile();
 				return true;
 			} else if(authorChoice.equals("es") && addedAuthors.isEmpty()) {			

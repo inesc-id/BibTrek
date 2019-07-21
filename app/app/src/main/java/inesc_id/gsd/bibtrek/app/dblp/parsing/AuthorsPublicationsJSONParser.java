@@ -58,7 +58,7 @@ public class AuthorsPublicationsJSONParser extends JSONParser {
 		System.out.print("- DOI: ");
 		System.out.println(doi);
 		
-		tuple = new Object[] {authors, title, ee, venue, year, type, key, url, doi};
+		tuple = new Object[] {authors, title, url, year, venue, type, ee, key, doi};
 		
 		return tuple;
 	}
