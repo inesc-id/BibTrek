@@ -3,7 +3,6 @@ package inesc_id.gsd.bibtrek.app.dblp.search.condition;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorDBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
