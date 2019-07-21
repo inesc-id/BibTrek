@@ -1,14 +1,17 @@
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\writer\PublicationsDBLPNoSQLWriter.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\DBLPInterfaceException.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\utils\TimeUtils.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\search\PublicationSearch.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\MainInterfaceException.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\writer\DBLPNoSQLWriter.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\AuthorSearchException.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\SearchBranchException.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\PublicationSearchException.java
-C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\writer\AuthorsByNamePublicationsDBLPNoSQLWriter.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\SearchException.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\MainClassException.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\parsing\JSONParser.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\search\condition\WriteConditionFactory.java
+C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\writer\AuthorDBLPNoSQLWriter.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\search\condition\SearchBranch.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\sanitizer\TitleSanitizer.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\search\AuthorSearch.java
@@ -22,7 +25,6 @@ C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bi
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\search\Search.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\neo4j\WriteNoSQL.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\DBLPQueryCreator.java
-C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\dblp\writer\AuthorByNameDBLPNoSQLWriter.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\http\HTTPClient.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\exceptions\DBLPNoSQLWriterException.java
 C:\Users\José Eduardo\Google Drive\BibTrek\app\app\src\main\java\inesc_id\gsd\bibtrek\app\utils\JSONUtils.java

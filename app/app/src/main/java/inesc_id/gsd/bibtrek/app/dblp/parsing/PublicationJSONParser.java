@@ -3,7 +3,6 @@ package inesc_id.gsd.bibtrek.app.dblp.parsing;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import inesc_id.gsd.bibtrek.app.utils.JSONUtils;
@@ -27,12 +26,17 @@ public class PublicationJSONParser extends JSONParser {
 
 	@Override
 	Object[] displayInfo(JSONObject info, int counter) {
-		Object[] tuple;
-		String title, ee, venue, year, type, key, url, doi;
-		ArrayList<Object> authors;
+		Object object;
+		Object[] tuple = null;
+		String author, title, ee, venue, year, type, key, url;
+		ArrayList<Object> authorsArray;
 		
-		authors = JSONUtils.convertJSONArrayToArrayList((JSONArray) ((JSONObject) info.get(AUTHORS)).get(AUTHOR));
-		doi = (String) info.get(DOI);
+		System.out.println("");
+		System.out.println(info);
+		System.out.println("");
+		
+		object = (Object) ((JSONObject) info.get(AUTHORS)).get(AUTHOR);
+		
 		ee = (String) info.get(EE);
 		key = (String) info.get(KEY);
 		title = (String) info.get(TITLE);
@@ -46,7 +50,18 @@ public class PublicationJSONParser extends JSONParser {
 		System.out.println(title);
 		System.out.print("- Authors: ");
 		System.out.println("");
-		this.displayAuthorsList(authors);
+		
+		if(object instanceof JSONArray) {
+			authorsArray = JSONUtils.convertJSONArrayToArrayList((JSONArray) ((JSONObject) info.get(AUTHORS)).get(AUTHOR));
+			this.displayAuthorsList(authorsArray);
+			tuple = new Object[] {authorsArray, title, url, year, venue, type, ee, key};
+		} else if(object instanceof String) {
+			author = (String) ((JSONObject) info.get(AUTHORS)).get(AUTHOR);
+			System.out.println("- Author: ");
+			System.out.println(author);
+			tuple = new Object[] {author, title, url, year, venue, type, ee, key};
+		}
+		
 		System.out.print("- EE: ");
 		System.out.println(ee);
 		System.out.print("- Venue: ");
@@ -57,10 +72,8 @@ public class PublicationJSONParser extends JSONParser {
 		System.out.println(type);
 		System.out.print("- URL: ");
 		System.out.println(url);
-		System.out.print("- DOI: ");
-		System.out.println(doi);
 		
-		tuple = new Object[] {authors, title, url, year, venue, type, ee, key, doi};
+		
 		
 		return tuple;
 	}

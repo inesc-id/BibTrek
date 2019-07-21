@@ -9,9 +9,9 @@ import java.util.Iterator;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.utils.TimeUtils;
 
-public class AuthorByNameDBLPNoSQLWriter extends DBLPNoSQLWriter{
+public class AuthorDBLPNoSQLWriter extends DBLPNoSQLWriter{
 	
-	public AuthorByNameDBLPNoSQLWriter(ArrayList<Object[]> listToWrite) {
+	public AuthorDBLPNoSQLWriter(ArrayList<Object[]> listToWrite) {
 		super(listToWrite);
 	}
 	

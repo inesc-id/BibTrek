@@ -3,10 +3,10 @@ package inesc_id.gsd.bibtrek.app.dblp.search.condition;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorsByNamePublicationsDBLPNoSQLWriter;
+import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorDBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
-import inesc_id.gsd.bibtrek.app.exceptions.PublicationSearchException;
+import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 
 public class SearchBranch {
@@ -23,7 +23,7 @@ public class SearchBranch {
 		this.userInput = userInput;
 	}
 	
-	public void choose(ArrayList<Object[]> tupleArrayList) throws PublicationSearchException {
+	public void choose(ArrayList<Object[]> tupleArrayList) throws SearchBranchException {
 		String publicationChoice;
 		boolean exit = false;
 		
@@ -56,7 +56,7 @@ public class SearchBranch {
 			if(StringToIntegerUtils.isInteger(publicationChoice)) {
 				addedPublications = chooseIntegerCondition(publicationChoice, tupleArrayList);				
 			} else {
-				exit = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications);
+				exit = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications, this.choice);
 				
 				if(exit)
 					return;
@@ -90,16 +90,16 @@ public class SearchBranch {
 		return addedPublications;
 	}
 	
-	private boolean chooseStringCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedPublications) throws PublicationSearchException  {				
+	private boolean chooseStringCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedPublications, String choice) throws SearchBranchException  {				
 		DBLPNoSQLWriter dblpNoSQLWriter;
 		
 		try {
 			if(publicationChoice.equals("a")) {
-				dblpNoSQLWriter = new AuthorsByNamePublicationsDBLPNoSQLWriter(tupleArrayList);
+				dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, choice);
 				dblpNoSQLWriter.writeToFile();
 				return true;
 			} else if(publicationChoice.equals("es") && !addedPublications.isEmpty()) {
-				dblpNoSQLWriter = new AuthorsByNamePublicationsDBLPNoSQLWriter(addedPublications);
+				dblpNoSQLWriter = WriteConditionFactory.getWriter(addedPublications, choice);
 				dblpNoSQLWriter.writeToFile();
 				return true;
 			} else if(publicationChoice.equals("es") && addedPublications.isEmpty()) {			
@@ -112,7 +112,7 @@ public class SearchBranch {
 				return false;
 			}
 		} catch(DBLPNoSQLWriterException dblpnosqlwe) {
-			throw new PublicationSearchException("choosePublicationsToAddCharacterCondition(): could not execute a valid option!");
+			throw new SearchBranchException("choosePublicationsToAddCharacterCondition(): could not execute a valid option!");
 		}
 	}	
 }

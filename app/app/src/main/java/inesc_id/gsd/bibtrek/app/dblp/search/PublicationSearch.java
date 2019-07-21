@@ -6,13 +6,9 @@ import java.util.Scanner;
 import inesc_id.gsd.bibtrek.app.dblp.DBLPQueryCreator;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.PublicationJSONParser;
 import inesc_id.gsd.bibtrek.app.dblp.search.condition.SearchBranch;
-import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorsByNamePublicationsDBLPNoSQLWriter;
-import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.PublicationSearchException;
+import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
-import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
-
 
 public class PublicationSearch extends Search {
 	
@@ -31,20 +27,29 @@ public class PublicationSearch extends Search {
 
 	@Override
 	public void search() throws PublicationSearchException {
-		String query, authorName, getRequest;		
+		String query, userChoice, getRequest;		
 		PublicationJSONParser publicationJSONParser;	
 		ArrayList<Object[]> tupleArrayList;
 		SearchBranch searchBranch;
 				
 		publicationJSONParser = new PublicationJSONParser();
 		searchBranch = new SearchBranch(this.choice, this.userInput);
+		
 		if(this.choice.equals(AUTHORS_PUBLICATIONS)) {
 			System.out.print("Type the author's name: ");
 		} else if(this.choice.equals(PUBLICATION)) {
 			System.out.print("Type the publication's title: ");
 		}
-		authorName = this.userInput.nextLine(); 
-		query = queryCreator.searchAuthorsPublications(authorName);
+		
+		userChoice = this.userInput.nextLine(); 
+		query = queryCreator.searchAuthorsPublications(userChoice);
+		
+		if(this.choice.equals(AUTHORS_PUBLICATIONS)) {
+			query = queryCreator.searchAuthorsPublications(userChoice);
+		} else if(this.choice.equals(PUBLICATION)) {
+			query = queryCreator.searchForPublication(userChoice);
+		}
+		
 		try {
 			getRequest = this.executeQuery(query);
 		} catch (SearchException se) {
@@ -54,8 +59,12 @@ public class PublicationSearch extends Search {
 		System.out.println("");
 		System.out.println("(*) Publications Found: ");
 		tupleArrayList = publicationJSONParser.parseString();
-		if(!tupleArrayList.isEmpty()) {			
-			searchBranch.choose(tupleArrayList);
+		if(!tupleArrayList.isEmpty()) {					
+			try {
+				searchBranch.choose(tupleArrayList);
+			} catch (SearchBranchException sbe) {
+				throw new PublicationSearchException("search(): could not search for publication.");
+			}			
 		}
 	}
 

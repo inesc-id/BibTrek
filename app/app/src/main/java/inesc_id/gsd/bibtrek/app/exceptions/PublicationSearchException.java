@@ -1,6 +1,6 @@
 package inesc_id.gsd.bibtrek.app.exceptions;
 
-public class PublicationSearchException extends Exception {
+public class PublicationSearchException extends SearchException {
 	
 	public PublicationSearchException(String errorMessage, Throwable err) {
         super(errorMessage, err);
