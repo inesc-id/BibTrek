@@ -46,4 +46,6 @@ public class DBLPQueryCreator {
 		
 		return query;
 	}
+	
+	
 }

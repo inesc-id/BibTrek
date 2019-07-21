@@ -1,61 +1,45 @@
-package inesc_id.gsd.bibtrek.app.dblp.search;
+package inesc_id.gsd.bibtrek.app.dblp.search.condition;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import inesc_id.gsd.bibtrek.app.dblp.DBLPQueryCreator;
-import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorsPublicationsJSONParser;
 import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorsByNamePublicationsDBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
-import inesc_id.gsd.bibtrek.app.exceptions.AuthorsPublicationByNameSearchException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
-import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
+import inesc_id.gsd.bibtrek.app.exceptions.PublicationSearchException;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 
-
-public class AuthorsPublicationByNameSearch extends Search {
+public class SearchBranch {
 	
-	private DBLPQueryCreator queryCreator; 
+	private final static String AUTHOR = "author";
+	private final static String AUTHORS_PUBLICATIONS = "authors-publications";
+	private final static String PUBLICATION = "publication";
+	
+	private String choice;
 	private Scanner userInput;
 	
-	public AuthorsPublicationByNameSearch(DBLPQueryCreator queryCreator, Scanner userInput) {		
-		this.queryCreator = queryCreator;
+	public SearchBranch(String choice, Scanner userInput) {
+		this.choice = choice;
 		this.userInput = userInput;
 	}
-
-	@Override
-	public void search() throws AuthorsPublicationByNameSearchException {
-		String query, authorName, getRequest;		
-		AuthorsPublicationsJSONParser authorsPublicationsJSONParser;	
-		ArrayList<Object[]> tupleArrayList;
-		
-				
-		authorsPublicationsJSONParser = new AuthorsPublicationsJSONParser();					
-		System.out.print("Type the author's name: ");	            									
-		authorName = this.userInput.nextLine(); 
-		query = queryCreator.searchAuthorsPublications(authorName);
-		try {
-			getRequest = this.executeQuery(query);
-		} catch (SearchException se) {
-			throw new AuthorsPublicationByNameSearchException("search(): could not execute the query: \"" + query + "\".");
-		}
-		authorsPublicationsJSONParser.setString(getRequest);
-		System.out.println("");
-		System.out.println("(*) Publications Found: ");
-		tupleArrayList = authorsPublicationsJSONParser.parseString();
-		if(!tupleArrayList.isEmpty()) {			
-			choosePublicationsToAdd(tupleArrayList);
-		}
-	}
 	
-	private void choosePublicationsToAdd(ArrayList<Object[]> tupleArrayList) throws AuthorsPublicationByNameSearchException {
+	public void choose(ArrayList<Object[]> tupleArrayList) throws PublicationSearchException {
 		String publicationChoice;
 		boolean exit = false;
 		
 		ArrayList<Object[]> addedPublications = new ArrayList<Object[]>();
 		while(true) {
-			System.out.println("");
-			System.out.println("(*) Author's Publication Menu");
+						
+			if(this.choice.equals(AUTHOR)) {
+				System.out.println("");			
+				System.out.println("(*) Author's Menu");
+			} else if(this.choice.equals(AUTHORS_PUBLICATIONS)) {
+				System.out.println("");
+				System.out.println("(*) Author's Publication Menu");
+			} else if(this.choice.equals(PUBLICATION)) {
+				System.out.println("");
+				System.out.println("(*) Publications Menu");
+			}
 			System.out.println("");
 			System.out.println("(a)");
 			System.out.println("- Add all of the publications and exits the menu ; ");
@@ -70,9 +54,9 @@ public class AuthorsPublicationByNameSearch extends Search {
 			publicationChoice = this.userInput.nextLine();
 
 			if(StringToIntegerUtils.isInteger(publicationChoice)) {
-				addedPublications = choosePublicationsToAddIntegerCondition(publicationChoice, tupleArrayList);				
+				addedPublications = chooseIntegerCondition(publicationChoice, tupleArrayList);				
 			} else {
-				exit = choosePublicationsToAddCharacterCondition(publicationChoice, tupleArrayList, addedPublications);
+				exit = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications);
 				
 				if(exit)
 					return;
@@ -80,7 +64,7 @@ public class AuthorsPublicationByNameSearch extends Search {
 		}
 	}
 	
-	private ArrayList<Object[]> choosePublicationsToAddIntegerCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList) {
+	private ArrayList<Object[]> chooseIntegerCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList) {
 		Object[] tuple;
 		ArrayList<Object[]> addedPublications;
 		
@@ -106,7 +90,7 @@ public class AuthorsPublicationByNameSearch extends Search {
 		return addedPublications;
 	}
 	
-	private boolean choosePublicationsToAddCharacterCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedPublications) throws AuthorsPublicationByNameSearchException  {				
+	private boolean chooseStringCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedPublications) throws PublicationSearchException  {				
 		DBLPNoSQLWriter dblpNoSQLWriter;
 		
 		try {
@@ -128,8 +112,7 @@ public class AuthorsPublicationByNameSearch extends Search {
 				return false;
 			}
 		} catch(DBLPNoSQLWriterException dblpnosqlwe) {
-			throw new AuthorsPublicationByNameSearchException("choosePublicationsToAddCharacterCondition(): could not execute a valid option!");
+			throw new PublicationSearchException("choosePublicationsToAddCharacterCondition(): could not execute a valid option!");
 		}
 	}	
-	
 }

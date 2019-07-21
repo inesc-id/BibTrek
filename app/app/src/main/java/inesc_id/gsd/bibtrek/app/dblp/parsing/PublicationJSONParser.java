@@ -3,11 +3,12 @@ package inesc_id.gsd.bibtrek.app.dblp.parsing;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import inesc_id.gsd.bibtrek.app.utils.JSONUtils;
 
-public class AuthorsPublicationsJSONParser extends JSONParser {
+public class PublicationJSONParser extends JSONParser {
 	
 	private static final String AUTHORS = "authors";
 	private static final String AUTHOR = "author";
@@ -20,9 +21,10 @@ public class AuthorsPublicationsJSONParser extends JSONParser {
 	private static final String VENUE = "venue";
 	private static final String YEAR = "year";
 	
-	public AuthorsPublicationsJSONParser() {		
+	public PublicationJSONParser() {
+		
 	}
-	
+
 	@Override
 	Object[] displayInfo(JSONObject info, int counter) {
 		Object[] tuple;

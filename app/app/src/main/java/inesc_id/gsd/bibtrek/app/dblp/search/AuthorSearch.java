@@ -5,38 +5,42 @@ import java.util.Scanner;
 
 import inesc_id.gsd.bibtrek.app.dblp.DBLPQueryCreator;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorJSONParser;
+import inesc_id.gsd.bibtrek.app.dblp.search.condition.SearchBranch;
 import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorByNameDBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
-import inesc_id.gsd.bibtrek.app.exceptions.AuthorByNameSearchException;
+import inesc_id.gsd.bibtrek.app.exceptions.AuthorSearchException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 
-public class AuthorByNameSearch extends Search {
+public class AuthorSearch extends Search {
 	
+	private String choice;
 	private DBLPQueryCreator queryCreator; 
 	private Scanner userInput;
 	
-	public AuthorByNameSearch(DBLPQueryCreator queryCreator, Scanner userInput) {
+	public AuthorSearch(DBLPQueryCreator queryCreator, Scanner userInput, String choice) {
 		this.queryCreator = queryCreator;
 		this.userInput = userInput;
+		this.choice = choice;
 	}
 
 	@Override
-	public void search() throws AuthorByNameSearchException {
+	public void search() throws AuthorSearchException {
 		String query, authorName, getRequest;		
 		AuthorJSONParser authorJSONParser;	
 		ArrayList<Object[]> tupleArrayList;
-		
+		SearchBranch searchBranch;
 				
-		authorJSONParser = new AuthorJSONParser();					
+		authorJSONParser = new AuthorJSONParser();
+		searchBranch = new SearchBranch(this.choice, this.userInput);
 		System.out.print("Type the author's name: ");	            									
 		authorName = this.userInput.nextLine(); 
 		query = this.queryCreator.searchAuthorByName(authorName);		
 		try {
 			getRequest = this.executeQuery(query);
 		} catch (SearchException se) {
-			throw new AuthorByNameSearchException("search(): could not execute the query: \"" + query + "\".");
+			throw new AuthorSearchException("search(): could not execute the query: \"" + query + "\".");
 		}
 		authorJSONParser.setString(getRequest);
 		System.out.println("");
@@ -47,7 +51,7 @@ public class AuthorByNameSearch extends Search {
 		}		
 	}
 	
-	private void chooseAuthorsToAdd(ArrayList<Object[]> tupleArrayList) throws AuthorByNameSearchException {
+	private void chooseAuthorsToAdd(ArrayList<Object[]> tupleArrayList) throws AuthorSearchException {
 		String authorChoice;
 		boolean exit = false;
 		
@@ -105,7 +109,7 @@ public class AuthorByNameSearch extends Search {
 		return addedAuthors;
 	}
 	
-	private boolean chooseAuthorsToAddCharacterCondition(String authorChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedAuthors) throws AuthorByNameSearchException  {				
+	private boolean chooseAuthorsToAddCharacterCondition(String authorChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedAuthors) throws AuthorSearchException  {				
 		DBLPNoSQLWriter dblpNoSQLWriter;
 		
 		try {
@@ -127,7 +131,7 @@ public class AuthorByNameSearch extends Search {
 				return false;
 			}
 		} catch(DBLPNoSQLWriterException dblpnosqlwe) {
-			throw new AuthorByNameSearchException("chooseAuthorsToAddCharacterCondition(): could not execute a valid option!");
+			throw new AuthorSearchException("chooseAuthorsToAddCharacterCondition(): could not execute a valid option!");
 		}
 	}	
 	
