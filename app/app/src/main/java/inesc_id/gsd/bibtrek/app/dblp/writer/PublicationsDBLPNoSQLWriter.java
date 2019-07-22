@@ -16,7 +16,7 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void writeToFile() throws DBLPNoSQLWriterException {
+	public synchronized void writeToFile() throws DBLPNoSQLWriterException {
 		BufferedWriter bufferedWriter;
 		Iterator<Object[]> iter;
 		Object[] tuple;
@@ -27,7 +27,7 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 		authorsArrayList = new ArrayList<String>();
 		
 		try {
-			bufferedWriter = new BufferedWriter(new FileWriter(DBLP_FILE, true));
+			bufferedWriter = new BufferedWriter(new FileWriter(getCurrentFile(), true));
 			
 			while(iter.hasNext()) {
 				tuple = iter.next();
@@ -66,7 +66,7 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 			}			
 			bufferedWriter.close();
 		} catch(IOException ioe) {
-			throw new DBLPNoSQLWriterException("writeToFile(): could not write to the: \"" + DBLP_FILE + "\".");
+			throw new DBLPNoSQLWriterException("writeToFile(): could not write to the current state.");
 		}
 	}
 }

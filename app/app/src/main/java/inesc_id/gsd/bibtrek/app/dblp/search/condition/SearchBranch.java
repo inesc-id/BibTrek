@@ -60,14 +60,6 @@ public class SearchBranch {
 				exit = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications, this.choice);
 				
 				if(exit) {
-					// TODO eventually becomes a multi threaded oracle using a publisher-subscriber method
-					/*DBLPConnectNeo4J neo4J = new DBLPConnectNeo4J("bolt://localhost:7687", "neo4j", "graph");
-					try {
-						neo4J.execute();
-					} catch (DBLPConnectNeo4JException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
 					return;
 				}
 			}			

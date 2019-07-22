@@ -15,7 +15,7 @@ public class TimeUtils {
 		SimpleDateFormat format;
 		
 		date = new Date();
-		format = new SimpleDateFormat("ddMMyyyy_HHmmssSSS");	
+		format = new SimpleDateFormat("ddMMyyyy_HHmmssSSSSSS");	
 		dateString = format.format(date);
 		
 		return dateString;
