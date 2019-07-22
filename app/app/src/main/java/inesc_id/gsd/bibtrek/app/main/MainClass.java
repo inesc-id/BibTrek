@@ -10,14 +10,13 @@ public class MainClass {
     	WriteNeo4JThread neo4JThread;
     	
     	MainInterface mainInterface = MainInterface.getInstance();    	
-    	//try {
+    	try {
     		neo4JThread = new WriteNeo4JThread();
-    		//new Thread(neo4JThread).start();
-    		neo4JThread.run();
-			//mainInterface.display();
-		/*} catch (MainInterfaceException mie) {
+    		new Thread(neo4JThread).start();
+			mainInterface.display();
+		} catch (MainInterfaceException mie) {
 			throw new MainClassException("main(): an error occurred while displaying the menu! Aborting...");
-		}*/
+		}
     }
     
 

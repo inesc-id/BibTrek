@@ -17,12 +17,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class DBLPConnectNeo4J implements AutoCloseable {
+public class ConnectNeo4J implements AutoCloseable {
 	
-	private final static String DBLP_NOSQL = "dblp.nosql";
     private final Driver driver;
 
-    public DBLPConnectNeo4J(String uri, String user, String password) {
+    public ConnectNeo4J(String uri, String user, String password) {
         driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
     }
 
@@ -44,11 +43,11 @@ public class DBLPConnectNeo4J implements AutoCloseable {
         });
     }
     
-    private String read() throws DBLPConnectNeo4JException {
+    private boolean read(String fileName) throws DBLPConnectNeo4JException {
     	BufferedReader bufferedReader;
     	String line, query, queryTuple[];
     	try {
-			bufferedReader = new BufferedReader(new FileReader(DBLP_NOSQL));
+			bufferedReader = new BufferedReader(new FileReader(fileName));
 			
 			while((line = bufferedReader.readLine()) != null) {
 				if(!line.equals("") ) {
@@ -58,15 +57,16 @@ public class DBLPConnectNeo4J implements AutoCloseable {
 				}
 			}
 			
+			return true;
+			
 		} catch (FileNotFoundException fnfe) {
-			throw new DBLPConnectNeo4JException("read(): could not open file: \"" + DBLP_NOSQL + "\".");
+			throw new DBLPConnectNeo4JException("read(): could not open file: \"" + fileName + "\".");
 		} catch (IOException ioe) {
-			throw new DBLPConnectNeo4JException("read(): could not read the file: \"" + DBLP_NOSQL + "\".");
-		}
-    	return "";
+			throw new DBLPConnectNeo4JException("read(): could not read the file: \"" + fileName + "\".");
+		}    	
     }
     
-    public void execute() throws DBLPConnectNeo4JException {
-    	this.read();
+    public boolean execute(String fileName) throws DBLPConnectNeo4JException {
+    	return this.read(fileName);
     }    
 }

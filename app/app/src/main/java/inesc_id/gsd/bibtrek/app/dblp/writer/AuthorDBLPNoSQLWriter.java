@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
-import inesc_id.gsd.bibtrek.app.neo4j.DBLPConnectNeo4J;
 import inesc_id.gsd.bibtrek.app.utils.TimeUtils;
 
 public class AuthorDBLPNoSQLWriter extends DBLPNoSQLWriter{
@@ -17,7 +16,6 @@ public class AuthorDBLPNoSQLWriter extends DBLPNoSQLWriter{
 	}
 	
 	public synchronized void writeToFile() throws DBLPNoSQLWriterException {		
-		DBLPConnectNeo4J neo4J;
 		BufferedWriter bufferedWriter;
 		Iterator<Object[]> iter;
 		Object[] tuple;
