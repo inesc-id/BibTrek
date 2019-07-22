@@ -21,7 +21,7 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 		Iterator<Object[]> iter;
 		Object[] tuple;
 		ArrayList<String> authorsArrayList;
-		String author = "no_author", title, url, year, venue, type, ee, key, doi;
+		String author = "no_author", title, url, year, venue, type, key;
 		
 		iter = listToWrite.iterator();
 		authorsArrayList = new ArrayList<String>();
@@ -39,22 +39,13 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 				year = (String) tuple[3];
 				venue = (String) tuple[4];
 				type = (String) tuple[5];
-				ee = (String) tuple[6];
-				key = (String) tuple[7];
-				
-				/*bufferedWriter.append("\n" + title);
-				bufferedWriter.append("\n" + url);
-				bufferedWriter.append("\n" + year);
-				bufferedWriter.append("\n" + venue);
-				bufferedWriter.append("\n" + type);
-				bufferedWriter.append("\n" + ee);
-				bufferedWriter.append("\n" + key);
-				bufferedWriter.append("\n" + doi);*/
+				key = (String) tuple[6];				
 				
 				bufferedWriter.append("CREATE (" + title.replaceAll("[.:\\s]", "")
-					+ ":Publication {title:\"" + title 
-					+ "\", url:\"" + url + "\", year:\"" + year + "\"})");
-				
+						+ ":Publication {title:\"" + title 
+						+ "\", url:\"" + url + "\", year:\"" + year 
+						+ "\", venue:\"" + venue + "\", type:\"" + type 
+						+ "\", key:\"" + key + "})");				
 				authorsArrayList = (ArrayList<String>) tuple[0];
 				for(String authorIter : authorsArrayList) {
 					author = authorIter;					
@@ -71,11 +62,11 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 				}
 				
 				bufferedWriter.append("\n");
-				
-				bufferedWriter.close();
-			}
-		} catch (IOException ioe) {
+						
+			}			
+			bufferedWriter.close();
+		} catch(IOException ioe) {
 			throw new DBLPNoSQLWriterException("writeToFile(): could not write to the: \"" + DBLP_FILE + "\".");
-		}		
+		}
 	}
 }

@@ -28,16 +28,11 @@ public class PublicationJSONParser extends JSONParser {
 	Object[] displayInfo(JSONObject info, int counter) {
 		Object object;
 		Object[] tuple = null;
-		String author, title, ee, venue, year, type, key, url;
+		String author, title, venue, year, type, key, url;
 		ArrayList<Object> authorsArray;
-		
-		System.out.println("");
-		System.out.println(info);
-		System.out.println("");
 		
 		object = (Object) ((JSONObject) info.get(AUTHORS)).get(AUTHOR);
 		
-		ee = (String) info.get(EE);
 		key = (String) info.get(KEY);
 		title = (String) info.get(TITLE);
 		type = (String) info.get(TYPE);
@@ -54,16 +49,16 @@ public class PublicationJSONParser extends JSONParser {
 		if(object instanceof JSONArray) {
 			authorsArray = JSONUtils.convertJSONArrayToArrayList((JSONArray) ((JSONObject) info.get(AUTHORS)).get(AUTHOR));
 			this.displayAuthorsList(authorsArray);
-			tuple = new Object[] {authorsArray, title, url, year, venue, type, ee, key};
+			tuple = new Object[] {authorsArray, title, url, year, venue, type, key};
 		} else if(object instanceof String) {
 			author = (String) ((JSONObject) info.get(AUTHORS)).get(AUTHOR);
 			System.out.println("- Author: ");
 			System.out.println(author);
-			tuple = new Object[] {author, title, url, year, venue, type, ee, key};
+			authorsArray = new ArrayList<Object>();
+			authorsArray.add(author);
+			tuple = new Object[] {authorsArray, title, url, year, venue, type, key};
 		}
 		
-		System.out.print("- EE: ");
-		System.out.println(ee);
 		System.out.print("- Venue: ");
 		System.out.println(venue);
 		System.out.print("- Year: ");

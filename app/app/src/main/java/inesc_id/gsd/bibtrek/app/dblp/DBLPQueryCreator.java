@@ -8,7 +8,6 @@ public class DBLPQueryCreator {
 	
 	private final static String SEARCH_AUTHORS = "/author/api?q=";
 	private final static String SEARCH_PUBLICATIONS = "/publ/api?q=";
-	private final static String AUTHOR = "author=";
 	
 	private final static String FORMAT_JSON = "&format=json";
 	
@@ -24,8 +23,6 @@ public class DBLPQueryCreator {
 		
 		query = BASE_URL + SEARCH_AUTHORS + authorName + FORMAT_JSON;
 		
-		System.out.println("DBLPQueryCreator - searchAuthorByName()");
-		System.out.println(query);
 		return query;
 	}
 	
@@ -36,10 +33,8 @@ public class DBLPQueryCreator {
 		dblpSanitizer = new DBLPSanitizer(authorName);
 		authorName = dblpSanitizer.sanitize();
 		
-		query = BASE_URL + SEARCH_PUBLICATIONS + AUTHOR + authorName + FORMAT_JSON;
+		query = BASE_URL + SEARCH_PUBLICATIONS + authorName + FORMAT_JSON;
 		
-		System.out.println("DBLPQueryCreator - searchAuthorsPublications()");
-		System.out.println(query);
 		return query;
 	}
 	

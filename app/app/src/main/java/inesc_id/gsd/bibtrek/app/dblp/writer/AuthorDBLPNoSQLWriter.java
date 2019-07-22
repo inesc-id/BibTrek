@@ -37,13 +37,9 @@ public class AuthorDBLPNoSQLWriter extends DBLPNoSQLWriter{
 						+ author.replaceAll("\\W", "") + ":Author {name:\"" 
 						+ author + "\", url:\"" + url + "\"})");
 				
-				bufferedWriter.append("\n");
-				
-				bufferedWriter.close();
-				
-				neo4J = new DBLPConnectNeo4J("bolt://localhost:7687", "neo4j", "graph");
-				neo4J.close();
-			}
+				bufferedWriter.append("\n");												
+			}			
+			bufferedWriter.close();
 		} catch (IOException ioe) {
 			throw new DBLPNoSQLWriterException("writeToFile(): could not write to the: \"" + DBLP_FILE + "\".");
 		}
