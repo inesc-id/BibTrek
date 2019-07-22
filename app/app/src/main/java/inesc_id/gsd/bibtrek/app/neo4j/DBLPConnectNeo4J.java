@@ -31,31 +31,33 @@ public class DBLPConnectNeo4J implements AutoCloseable {
         driver.close();
     }
 
-    public void store() {
-    	final String message = "test";
+    private void store(final String query) {
         try (Session session = driver.session()) {        	
             String greeting = session.writeTransaction( new TransactionWork<String>() {
                 @Override
-                public String execute(Transaction tx) {                	
-                    StatementResult result = tx.run( "CREATE (a:Greeting {title:$ola}) " +
-                                                     "SET a.message = $message " +
-                                                     "RETURN a.message + ', from node ' + id(a)",
-                            parameters("message", message, "ola", "ola"));
-                    return result.single().get(0).asString();
+                public String execute(Transaction tx) {     
+                	System.out.println("with a little help");
+                	System.out.println(query);
+                    StatementResult result = tx.run(query, parameters());
+                    return null;
                 }
             });
             System.out.println(greeting);
         }
     }
     
-    public String read() throws DBLPConnectNeo4JException {
+    private String read() throws DBLPConnectNeo4JException {
     	BufferedReader bufferedReader;
-    	String line;
+    	String line, query, queryTuple[];
     	try {
 			bufferedReader = new BufferedReader(new FileReader(DBLP_NOSQL));
 			
 			while((line = bufferedReader.readLine()) != null) {
-				System.out.println(line.length());
+				if(!line.equals("") ) {
+					queryTuple = line.split(": ", 2);
+					query = queryTuple[1];	
+					this.store(query);
+				}
 			}
 			
 		} catch (FileNotFoundException fnfe) {
@@ -65,5 +67,8 @@ public class DBLPConnectNeo4J implements AutoCloseable {
 		}
     	return "";
     }
-
+    
+    public void execute() throws DBLPConnectNeo4JException {
+    	this.read();
+    }    
 }

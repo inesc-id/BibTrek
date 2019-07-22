@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
+import inesc_id.gsd.bibtrek.app.exceptions.DBLPConnectNeo4JException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
+import inesc_id.gsd.bibtrek.app.neo4j.DBLPConnectNeo4J;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 
 public class SearchBranch {
@@ -57,8 +59,17 @@ public class SearchBranch {
 			} else {
 				exit = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications, this.choice);
 				
-				if(exit)
+				if(exit) {
+					// TODO eventually becomes a multi threaded oracle using a publisher-subscriber method
+					DBLPConnectNeo4J neo4J = new DBLPConnectNeo4J("bolt://localhost:7687", "neo4j", "graph");
+					try {
+						neo4J.execute();
+					} catch (DBLPConnectNeo4JException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return;
+				}
 			}			
 		}
 	}
