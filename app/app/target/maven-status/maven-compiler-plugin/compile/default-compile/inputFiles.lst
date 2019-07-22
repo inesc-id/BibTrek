@@ -1,11 +1,11 @@
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/writer/DBLPNoSQLWriter.java
+/home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/sanitizer/DBLPSanitizer.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/DBLPQueryCreator.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/DBLPNoSQLWriterException.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/search/PublicationSearch.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/writer/PublicationsDBLPNoSQLWriter.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/neo4j/DBLPConnectNeo4J.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/search/condition/WriteConditionFactory.java
-/home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/sanitizer/TitleSanitizer.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/writer/AuthorDBLPNoSQLWriter.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/AuthorSearchException.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/utils/TimeUtils.java
@@ -25,7 +25,6 @@
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/MainInterfaceException.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/parsing/AuthorJSONParser.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/DBLPInterface.java
-/home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/sanitizer/NameSanitizer.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/SearchException.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/dblp/search/AuthorSearch.java
 /home/jose-eduardo/Documentos/INESC-ID/BibTrek/app/app/src/main/java/inesc_id/gsd/bibtrek/app/exceptions/DBLPConnectNeo4JException.java

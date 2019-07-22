@@ -1,6 +1,6 @@
 package inesc_id.gsd.bibtrek.app.dblp;
 
-import inesc_id.gsd.bibtrek.app.sanitizer.NameSanitizer;
+import inesc_id.gsd.bibtrek.app.sanitizer.DBLPSanitizer;
 
 public class DBLPQueryCreator {
 	
@@ -17,30 +17,38 @@ public class DBLPQueryCreator {
 	
 	public String searchAuthorByName(String authorName) {
 		String query;
-		NameSanitizer nameSanitizer;
+		DBLPSanitizer dblpSanitizer;
 		
-		nameSanitizer = new NameSanitizer(authorName);
-		authorName = nameSanitizer.sanitize();
+		dblpSanitizer = new DBLPSanitizer(authorName);
+		authorName = dblpSanitizer.sanitize();
 		
 		query = BASE_URL + SEARCH_AUTHORS + authorName + FORMAT_JSON;
 		
+		System.out.println("DBLPQueryCreator - searchAuthorByName()");
+		System.out.println(query);
 		return query;
 	}
 	
 	public String searchAuthorsPublications(String authorName) {
 		String query;
-		NameSanitizer nameSanitizer;
+		DBLPSanitizer dblpSanitizer;
 		
-		nameSanitizer = new NameSanitizer(authorName);
-		authorName = nameSanitizer.sanitize();
+		dblpSanitizer = new DBLPSanitizer(authorName);
+		authorName = dblpSanitizer.sanitize();
 		
 		query = BASE_URL + SEARCH_PUBLICATIONS + AUTHOR + authorName + FORMAT_JSON;
 		
+		System.out.println("DBLPQueryCreator - searchAuthorsPublications()");
+		System.out.println(query);
 		return query;
 	}
 	
 	public String searchForPublication(String publicationTitle) {
 		String query;
+		DBLPSanitizer dblpSanitizer;
+		
+		dblpSanitizer = new DBLPSanitizer(publicationTitle);
+		publicationTitle = dblpSanitizer.sanitize();
 		
 		query = BASE_URL + SEARCH_PUBLICATIONS + publicationTitle + FORMAT_JSON;
 		

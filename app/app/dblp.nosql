@@ -1,3 +1,1 @@
-
-22072019_105409634: CREATE (MiguelLPardal:Author {name:"Miguel L. Pardal", url:"https://dblp.org/pid/77/8922"})
-22072019_105615606: CREATE (MiguelLPardal:Author {name:"Miguel L. Pardal", url:"https://dblp.org/pid/77/8922"})
+22072019_142905802: CREATE (FelipePardalFrancoCruz:Author {name:"Felipe Pardal Franco Cruz", url:"https://dblp.org/pid/30/7612"})

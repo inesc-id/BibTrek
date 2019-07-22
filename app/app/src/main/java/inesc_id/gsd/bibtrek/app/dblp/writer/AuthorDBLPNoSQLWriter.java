@@ -32,9 +32,13 @@ public class AuthorDBLPNoSQLWriter extends DBLPNoSQLWriter{
 				tuple = iter.next();
 				author = (String) tuple[0];
 				url = (String) tuple[1];
-				bufferedWriter.append("\n" + TimeUtils.getCurrentTimeString() + ": ");
+				bufferedWriter.append(TimeUtils.getCurrentTimeString() + ": ");
 				bufferedWriter.append("CREATE (" 
-						+ author.replaceAll("\\W", "") + ":Author {name:\"" + author + "\", url:\"" + url + "\"})");
+						+ author.replaceAll("\\W", "") + ":Author {name:\"" 
+						+ author + "\", url:\"" + url + "\"})");
+				
+				bufferedWriter.append("\n");
+				
 				bufferedWriter.close();
 				
 				neo4J = new DBLPConnectNeo4J("bolt://localhost:7687", "neo4j", "graph");

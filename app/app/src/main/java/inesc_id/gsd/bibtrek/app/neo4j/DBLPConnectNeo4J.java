@@ -32,18 +32,16 @@ public class DBLPConnectNeo4J implements AutoCloseable {
     }
 
     private void store(final String query) {
-        try (Session session = driver.session()) {        	
-            String greeting = session.writeTransaction( new TransactionWork<String>() {
-                @Override
-                public String execute(Transaction tx) {     
-                	System.out.println("with a little help");
-                	System.out.println(query);
-                    StatementResult result = tx.run(query, parameters());
-                    return null;
-                }
-            });
-            System.out.println(greeting);
-        }
+    	Session session = driver.session();
+	
+        Boolean r = session.writeTransaction(new TransactionWork<Boolean>() {
+            @Override
+            public Boolean execute(Transaction tx) {     
+            	System.out.println(query);
+                StatementResult result = tx.run(query, parameters());
+                return true;
+            }
+        });
     }
     
     private String read() throws DBLPConnectNeo4JException {

@@ -32,13 +32,7 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 			while(iter.hasNext()) {
 				tuple = iter.next();
 				
-				bufferedWriter.append("\n" + TimeUtils.getCurrentTimeString());
-				
-				authorsArrayList = (ArrayList<String>) tuple[0];
-				for(String authorIter : authorsArrayList) {
-					author = authorIter;
-					bufferedWriter.append("\n" + author);
-				}
+				bufferedWriter.append(TimeUtils.getCurrentTimeString() + ": ");				
 				
 				title = (String) tuple[1];
 				url = (String) tuple[2];
@@ -47,16 +41,37 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 				type = (String) tuple[5];
 				ee = (String) tuple[6];
 				key = (String) tuple[7];
-				doi = (String) tuple[8];
 				
-				bufferedWriter.append("\n" + title);
+				/*bufferedWriter.append("\n" + title);
 				bufferedWriter.append("\n" + url);
 				bufferedWriter.append("\n" + year);
 				bufferedWriter.append("\n" + venue);
 				bufferedWriter.append("\n" + type);
 				bufferedWriter.append("\n" + ee);
 				bufferedWriter.append("\n" + key);
-				bufferedWriter.append("\n" + doi);
+				bufferedWriter.append("\n" + doi);*/
+				
+				bufferedWriter.append("CREATE (" + title.replaceAll("[.:\\s]", "")
+					+ ":Publication {title:\"" + title 
+					+ "\", url:\"" + url + "\", year:\"" + year + "\"})");
+				
+				authorsArrayList = (ArrayList<String>) tuple[0];
+				for(String authorIter : authorsArrayList) {
+					author = authorIter;					
+					
+					bufferedWriter.append(" ");
+					
+					bufferedWriter.append("CREATE (" 
+							+ author.replaceAll("\\W", "") + ":Author {name:\"" + author + "\"})");
+					
+					bufferedWriter.append(" ");
+					
+					bufferedWriter.append("CREATE (" + author.replaceAll("\\W", "")
+					+ ")-[:WROTE]->(" + title.replaceAll("[.:\\s]", "") + ")");
+				}
+				
+				bufferedWriter.append("\n");
+				
 				bufferedWriter.close();
 			}
 		} catch (IOException ioe) {

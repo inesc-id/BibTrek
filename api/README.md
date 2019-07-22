@@ -52,7 +52,7 @@ Finally we can also format our API responses in different formats. For example, 
 
 DBLP can be found in the following link: <https://dblp.uni-trier.de/>
 
-DBLP API allows us to query its database through HTTP requests like is showed in this link in the table below: <https://dblp.uni-trier.de/faq/How+to+use+the+dblp+search+API?q=rowhammer>. 
+DBLP API allows us to query its database through HTTP requests like is showed in this link in the table below: <https://dblp.uni-trier.de/faq/How+to+use+the+dblp+search+API>. 
 
 As they show us to query an author, publication or venue the API is the following: 
   - <http://dblp.org/search/publ/api?q=some_publication>
