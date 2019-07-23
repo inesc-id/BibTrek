@@ -41,11 +41,11 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 				type = (String) tuple[5];
 				key = (String) tuple[6];				
 				
-				bufferedWriter.append("CREATE (" + title.replaceAll("[.:\\s]", "")
+				bufferedWriter.append("CREATE (" + title.replaceAll(REPLACE_REGEX, "")
 						+ ":Publication {title:\"" + title 
-						+ "\", url:\"" + url + "\", year:\"" + year 
+						+ "\", url:\"" + url + "\", year:\"" + (int) Integer.valueOf(year) 
 						+ "\", venue:\"" + venue + "\", type:\"" + type 
-						+ "\", key:\"" + key + "})");				
+						+ "\", key:\"" + key + "\"})");				
 				authorsArrayList = (ArrayList<String>) tuple[0];
 				for(String authorIter : authorsArrayList) {
 					author = authorIter;					
@@ -57,8 +57,8 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 					
 					bufferedWriter.append(" ");
 					
-					bufferedWriter.append("CREATE (" + author.replaceAll("\\W", "")
-					+ ")-[:WROTE]->(" + title.replaceAll("[.:\\s]", "") + ")");
+					bufferedWriter.append("CREATE (" + author.replaceAll(REPLACE_REGEX, "")
+					+ ")-[:WROTE]->(" + title.replaceAll(REPLACE_REGEX, "") + ")");
 				}
 				
 				bufferedWriter.append("\n");

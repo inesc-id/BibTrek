@@ -1,7 +1,11 @@
 package inesc_id.gsd.bibtrek.app.neo4j;
 
 import java.io.File;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+
+import org.neo4j.driver.v1.exceptions.ServiceUnavailableException;
 
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPConnectNeo4JException;
 import inesc_id.gsd.bibtrek.app.exceptions.WriteNeo4JThreadException;
@@ -12,7 +16,7 @@ public class WriteNeo4JThread implements Runnable {
 	private final static String GRAPH_PASSWORD = "graph";
 	
 	@Override
-	public void run() {
+	public void run() {				
 		try {
 			while(true) {
 				Thread.sleep(5*1000);
@@ -61,13 +65,16 @@ public class WriteNeo4JThread implements Runnable {
 		boolean result; 
 		
 		result = false;
-		neo4J = new ConnectNeo4J("bolt://localhost:7687", "neo4j", GRAPH_PASSWORD);
+					
 		try {
+			neo4J = new ConnectNeo4J("bolt://localhost:7687", "neo4j", GRAPH_PASSWORD);
 			for(String fileName : fileNameArrayList) {
 				result = neo4J.execute(fileName);
 			}
-		} catch(DBLPConnectNeo4JException e) {
+		} catch(DBLPConnectNeo4JException dblpcneo4je) {
 			throw new WriteNeo4JThreadException("write(): could not connect to the Neo4J graph database...");
+		} catch(ServiceUnavailableException sue) {
+			System.out.println("write(): the database seems to be offline...");
 		}
 		
 		if(result) {

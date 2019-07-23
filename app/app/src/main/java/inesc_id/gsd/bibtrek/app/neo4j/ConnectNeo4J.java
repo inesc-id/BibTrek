@@ -20,7 +20,7 @@ import java.io.IOException;
 public class ConnectNeo4J implements AutoCloseable {
 	
     private final Driver driver;
-
+    
     public ConnectNeo4J(String uri, String user, String password) {
         driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
     }
@@ -43,7 +43,7 @@ public class ConnectNeo4J implements AutoCloseable {
         });
     }
     
-    private boolean read(String fileName) throws DBLPConnectNeo4JException {
+    private synchronized boolean read(String fileName) throws DBLPConnectNeo4JException {
     	BufferedReader bufferedReader;
     	String line, query, queryTuple[];
     	try {

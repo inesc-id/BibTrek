@@ -7,6 +7,8 @@ import inesc_id.gsd.bibtrek.app.utils.TimeUtils;
 
 public abstract class DBLPNoSQLWriter {
 	
+	final static String REPLACE_REGEX = "[\\W\\s]";
+	
 	private final static String DBLP_NOSQL_PATH = "src/main/java/inesc_id/gsd/bibtrek/app/nosql/dblp/";
 
 	ArrayList<Object[]> listToWrite;
