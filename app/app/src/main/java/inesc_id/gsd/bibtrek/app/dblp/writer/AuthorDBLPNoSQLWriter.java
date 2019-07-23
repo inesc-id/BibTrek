@@ -32,7 +32,7 @@ public class AuthorDBLPNoSQLWriter extends DBLPNoSQLWriter{
 				url = (String) tuple[1];
 				bufferedWriter.append(TimeUtils.getCurrentTimeString() + ": ");
 				bufferedWriter.append("CREATE (" 
-						+ author.replaceAll("\\W", "") + ":Author {name:\"" 
+						+ author.replaceAll(REPLACE_REGEX, "") + ":Author {name:\"" 
 						+ author + "\", url:\"" + url + "\"})");
 				
 				bufferedWriter.append("\n");												

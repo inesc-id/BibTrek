@@ -1,19 +1,27 @@
 package inesc_id.gsd.bibtrek.app.neo4j;
 
 import java.io.File;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.neo4j.driver.v1.exceptions.ServiceUnavailableException;
 
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPConnectNeo4JException;
 import inesc_id.gsd.bibtrek.app.exceptions.WriteNeo4JThreadException;
+import inesc_id.gsd.bibtrek.app.utils.TimeUtils;
 
 public class WriteNeo4JThread implements Runnable {
 	
-	private final static String NOSQL_PATH = "src/main/java/inesc_id/gsd/bibtrek/app/nosql/";
+	private final static String GET_FILE = "\\/.\\d*_\\d*.nosql";
+	
 	private final static String GRAPH_PASSWORD = "graph";
+	
+	private final static String NOSQL_PATH = "src/main/java/inesc_id/gsd/bibtrek/app/nosql/";
+	
+	private final static String PROCESSED = "processed";
+	private final static String PROCESSED_REGEX = ".*\\/processed";
+	
+	
+	
 	
 	@Override
 	public void run() {				
@@ -46,11 +54,11 @@ public class WriteNeo4JThread implements Runnable {
 		File newPath;
 		File[] newListOfFiles;
 		
-		for (int i = 0; i < listOfFiles.length; i++) {
+		for (int i = 0; i < listOfFiles.length; i++) {			
 			if (listOfFiles[i].isFile()) {
 				fileName = path + File.separator + listOfFiles[i].getName();
 				fileNameArrayList.add(fileName);				
-			} else if (listOfFiles[i].isDirectory()) {
+			} else if (listOfFiles[i].isDirectory() && !listOfFiles[i].toString().matches(PROCESSED_REGEX)) {				
 				newPath = new File(path + File.separator + listOfFiles[i].getName());
 				newListOfFiles = newPath.listFiles();
 				fileNameArrayList = this.recursiveDirectoryList(newPath, newListOfFiles, fileNameArrayList);
@@ -59,8 +67,9 @@ public class WriteNeo4JThread implements Runnable {
 		return fileNameArrayList;
 	}
 
-	@SuppressWarnings({ "resource"})
 	private void write(ArrayList<String> fileNameArrayList) throws WriteNeo4JThreadException {
+		File currentFile;
+		String currentPath;
 		ConnectNeo4J neo4J;
 		boolean result; 
 		
@@ -70,6 +79,11 @@ public class WriteNeo4JThread implements Runnable {
 			neo4J = new ConnectNeo4J("bolt://localhost:7687", "neo4j", GRAPH_PASSWORD);
 			for(String fileName : fileNameArrayList) {
 				result = neo4J.execute(fileName);
+				currentFile = new File(fileName);
+				currentPath = fileName.split(GET_FILE, 2)[0];
+				currentFile.renameTo(new File(currentPath 
+						+ File.separator + PROCESSED 
+						+ File.separator + TimeUtils.getCurrentTimeString() + ".nosql"));
 			}
 		} catch(DBLPConnectNeo4JException dblpcneo4je) {
 			throw new WriteNeo4JThreadException("write(): could not connect to the Neo4J graph database...");

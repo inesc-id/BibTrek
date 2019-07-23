@@ -22,8 +22,7 @@ public abstract class DBLPNoSQLWriter {
 	protected String getCurrentFile() {
 		String fileName;
 		
-		fileName = DBLP_NOSQL_PATH + "dblp" 
-				+ "_" + TimeUtils.getCurrentTimeString() + ".nosql";
+		fileName = DBLP_NOSQL_PATH + TimeUtils.getCurrentTimeString() + ".nosql";
 		
 		return fileName;
 	}
