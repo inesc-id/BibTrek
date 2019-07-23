@@ -27,7 +27,7 @@ public class AuthorsPublicationsSearch extends Search {;
 
 	@Override
 	public void search() throws AuthorsPublicationsSearchException {
-		String authorName, query, userChoice, getRequest;		
+		String authorName, query, userChoice, getRequest, continueChoice;		
 		AuthorJSONParser authorJSONParser;	
 		ArrayList<Object[]> tupleArrayList, chosenAuthors;		
 		SearchBranch searchBranch;
@@ -54,13 +54,36 @@ public class AuthorsPublicationsSearch extends Search {;
 
 		if(!tupleArrayList.isEmpty()) {			
 			try {
+				//TODO pensar em melhorar as escolhas. Passar a devolver tudo igual a esta e os writes sao feitos la fora
 				chosenAuthors = authorsPublicationsSearchBranch.choose(tupleArrayList);
 											
 				if(chosenAuthors!=null) {
 					publicationSearch = new PublicationSearch(this.queryCreator, this.userInput, this.choice);
-					for(Object[] tupleIter : chosenAuthors) {
-						authorName = (String) tupleIter[0];
-						publicationSearch.search(authorName);
+					for(int i = 0; i<chosenAuthors.size(); i++) {
+						authorName = (String) chosenAuthors.get(i)[0];
+						if(i>=1) {
+							while(true) {
+								boolean breakCycle = false;
+								System.out.println("");
+								System.out.print("(*) Do you want to fetch the publications of the other authors you have fetched? Type [Y|N]: ");											
+								continueChoice = this.userInput.nextLine();
+								//TODO por isto numa funcao especifica
+								switch(continueChoice) {
+									case "Y":
+										publicationSearch.search(authorName);
+										breakCycle = true;
+										break;
+									case "N":									
+										return;
+									default:
+										System.out.println("You must insert a valid choice...");
+								}
+								if(breakCycle)
+									break;
+							}
+						} else {
+							publicationSearch.search(authorName);
+						}
 					}
 				} 
 			} catch (SearchBranchException sbe) {
