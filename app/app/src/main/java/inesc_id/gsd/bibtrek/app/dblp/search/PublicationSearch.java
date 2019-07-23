@@ -12,9 +12,6 @@ import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 
 public class PublicationSearch extends Search {
 	
-	private final static String AUTHORS_PUBLICATIONS = "authors-publications";
-	private final static String PUBLICATION = "publication";
-	
 	private String choice;
 	private DBLPQueryCreator queryCreator; 
 	private Scanner userInput;	
@@ -35,20 +32,40 @@ public class PublicationSearch extends Search {
 		publicationJSONParser = new PublicationJSONParser();
 		searchBranch = new SearchBranch(this.choice, this.userInput);
 		
-		if(this.choice.equals(AUTHORS_PUBLICATIONS)) {
-			System.out.print("Type the author's name: ");
-		} else if(this.choice.equals(PUBLICATION)) {
-			System.out.print("Type the publication's title: ");
-		}
-		
+		System.out.print("Type the publication's title: ");
+				
 		userChoice = this.userInput.nextLine(); 
-		query = queryCreator.searchAuthorsPublications(userChoice);
+				
+		query = queryCreator.searchForPublication(userChoice);		
 		
-		if(this.choice.equals(AUTHORS_PUBLICATIONS)) {
-			query = queryCreator.searchAuthorsPublications(userChoice);
-		} else if(this.choice.equals(PUBLICATION)) {
-			query = queryCreator.searchForPublication(userChoice);
+		try {
+			getRequest = this.executeQuery(query);
+		} catch (SearchException se) {
+			throw new PublicationSearchException("search(): could not execute the query: \"" + query + "\".");
 		}
+		publicationJSONParser.setString(getRequest);
+		System.out.println("");
+		System.out.println("(*) Publications Found: ");
+		tupleArrayList = publicationJSONParser.parseString();
+		if(!tupleArrayList.isEmpty()) {					
+			try {
+				searchBranch.choose(tupleArrayList);
+			} catch (SearchBranchException sbe) {
+				throw new PublicationSearchException("search(): could not search for publication.");
+			}			
+		}
+	}
+	
+	protected void search(String title) throws PublicationSearchException {
+		String query, userChoice, getRequest;		
+		PublicationJSONParser publicationJSONParser;	
+		ArrayList<Object[]> tupleArrayList;
+		SearchBranch searchBranch;
+				
+		publicationJSONParser = new PublicationJSONParser();
+		searchBranch = new SearchBranch(this.choice, this.userInput);
+			 			
+		query = queryCreator.searchForPublication(title);		
 		
 		try {
 			getRequest = this.executeQuery(query);

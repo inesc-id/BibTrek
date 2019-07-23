@@ -42,7 +42,7 @@ public class SearchBranch {
 			}
 			System.out.println("");
 			System.out.println("(a)");
-			System.out.println("- Add all of the publications and exits the menu ; ");
+			System.out.println("- Add all of the available choices and exits the menu ; ");
 			System.out.println("");
 			System.out.println("(es)");
 			System.out.println("- Exits the choice menu and saves the configuration you have chosen ;");

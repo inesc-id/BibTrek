@@ -26,18 +26,6 @@ public class DBLPQueryCreator {
 		return query;
 	}
 	
-	public String searchAuthorsPublications(String authorName) {
-		String query;
-		DBLPSanitizer dblpSanitizer;
-		
-		dblpSanitizer = new DBLPSanitizer(authorName);
-		authorName = dblpSanitizer.sanitize();
-		
-		query = BASE_URL + SEARCH_PUBLICATIONS + authorName + FORMAT_JSON;
-		
-		return query;
-	}
-	
 	public String searchForPublication(String publicationTitle) {
 		String query;
 		DBLPSanitizer dblpSanitizer;

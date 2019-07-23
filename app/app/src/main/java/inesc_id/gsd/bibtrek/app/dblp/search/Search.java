@@ -1,6 +1,5 @@
 package inesc_id.gsd.bibtrek.app.dblp.search;
 
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
 import inesc_id.gsd.bibtrek.app.exceptions.HTTPClientException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 import inesc_id.gsd.bibtrek.app.http.HTTPClient;

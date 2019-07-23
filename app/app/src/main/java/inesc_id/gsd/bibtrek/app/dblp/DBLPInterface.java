@@ -7,9 +7,11 @@ import inesc_id.gsd.bibtrek.app.http.HTTPClient;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorJSONParser;
 import inesc_id.gsd.bibtrek.app.dblp.search.AuthorSearch;
+import inesc_id.gsd.bibtrek.app.dblp.search.AuthorsPublicationsSearch;
 import inesc_id.gsd.bibtrek.app.dblp.search.PublicationSearch;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.AuthorSearchException;
+import inesc_id.gsd.bibtrek.app.exceptions.AuthorsPublicationsSearchException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.HTTPClientException;
@@ -36,6 +38,7 @@ public class DBLPInterface {
 		String query, inputCommand, authorName, publicationTitle, getRequest;
 		DBLPQueryCreator queryCreator;		
 		AuthorSearch authorSearch;
+		AuthorsPublicationsSearch authorsPublicationsSearch;
 		PublicationSearch publicationSearch;
 		
         queryCreator = new DBLPQueryCreator();                        		   
@@ -62,8 +65,8 @@ public class DBLPInterface {
 						authorSearch.search();					
 						break;
 					case SEARCH_AUTHORS_PUBLICATIONS:
-						publicationSearch = new PublicationSearch(queryCreator, this.userInput, AUTHORS_PUBLICATIONS);
-						publicationSearch.search();					
+						authorsPublicationsSearch = new AuthorsPublicationsSearch(queryCreator, this.userInput, AUTHORS_PUBLICATIONS);
+						authorsPublicationsSearch.search();					
 						break;
 					case SEARCH_PUBLICATION:
 						publicationSearch = new PublicationSearch(queryCreator, this.userInput, PUBLICATION);
@@ -77,7 +80,9 @@ public class DBLPInterface {
 				}	
 		    } catch(AuthorSearchException ase) {
 		    	throw new DBLPInterfaceException("display(): could not execute search for author by name.");
-		    } catch (PublicationSearchException pse) {
+		    } catch(AuthorsPublicationsSearchException apse) {
+				throw new DBLPInterfaceException("display(): could not execute search for authors' publications.");
+			} catch (PublicationSearchException pse) {
 		    	throw new DBLPInterfaceException("display(): could not execute search for publications.");
 			}
 			

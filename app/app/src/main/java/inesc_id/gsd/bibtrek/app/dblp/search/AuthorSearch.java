@@ -6,13 +6,9 @@ import java.util.Scanner;
 import inesc_id.gsd.bibtrek.app.dblp.DBLPQueryCreator;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorJSONParser;
 import inesc_id.gsd.bibtrek.app.dblp.search.condition.SearchBranch;
-import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorDBLPNoSQLWriter;
-import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.AuthorSearchException;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
-import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 
 public class AuthorSearch extends Search {
 	
