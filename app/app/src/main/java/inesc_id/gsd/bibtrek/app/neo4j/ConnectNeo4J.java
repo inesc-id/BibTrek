@@ -16,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 public class ConnectNeo4J implements AutoCloseable {
 	

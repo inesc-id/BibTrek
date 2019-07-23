@@ -11,9 +11,6 @@ public class MainClass {
 	
     public static void main(String[] args ) throws MainClassException {
     	WriteNeo4JThread neo4JThread;
-    	
-		/*PrintStream hideStream = new PrintStream(new OutputStream(){public void write(int i) {}});
-		System.setOut(hideStream);*/	
 		
     	MainInterface mainInterface = MainInterface.getInstance();    	
     	try {

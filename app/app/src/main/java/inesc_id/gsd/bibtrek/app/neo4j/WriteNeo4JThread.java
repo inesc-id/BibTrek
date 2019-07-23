@@ -20,9 +20,6 @@ public class WriteNeo4JThread implements Runnable {
 	private final static String PROCESSED = "processed";
 	private final static String PROCESSED_REGEX = ".*\\/processed";
 	
-	
-	
-	
 	@Override
 	public void run() {				
 		try {
