@@ -23,7 +23,9 @@ public class SearchBranch {
 		this.userInput = userInput;
 	}
 	
-	public void choose(ArrayList<Object[]> tupleArrayList) throws SearchBranchException {
+	@SuppressWarnings("unchecked")
+	public ArrayList<Object[]> choose(ArrayList<Object[]> tupleArrayList) throws SearchBranchException {
+		Object[] tuple;
 		String publicationChoice;
 		boolean exit = false;
 		
@@ -56,10 +58,11 @@ public class SearchBranch {
 			if(StringToIntegerUtils.isInteger(publicationChoice)) {
 				addedPublications = chooseIntegerCondition(publicationChoice, tupleArrayList);				
 			} else {
-				exit = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications, this.choice);
-				
+				tuple = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications, this.choice);
+				exit = (boolean) tuple[0];
+				addedPublications = (ArrayList<Object[]>) tuple[1];
 				if(exit) {
-					return;
+					return addedPublications;
 				}
 			}			
 		}
@@ -91,29 +94,19 @@ public class SearchBranch {
 		return addedPublications;
 	}
 	
-	private boolean chooseStringCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedPublications, String choice) throws SearchBranchException  {				
-		DBLPNoSQLWriter dblpNoSQLWriter;
-		
-		try {
-			if(publicationChoice.equals("a")) {
-				dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, choice);
-				dblpNoSQLWriter.writeToFile();
-				return true;
-			} else if(publicationChoice.equals("es") && !addedPublications.isEmpty()) {
-				dblpNoSQLWriter = WriteConditionFactory.getWriter(addedPublications, choice);
-				dblpNoSQLWriter.writeToFile();
-				return true;
-			} else if(publicationChoice.equals("es") && addedPublications.isEmpty()) {			
-				return true;
-			} else if(publicationChoice.equals("e!")) {			
-				return true;
-			} else {
-				System.out.println("");
-				System.out.println("You must insert a valid option!");
-				return false;
-			}
-		} catch(DBLPNoSQLWriterException dblpnosqlwe) {
-			throw new SearchBranchException("choosePublicationsToAddCharacterCondition(): could not execute a valid option!");
+	private Object[] chooseStringCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedPublications, String choice)  {						
+		if(publicationChoice.equals("a")) {
+			return new Object[]{true, tupleArrayList};
+		} else if(publicationChoice.equals("es") && !addedPublications.isEmpty()) {
+			return new Object[]{true, addedPublications};
+		} else if(publicationChoice.equals("es") && addedPublications.isEmpty()) {			
+			return new Object[]{true, null};
+		} else if(publicationChoice.equals("e!")) {			
+			return new Object[]{true, null};
+		} else {
+			System.out.println("");
+			System.out.println("You must insert a valid option!");
+			return new Object[]{false, addedPublications};
 		}
 	}	
 }

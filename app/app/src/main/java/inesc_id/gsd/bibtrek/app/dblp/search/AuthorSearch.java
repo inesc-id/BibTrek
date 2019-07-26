@@ -6,7 +6,9 @@ import java.util.Scanner;
 import inesc_id.gsd.bibtrek.app.dblp.DBLPQueryCreator;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorJSONParser;
 import inesc_id.gsd.bibtrek.app.dblp.search.condition.SearchBranch;
+import inesc_id.gsd.bibtrek.app.dblp.writer.AuthorDBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.AuthorSearchException;
+import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 
@@ -28,6 +30,7 @@ public class AuthorSearch extends Search {
 		AuthorJSONParser authorJSONParser;	
 		ArrayList<Object[]> tupleArrayList;
 		SearchBranch searchBranch;
+		ArrayList<Object[]> authorsList;
 				
 		authorJSONParser = new AuthorJSONParser();
 		searchBranch = new SearchBranch(this.choice, this.userInput);
@@ -45,9 +48,12 @@ public class AuthorSearch extends Search {
 		tupleArrayList = authorJSONParser.parseString();
 		if(!tupleArrayList.isEmpty()) {		
 			try {
-				searchBranch.choose(tupleArrayList);
+				authorsList = searchBranch.choose(tupleArrayList);
+				this.write(authorsList, this.choice);
 			} catch (SearchBranchException sbe) {
 				throw new AuthorSearchException("search(): could not search for author.");
+			} catch (DBLPNoSQLWriterException dblpnosqlwe) {
+				throw new AuthorSearchException("search(): could not properly begin the write operation.");
 			}
 		}		
 	}			
