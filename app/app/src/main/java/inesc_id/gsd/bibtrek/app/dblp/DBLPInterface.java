@@ -9,9 +9,11 @@ import inesc_id.gsd.bibtrek.app.dblp.parsing.AuthorJSONParser;
 import inesc_id.gsd.bibtrek.app.dblp.search.AuthorSearch;
 import inesc_id.gsd.bibtrek.app.dblp.search.AuthorsPublicationsSearch;
 import inesc_id.gsd.bibtrek.app.dblp.search.PublicationSearch;
+import inesc_id.gsd.bibtrek.app.dblp.search.condition.WriteConditionFactory;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.AuthorSearchException;
 import inesc_id.gsd.bibtrek.app.exceptions.AuthorsPublicationsSearchException;
+import inesc_id.gsd.bibtrek.app.exceptions.DBLPClassException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
 import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.exceptions.HTTPClientException;
@@ -35,14 +37,8 @@ public class DBLPInterface {
 	}
 		
 	public void display() throws DBLPInterfaceException {
-		String query, inputCommand, authorName, publicationTitle, getRequest;
-		DBLPQueryCreator queryCreator;		
-		AuthorSearch authorSearch;
-		AuthorsPublicationsSearch authorsPublicationsSearch;
-		PublicationSearch publicationSearch;
-		
-        queryCreator = new DBLPQueryCreator();                        		   
-        
+		String inputCommand;
+		          
 		while(true) {
 			System.out.println("");
 			System.out.println("(*)  : DBLP MENU");
@@ -61,16 +57,13 @@ public class DBLPInterface {
 		    try {
 				switch(inputCommand) {
 					case SEARCH_AUTHOR_BY_NAME:
-						authorSearch = new AuthorSearch(queryCreator, this.userInput, AUTHOR);
-						authorSearch.search();					
+						DBLPClass.execute(inputCommand, this.userInput);
 						break;
 					case SEARCH_AUTHORS_PUBLICATIONS:
-						authorsPublicationsSearch = new AuthorsPublicationsSearch(queryCreator, this.userInput, AUTHORS_PUBLICATIONS);
-						authorsPublicationsSearch.search();					
+						DBLPClass.execute(inputCommand, this.userInput);
 						break;
 					case SEARCH_PUBLICATION:
-						publicationSearch = new PublicationSearch(queryCreator, this.userInput, PUBLICATION);
-						publicationSearch.search();
+						DBLPClass.execute(inputCommand, this.userInput);
 						break;
 					case EXIT:		                        
 			            return;       
@@ -78,14 +71,9 @@ public class DBLPInterface {
 						System.out.println("Error! You must insert a valid command...");
 						break;
 				}	
-		    } catch(AuthorSearchException ase) {
-		    	throw new DBLPInterfaceException("display(): could not execute search for author by name.");
-		    } catch(AuthorsPublicationsSearchException apse) {
-				throw new DBLPInterfaceException("display(): could not execute search for authors' publications.");
-			} catch (PublicationSearchException pse) {
-		    	throw new DBLPInterfaceException("display(): could not execute search for publications.");
-			}
-			
+		    } catch(DBLPClassException dblpce) {
+		    	throw new DBLPInterfaceException("display(): could not execute a DBLP operation...");
+		    }
 		}         
 	}		
 

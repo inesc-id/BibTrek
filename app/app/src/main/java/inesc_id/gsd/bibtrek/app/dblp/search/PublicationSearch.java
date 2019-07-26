@@ -23,10 +23,10 @@ public class PublicationSearch extends Search {
 	}
 
 	@Override
-	public void search() throws PublicationSearchException {
+	public ArrayList<Object[]> search() throws PublicationSearchException {
 		String query, userChoice, getRequest;		
 		PublicationJSONParser publicationJSONParser;	
-		ArrayList<Object[]> tupleArrayList;
+		ArrayList<Object[]> tupleArrayList = null;
 		SearchBranch searchBranch;
 				
 		publicationJSONParser = new PublicationJSONParser();
@@ -54,6 +54,8 @@ public class PublicationSearch extends Search {
 				throw new PublicationSearchException("search(): could not search for publication.");
 			}			
 		}
+		
+		return tupleArrayList;
 	}
 	
 	protected void search(String title) throws PublicationSearchException {

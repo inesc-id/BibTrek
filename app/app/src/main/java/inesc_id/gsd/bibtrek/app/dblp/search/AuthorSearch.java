@@ -25,12 +25,12 @@ public class AuthorSearch extends Search {
 	}
 
 	@Override
-	public void search() throws AuthorSearchException {
+	public ArrayList<Object[]> search() throws AuthorSearchException {
 		String query, authorName, getRequest;		
 		AuthorJSONParser authorJSONParser;	
 		ArrayList<Object[]> tupleArrayList;
 		SearchBranch searchBranch;
-		ArrayList<Object[]> authorsList;
+		ArrayList<Object[]> authorsList = null;
 				
 		authorJSONParser = new AuthorJSONParser();
 		searchBranch = new SearchBranch(this.choice, this.userInput);
@@ -48,14 +48,12 @@ public class AuthorSearch extends Search {
 		tupleArrayList = authorJSONParser.parseString();
 		if(!tupleArrayList.isEmpty()) {		
 			try {
-				authorsList = searchBranch.choose(tupleArrayList);
-				this.write(authorsList, this.choice);
+				authorsList = searchBranch.choose(tupleArrayList);					
 			} catch (SearchBranchException sbe) {
 				throw new AuthorSearchException("search(): could not search for author.");
-			} catch (DBLPNoSQLWriterException dblpnosqlwe) {
-				throw new AuthorSearchException("search(): could not properly begin the write operation.");
-			}
-		}		
+			} 
+		} 
+		return authorsList;
 	}			
 	
 }
