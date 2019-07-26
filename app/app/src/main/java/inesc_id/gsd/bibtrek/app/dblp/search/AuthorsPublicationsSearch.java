@@ -12,7 +12,7 @@ import inesc_id.gsd.bibtrek.app.exceptions.PublicationSearchException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
 import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 
-public class AuthorsPublicationsSearch extends Search {;
+public class AuthorsPublicationsSearch {;
 	
 	private String choice;
 	private DBLPQueryCreator queryCreator; 
@@ -25,32 +25,17 @@ public class AuthorsPublicationsSearch extends Search {;
 		this.choice = choice;
 	}
 
-	@Override
-	public void search() throws AuthorsPublicationsSearchException {
+	public void search(ArrayList<Object[]> tupleArrayList) throws AuthorsPublicationsSearchException {
 		String authorName, query, userChoice, getRequest, continueChoice;		
 		AuthorJSONParser authorJSONParser;	
-		ArrayList<Object[]> tupleArrayList, chosenAuthors;		
+		ArrayList<Object[]> chosenAuthors;		
 		SearchBranch searchBranch;
 		AuthorsPublicationsSearchBranch authorsPublicationsSearchBranch;
 		PublicationSearch publicationSearch;
 				
 		authorJSONParser = new AuthorJSONParser();
 		searchBranch = new SearchBranch(this.choice, this.userInput);
-		authorsPublicationsSearchBranch = new AuthorsPublicationsSearchBranch(this.userInput);
-		
-		System.out.print("Type the author's name: ");
-		userChoice = this.userInput.nextLine(); 
-		query = queryCreator.searchAuthorByName(userChoice);
-					
-		try {
-			getRequest = this.executeQuery(query);
-		} catch (SearchException se) {
-			throw new AuthorsPublicationsSearchException("search(): could not execute the query: \"" + query + "\".");
-		}
-		authorJSONParser.setString(getRequest);
-		System.out.println("");
-		System.out.println("(*) Authors Found: ");
-		tupleArrayList = authorJSONParser.parseString();
+		authorsPublicationsSearchBranch = new AuthorsPublicationsSearchBranch(this.userInput);						
 
 		if(!tupleArrayList.isEmpty()) {			
 			try {

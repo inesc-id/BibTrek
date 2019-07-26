@@ -21,6 +21,10 @@ public class DBLPClass {
 	private final static String AUTHORS_PUBLICATIONS = "authors-publications";
 	private final static String PUBLICATION = "publication";
 	
+	private static final String SEARCH_AUTHOR_BY_NAME = "a"; 
+	private static final String SEARCH_AUTHORS_PUBLICATIONS = "ap";
+	private static final String SEARCH_PUBLICATION = "p";
+	
 	
 	public static void execute(String inputCommand, Scanner userInput) throws DBLPClassException {
 		DBLPQueryCreator queryCreator;		
@@ -30,25 +34,30 @@ public class DBLPClass {
 		PublicationSearch publicationSearch;
 		DBLPNoSQLWriter dblpNoSQLWriter;
 		ArrayList<Object[]> tupleArrayList; 
-		
+				
 		queryCreator = new DBLPQueryCreator();                        		 
 		
 		try {
 			switch(inputCommand) {
-				case AUTHOR:
+				case SEARCH_AUTHOR_BY_NAME:
 					authorSearch = new AuthorSearch(queryCreator, userInput, AUTHOR);
 					tupleArrayList = authorSearch.search();		
-					dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, inputCommand);
+					dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, AUTHOR);
 					dblpNoSQLWriter.writeToFile();
 					break;
-				case AUTHORS_PUBLICATIONS:
-					authorsPublicationsSearch = new AuthorsPublicationsSearch(queryCreator, userInput, AUTHORS_PUBLICATIONS);
-					authorsPublicationsSearch.search();					
+				case SEARCH_AUTHORS_PUBLICATIONS:
+					authorSearch = new AuthorSearch(queryCreator, userInput, AUTHOR);
+					tupleArrayList = authorSearch.search();	
+					if(tupleArrayList!=null) {
+						authorsPublicationsSearch = new AuthorsPublicationsSearch(queryCreator, userInput, AUTHORS_PUBLICATIONS);
+						authorsPublicationsSearch.search(tupleArrayList);
+					}
+					
 					break;
-				case PUBLICATION:
+				case SEARCH_PUBLICATION:
 					publicationSearch = new PublicationSearch(queryCreator, userInput, PUBLICATION);
 					tupleArrayList = publicationSearch.search();
-					dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, inputCommand);
+					dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, PUBLICATION);
 					dblpNoSQLWriter.writeToFile();
 					break;
 			}
