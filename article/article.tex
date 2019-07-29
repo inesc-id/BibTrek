@@ -4,7 +4,14 @@
 \begin{document}
 \title{\textbf{BibTrek Prototype: A Graph Visualization Tool and Search Engine for Cybersecurity Papers}}
 \date{}
+\author{Jos\'{e} Eduardo Br\'{a}s\\Instituto Superior T\'{e}cnico}
+\date{2019\\ August}
 \maketitle
+
+\textbf{\textit{Abstract}--With the advent of bigger and more elaborate cyberattacks the search for hackers with a deep understanding of the most recent cutting-edge attacks is becoming more difficult. Since the information about these techniques is present in the most recent scientific research publications and because most of the knowledge present in them is built onto the work of several other publications, which they reference, we present BibTrek, a Graph Visualization Tool and Search Engine for Cybersecurity Papers, that intends to solve this exact problem. With BibTrek we shall make use of several computer science web-based libraries to acquire information from multiple sources and display them into a Neo4j graph database to better relate the references between publications, but also authors and other relevant information for the reader. We then present the implementation of a simple command line program that allows us to query the API of DBLP and select which information we shall include on our database. Finally, we talk about further considerations and engineering developments in order for BibTrek to provide a more complex and richer functioning yet providing an easy and enjoyable experience for the user.}
+
+\\[1\baselineskip]
+
 \section{Introduction}
 \subsection{Problem}
 As a result of the rising number of cyberattacks, it is becoming hard to find white-hat hackers that know how to thwart these kinds of attacks effectively. However, with the increased availability of information on the web it is becoming easier to study and learn how these attacks work. The cutting edge techniques used to carry them out is mostly found on the latest scientific research papers. Due to the many iterations of scientific knowledge the most recent work builds upon the work that has been done on the past. Because of this, to understand the most recent concepts it is important the reading of the referenced papers that made the writing of the current ones possible. With this being said the most relevant paper of a certain subject becomes the paper with more references to it, thus making it an obligatory read. Having said that, the reality is that performing these kinds of bibliography surveys is time-consuming and inefficient.
@@ -48,7 +55,7 @@ The reader of this article has to keep in mind that this project was developed i
 The BibTrek prototype the way it was implemented allows us to fully query the DBLP database and acquire diverse information about the subject matter. Currently it presents a fully functional rich user interface allowing the user to insert all obtained information into the Neo4j graph database. We are able to construct a graph with some relevant node information. This information being authors and publications and the relations between them therefore being able to infer which authors wrote each paper. BibTrek's main potential is the strength of us being able to use different databases to our advantage. This way we would be able to add even more data and create a very complex but informative graph. There is also some work to be done in inferring more information than the one being currently inferred about the retrieved data from DBLP, adding more nodes and attributes to the graph representation. Finally, we should crawl the database publications' PDF texts in order for us to add a relationship between publication nodes that reference one another in the database.
 
 \section{Acknowledgements}
-The writer of this article would like to thank Professor Miguel L. Pardal and INESC-ID for having invited him for a one month summer-internship program. With this program the writer learned highly valuable knowledge in the areas of cybersecurity, distributed systems and scientific research from multiple researcher peers. Non only that but also acquired a greater  work from  and has the utmost gratitude for having been part of this project from which he has learned immensely from. 
+The writer of this article would like to thank Professor Miguel L. Pardal and INESC-ID for having invited him for a one month summer-internship program. With this program the writer learned highly valuable knowledge in the areas of cybersecurity, distributed systems and scientific research from multiple researcher peers. Non only that but also acquired a greater work ethic. With this being said he has the utmost gratitude for having been part of this project from which he has learned immensely from. 
 
 \begin{thebibliography}{9}
 
