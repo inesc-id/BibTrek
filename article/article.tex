@@ -10,17 +10,17 @@
 
 \textbf{\textit{Abstract}--With the advent of bigger and more elaborate cyberattacks the search for hackers with a deep understanding of the most recent cutting-edge attacks is becoming more difficult. Since the information about these techniques is present in the most recent scientific research publications and because most of the knowledge present in them is built onto the work of several other publications, which they reference, we present BibTrek, a Graph Visualization Tool and Search Engine for Cybersecurity Papers, that intends to solve this exact problem. With BibTrek we shall make use of several computer science web-based libraries to acquire information from multiple sources and display them into a Neo4j graph database to better relate the references between publications, but also authors and other relevant information for the reader. We then present the implementation of a simple command line program that allows us to query the API of DBLP and select which information we shall include on our database. Finally, we talk about further considerations and engineering developments in order for BibTrek to provide a more complex and richer functioning yet providing an easy and enjoyable experience for the user.}
 
-\\[1\baselineskip]
-
 \section{Introduction}
 
-The number of cyberattacks is on the rise. The CVE statistics \cite{cvestatisticsbyyear} show a 21.56\% increase in the number of documented vulnerabilities over the past 19 years. With the amount of information available it is very easy for an ill-intentioned individual to carry out an attack and exploit some system with minimal computacional resources.
-
-\subsection{Problem}
+The number of cyberattacks is on the rise. The CVE statistics \cite{cvestatisticsbyyear} show a 21.56\% increase in the number of documented vulnerabilities over the past 19 years. With the amount of information available it is very easy for an ill-intentioned individual to carry out an attack and exploit some system with minimal computacional resources. 
+\\[1\baselineskip]
 As a result of the rising number of cyberattacks, it is becoming hard to find white-hat hackers that know how to thwart these kinds of attacks effectively. However, with the increased availability of information on the web it is becoming easier to study and learn how these attacks work. The techniques used to carry them out are are mostly found in blog posts and other social media with short publication times. However, for in-depth analysis and scientic rigour, there are scientific publications in peer-reviewed conferences and journals. Due to the many iterations of scientific knowledge the most recent work builds upon the work that has been done on the past. Because of this, to understand the most recent concepts it is important to read the referenced papers that made the writing of the current ones possible. Usually the most cited papers are the most relevant regarding a certain subject. Having said that, the reality is that performing these kinds of bibliography surveys are time-consuming and inefficient, thus, creating the possibility of them being improved upon.
 
 \subsection{Solution}
-The visualization of information using graphs has the potential to improve the learning process and the construction of conceptual mind maps that make it easier to retain information and relate it with other topics \cite{enhancinglearningwithvisualizationtechniques}. With BibTrek we propose a graph visualization tool with the goal of relating the many different research papers in the area of cybersecurity and presenting that in an informative easy-to-browse graph. The use of this graph is therefore useful to relate the papers and their references making the workflow of the survey process more efficient. We implemented a tool prototype. It allows a search from a set of either authors, publication titles or keywords dynamically producing a reference graph composed of the most relevant scientific papers therefore permitting an easy navigation of information. A simple example execution would follow these steps. Let us say we want to learn about the Spectre attack. We would choose the option to query one of the mentioned above libraries. Next, by selecting the option to search for a publication, we would then then type the word ``Spectre`` on the console terminal. After choosing the Spectre publication, the paper its references, authors and its subject will be added to the database and related with the other papers that were previously added by the user. After the fact, the user can simply watch the graph visualization created by BibTrek, this way finding which papers are the most referenced and therefore understand which shall be the one that he should tackle first.
+The visualization of information using graphs has the potential to improve the learning process and the construction of conceptual mind maps that make it easier to retain information and relate it with other topics \cite{enhancinglearningwithvisualizationtechniques}. With BibTrek we propose a graph visualization tool with the goal of relating the many different research papers in the area of cybersecurity and presenting that in an informative easy-to-browse graph. The use of this graph is therefore useful to relate the papers and their references making the workflow of the survey process more efficient. We implemented a tool prototype. It allows a search from a set of either authors, publication titles or keywords dynamically producing a reference graph composed of the most relevant scientific papers therefore permitting an easy navigation of information. 
+
+\subsection{Example}
+A simple example execution would follow these steps. Let us say we want to learn about the Spectre attack. We would choose the option to query one of the mentioned above libraries. Next, by selecting the option to search for a publication, we would then then type the word ``Spectre`` on the console terminal. After choosing the Spectre publication, the paper its references, authors and its subject will be added to the database and related with the other papers that were previously added by the user. After the fact, the user can simply watch the graph visualization created by BibTrek, this way finding which papers are the most referenced and therefore understand which shall be the one that he should tackle first.
 
 
 \subsection{Overview}
@@ -41,7 +41,6 @@ To obtain the required information to populate our graph database we make use of
 \captionof{\textbf{Table 1}}
 \\[1\baselineskip]
 \begin{tabular}{c|c|c|c|}
-\centering
 \cline{2-4}
 \multicolumn{1}{l|}{}                     & API & Crawlers & Key \\ \hline
 \multicolumn{1}{|c|}{ACM Digital Library} & No  & No       & N/A \\ \hline
@@ -87,11 +86,47 @@ The writer of this article would like to thank Professor Miguel L. Pardal and IN
 
 \begin{thebibliography}{9}
 
+\bibitem{arxiv}
+arXiv 2019,
+\textit{arXiv API | arXiv e-print repository},
+arXiv, viewed 29 July 2019,
+\url{https://arxiv.org/help/api}
+
+\bibitem{crossref}
+Crossref 2019,
+\textit{You are Crossref - Crossref},
+Crossref, viewed 29 July 2019,
+\url{https://www.crossref.org/}
+
 \bibitem{cvestatisticsbyyear}
 CVE 2019,
 \textit{Browse cve vulnerabilities by date - CVE Details},
 CVE, viewed 30 July 2019,
 \url{https://www.cvedetails.com/browse-by-date.php}
+
+\bibitem{bookrecusingneo4j}
+I. N. P. W. Dharmawan and R. Sarno, 
+\textit{Book recommendation using Neo4j graph database in BibTeX book metadata}, 2017.
+In: 3rd International Conference on Science in Information Technology (ICSITech). 
+Bandung, Indonesia.
+
+\bibitem{cypher}
+Neo4j 2019,
+\textit{Cypher Query Language - Neo4j},
+Neo4j, viewed 29 July 2019,
+\url{https://neo4j.com/developer/cypher-query-language/}
+
+\bibitem{dblp}
+dblp 2019,
+\textit{How to use the dblp search API? - dblp},
+dblp, viewed 29 July 2019,
+\url{https://dblp.uni-trier.de/faq/How+to+use+the+dblp+search+API}
+
+\bibitem{ieeexplore}
+IEEE Xplore 2019,
+\textit{IEEE Xplore API},
+IEEE Xplore, viewed 29 July 2019,
+\url{https://developer.ieee.org}
 
 \bibitem{enhancinglearningwithvisualizationtechniques} 
 J. Klerkx, K. Verbert, E. Duval,
@@ -106,47 +141,12 @@ Neo4j 2019,
 Neo4j, viewed 29 July 2019, 
 \url{https://neo4j.com}
 
-\bibitem{arxiv}
-arXiv 2019,
-\textit{arXiv API | arXiv e-print repository},
-arXiv, viewed 29 July 2019,
-\url{https://arxiv.org/help/api}
-
-\bibitem{dblp}
-dblp 2019,
-\textit{How to use the dblp search API? - dblp},
-dblp, viewed 29 July 2019,
-\url{https://dblp.uni-trier.de/faq/How+to+use+the+dblp+search+API}
-
-\bibitem{ieeexplore}
-IEEE Xplore 2019,
-\textit{IEEE Xplore API},
-IEEE Xplore, viewed 29 July 2019,
-\url{https://developer.ieee.org}
-
-\bibitem{crossref}
-Crossref 2019,
-\textit{You are Crossref - Crossref},
-Crossref, viewed 29 July 2019,
-\url{https://www.crossref.org/}
-
-\bibitem{bookrecusingneo4j}
-I. N. P. W. Dharmawan and R. Sarno, 
-\textit{Book recommendation using Neo4j graph database in BibTeX book metadata}, 2017.
-In: 3rd International Conference on Science in Information Technology (ICSITech). 
-Bandung, Indonesia.
-
 \bibitem{vis}
 C. Yang, I. Todd, L. Sanby, 2019,
 \textit{Google Scholar Citation Visualisation},
 Google Scholar Citation Visualisation, viewed 29 July 2019,
 \url{https://people.cs.uct.ac.za/~yngcha005/vis2015/index.html}
 
-\bibitem{cypher}
-Neo4j 2019,
-\textit{Cypher Query Language - Neo4j},
-Neo4j, viewed 29 July 2019,
-\url{https://neo4j.com/developer/cypher-query-language/}
 
 \end{thebibliography}
 
