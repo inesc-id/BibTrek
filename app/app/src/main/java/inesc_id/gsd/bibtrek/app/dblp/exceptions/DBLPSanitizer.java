@@ -1,4 +1,6 @@
-package inesc_id.gsd.bibtrek.app.sanitizer;
+package inesc_id.gsd.bibtrek.app.dblp.exceptions;
+
+import inesc_id.gsd.bibtrek.app.sanitizer.QuerySanitizer;
 
 public class DBLPSanitizer extends QuerySanitizer {
 	

@@ -1,4 +1,4 @@
-package inesc_id.gsd.bibtrek.app.exceptions;
+package inesc_id.gsd.bibtrek.app.dblp.exceptions;
 
 public class DBLPConnectNeo4JException extends Exception {
 	

@@ -1,6 +1,6 @@
 package inesc_id.gsd.bibtrek.app.dblp;
 
-import inesc_id.gsd.bibtrek.app.sanitizer.DBLPSanitizer;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPSanitizer;
 
 public class DBLPQueryCreator {
 	

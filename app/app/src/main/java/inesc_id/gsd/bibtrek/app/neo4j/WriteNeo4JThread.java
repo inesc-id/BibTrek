@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.neo4j.driver.v1.exceptions.ServiceUnavailableException;
 
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPConnectNeo4JException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPConnectNeo4JException;
 import inesc_id.gsd.bibtrek.app.exceptions.WriteNeo4JThreadException;
 import inesc_id.gsd.bibtrek.app.utils.TimeUtils;
 

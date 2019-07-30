@@ -3,17 +3,17 @@ package inesc_id.gsd.bibtrek.app.dblp;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.AuthorSearchException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.AuthorsPublicationsSearchException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPClassException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPInterfaceException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPNoSQLWriterException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.PublicationSearchException;
 import inesc_id.gsd.bibtrek.app.dblp.search.AuthorSearch;
 import inesc_id.gsd.bibtrek.app.dblp.search.AuthorsPublicationsSearch;
 import inesc_id.gsd.bibtrek.app.dblp.search.PublicationSearch;
 import inesc_id.gsd.bibtrek.app.dblp.search.condition.WriteConditionFactory;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
-import inesc_id.gsd.bibtrek.app.exceptions.AuthorSearchException;
-import inesc_id.gsd.bibtrek.app.exceptions.AuthorsPublicationsSearchException;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPClassException;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
-import inesc_id.gsd.bibtrek.app.exceptions.PublicationSearchException;
 
 public class DBLPClass {
 	
@@ -51,8 +51,7 @@ public class DBLPClass {
 					if(tupleArrayList!=null) {
 						authorsPublicationsSearch = new AuthorsPublicationsSearch(queryCreator, userInput, AUTHORS_PUBLICATIONS);
 						authorsPublicationsSearch.search(tupleArrayList);
-					}
-					
+					}					
 					break;
 				case SEARCH_PUBLICATION:
 					publicationSearch = new PublicationSearch(queryCreator, userInput, PUBLICATION);

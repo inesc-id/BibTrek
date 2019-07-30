@@ -3,10 +3,10 @@ package inesc_id.gsd.bibtrek.app.dblp.search.condition;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPConnectNeo4JException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPNoSQLWriterException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.SearchBranchException;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPConnectNeo4JException;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
-import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
 import inesc_id.gsd.bibtrek.app.utils.StringToIntegerUtils;
 
 public class SearchBranch {

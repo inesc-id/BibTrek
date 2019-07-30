@@ -2,7 +2,7 @@ package inesc_id.gsd.bibtrek.app.dblp.writer;
 
 import java.util.ArrayList;
 
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.utils.TimeUtils;
 
 public abstract class DBLPNoSQLWriter {

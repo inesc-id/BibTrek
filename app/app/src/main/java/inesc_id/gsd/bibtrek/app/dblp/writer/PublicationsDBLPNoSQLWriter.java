@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPNoSQLWriterException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPNoSQLWriterException;
 import inesc_id.gsd.bibtrek.app.utils.TimeUtils;
 
 public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{

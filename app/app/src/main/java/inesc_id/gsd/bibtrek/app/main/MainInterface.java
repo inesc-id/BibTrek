@@ -3,7 +3,7 @@ package inesc_id.gsd.bibtrek.app.main;
 import java.util.Scanner;
 
 import inesc_id.gsd.bibtrek.app.dblp.DBLPInterface;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPInterfaceException;
 import inesc_id.gsd.bibtrek.app.exceptions.MainInterfaceException;
 
 public class MainInterface {

@@ -1,7 +1,5 @@
 package inesc_id.gsd.bibtrek.app.neo4j;
 
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPConnectNeo4JException;
-
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
@@ -9,6 +7,8 @@ import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
 import org.neo4j.driver.v1.TransactionWork;
+
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPConnectNeo4JException;
 
 import static org.neo4j.driver.v1.Values.parameters;
 

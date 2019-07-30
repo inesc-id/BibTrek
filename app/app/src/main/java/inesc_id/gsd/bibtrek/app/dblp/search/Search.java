@@ -2,10 +2,10 @@ package inesc_id.gsd.bibtrek.app.dblp.search;
 
 import java.util.ArrayList;
 
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.SearchException;
 import inesc_id.gsd.bibtrek.app.dblp.search.condition.WriteConditionFactory;
 import inesc_id.gsd.bibtrek.app.dblp.writer.DBLPNoSQLWriter;
 import inesc_id.gsd.bibtrek.app.exceptions.HTTPClientException;
-import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 import inesc_id.gsd.bibtrek.app.http.HTTPClient;
 
 public abstract class Search {

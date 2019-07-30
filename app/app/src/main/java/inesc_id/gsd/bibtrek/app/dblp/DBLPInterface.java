@@ -2,8 +2,8 @@ package inesc_id.gsd.bibtrek.app.dblp;
 
 import java.util.Scanner;
 
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPClassException;
-import inesc_id.gsd.bibtrek.app.exceptions.DBLPInterfaceException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPClassException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.DBLPInterfaceException;
 
 public class DBLPInterface {
 		

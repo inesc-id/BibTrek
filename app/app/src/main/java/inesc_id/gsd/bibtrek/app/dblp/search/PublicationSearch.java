@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import inesc_id.gsd.bibtrek.app.dblp.DBLPQueryCreator;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.PublicationSearchException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.SearchBranchException;
+import inesc_id.gsd.bibtrek.app.dblp.exceptions.SearchException;
 import inesc_id.gsd.bibtrek.app.dblp.parsing.PublicationJSONParser;
 import inesc_id.gsd.bibtrek.app.dblp.search.condition.SearchBranch;
-import inesc_id.gsd.bibtrek.app.exceptions.PublicationSearchException;
-import inesc_id.gsd.bibtrek.app.exceptions.SearchBranchException;
-import inesc_id.gsd.bibtrek.app.exceptions.SearchException;
 
 public class PublicationSearch extends Search {
 	
@@ -58,7 +58,7 @@ public class PublicationSearch extends Search {
 		return tupleArrayList;
 	}
 	
-	protected void search(String title) throws PublicationSearchException {
+	public void search(String title) throws PublicationSearchException {
 		String query, userChoice, getRequest;		
 		PublicationJSONParser publicationJSONParser;	
 		ArrayList<Object[]> tupleArrayList;

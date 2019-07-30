@@ -59,7 +59,7 @@ As they show us to query an author, publication or venue the API is the followin
   - <http://dblp.org/search/author/api?q=some_author>
   - <http://dblp.org/search/venue/api?q=some_venue>
 
-We can combine these search queries shown above with the attributes of the table shown: <https://dblp.uni-trier.de/faq/How+to+use+the+dblp+search+API?q=rowhammer> using "&" either for format, number of hits, etc...
+We can combine these search queries shown above with the attributes of the table shown: <https://dblp.uni-trier.de/faq/How+to+use+the+dblp+search+API> using "&" either for format, number of hits, etc...
 
 In the following link is also showed how the results are proccessed from the database: <https://dblp.org/faq/How+can+I+fetch+all+publications+of+one+specific+author>. The results can be proccessed in several ways, including xml, rss and many others. In this same link they showed us to ways of using the API. We used the 2nd one. Although it wasn't the one that they reccomend it was the most useful for us.
 
