@@ -28,7 +28,7 @@ public class AuthorsPublicationsSearch {;
 
 	public void search(ArrayList<Object[]> tupleArrayList) throws AuthorsPublicationsSearchException {		
 		AuthorsPublicationsSearchBranch authorsPublicationsSearchBranch;										
-
+		
 		if(!tupleArrayList.isEmpty()) {			
 			try {											
 				authorsPublicationsSearchBranch = new AuthorsPublicationsSearchBranch(this.queryCreator, this.userInput, this.choice);

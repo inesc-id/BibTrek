@@ -21,7 +21,7 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 		Iterator<Object[]> iter;
 		Object[] tuple;
 		ArrayList<String> authorsArrayList;
-		String author = "no_author", title, url, year, venue, type, key;
+		String author = "no_author", title, url, year, type, key;
 		
 		iter = listToWrite.iterator();
 		authorsArrayList = new ArrayList<String>();
@@ -37,14 +37,13 @@ public class PublicationsDBLPNoSQLWriter extends DBLPNoSQLWriter{
 				title = (String) tuple[1];
 				url = (String) tuple[2];
 				year = (String) tuple[3];
-				venue = (String) tuple[4];
-				type = (String) tuple[5];
-				key = (String) tuple[6];				
+				type = (String) tuple[4];
+				key = (String) tuple[5];				
 				
 				bufferedWriter.append("CREATE (" + title.replaceAll(REPLACE_REGEX, "")
 						+ ":Publication {title:\"" + title 
 						+ "\", url:\"" + url + "\", year:\"" + (int) Integer.valueOf(year) 
-						+ "\", venue:\"" + venue + "\", type:\"" + type 
+						+ "\", type:\"" + type 
 						+ "\", key:\"" + key + "\"})");				
 				authorsArrayList = (ArrayList<String>) tuple[0];
 				for(String authorIter : authorsArrayList) {
