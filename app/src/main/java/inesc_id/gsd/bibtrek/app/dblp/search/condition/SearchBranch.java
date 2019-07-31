@@ -29,7 +29,7 @@ public class SearchBranch {
 		String publicationChoice;
 		boolean exit = false;
 		
-		ArrayList<Object[]> addedPublications = new ArrayList<Object[]>();
+		ArrayList<Object[]> addedObject = new ArrayList<Object[]>();
 		while(true) {
 						
 			if(this.choice.equals(AUTHOR)) {
@@ -56,31 +56,28 @@ public class SearchBranch {
 			publicationChoice = this.userInput.nextLine();
 
 			if(StringToIntegerUtils.isInteger(publicationChoice)) {
-				addedPublications = chooseIntegerCondition(publicationChoice, tupleArrayList);				
+				addedObject = chooseIntegerCondition(publicationChoice, tupleArrayList, addedObject);				
 			} else {
-				tuple = chooseStringCondition(publicationChoice, tupleArrayList, addedPublications, this.choice);
+				tuple = chooseStringCondition(publicationChoice, tupleArrayList, addedObject, this.choice);
 				exit = (boolean) tuple[0];
-				addedPublications = (ArrayList<Object[]>) tuple[1];
+				addedObject = (ArrayList<Object[]>) tuple[1];
 				if(exit) {
-					return addedPublications;
+					return addedObject;
 				}
 			}			
 		}
 	}
 	
-	private ArrayList<Object[]> chooseIntegerCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList) {
+	private ArrayList<Object[]> chooseIntegerCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedObject) {
 		Object[] tuple;
-		ArrayList<Object[]> addedPublications;
-		
-		addedPublications = new ArrayList<Object[]>();
 		
 		try {
 			tuple = tupleArrayList.get(Integer.valueOf(publicationChoice)-1);	
-			if(addedPublications.contains(tuple)) {
+			if(addedObject.contains(tuple)) {
 				System.out.println("");
 				System.out.println("You cannot pick the same publication twice!");
 			} else {				
-				addedPublications.add(tuple);
+				addedObject.add(tuple);
 			}
 			
 		} catch(IndexOutOfBoundsException ioobe) {
@@ -91,22 +88,22 @@ public class SearchBranch {
 			System.out.println("You must insert a valid option!");
 		}
 		
-		return addedPublications;
+		return addedObject;
 	}
 	
-	private Object[] chooseStringCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedPublications, String choice)  {						
+	private Object[] chooseStringCondition(String publicationChoice, ArrayList<Object[]> tupleArrayList, ArrayList<Object[]> addedObject, String choice)  {						
 		if(publicationChoice.equals("a")) {
 			return new Object[]{true, tupleArrayList};
-		} else if(publicationChoice.equals("es") && !addedPublications.isEmpty()) {
-			return new Object[]{true, addedPublications};
-		} else if(publicationChoice.equals("es") && addedPublications.isEmpty()) {			
+		} else if(publicationChoice.equals("es") && !addedObject.isEmpty()) {
+			return new Object[]{true, addedObject};
+		} else if(publicationChoice.equals("es") && addedObject.isEmpty()) {			
 			return new Object[]{true, null};
 		} else if(publicationChoice.equals("e!")) {			
 			return new Object[]{true, null};
 		} else {
 			System.out.println("");
 			System.out.println("You must insert a valid option!");
-			return new Object[]{false, addedPublications};
+			return new Object[]{false, addedObject};
 		}
 	}	
 }
