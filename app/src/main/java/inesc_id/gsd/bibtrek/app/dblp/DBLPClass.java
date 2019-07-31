@@ -41,9 +41,11 @@ public class DBLPClass {
 			switch(inputCommand) {
 				case SEARCH_AUTHOR_BY_NAME:
 					authorSearch = new AuthorSearch(queryCreator, userInput, AUTHOR);
-					tupleArrayList = authorSearch.search();		
-					dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, AUTHOR);
-					dblpNoSQLWriter.writeToFile();
+					tupleArrayList = authorSearch.search();	
+					if(tupleArrayList!=null) {
+						dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, AUTHOR);
+						dblpNoSQLWriter.writeToFile();
+					}
 					break;
 				case SEARCH_AUTHORS_PUBLICATIONS:
 					authorSearch = new AuthorSearch(queryCreator, userInput, AUTHOR);
@@ -56,8 +58,10 @@ public class DBLPClass {
 				case SEARCH_PUBLICATION:
 					publicationSearch = new PublicationSearch(queryCreator, userInput, PUBLICATION);
 					tupleArrayList = publicationSearch.search();
-					dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, PUBLICATION);
-					dblpNoSQLWriter.writeToFile();
+					if(tupleArrayList!=null) {
+						dblpNoSQLWriter = WriteConditionFactory.getWriter(tupleArrayList, PUBLICATION);
+						dblpNoSQLWriter.writeToFile();
+					}
 					break;
 			}
 		} catch(AuthorSearchException ase) {

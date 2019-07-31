@@ -1,6 +1,7 @@
 package inesc_id.gsd.bibtrek.app.dblp.parsing;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ public class PublicationJSONParser extends JSONParser {
 	Object[] displayInfo(JSONObject info, int counter) {
 		Object object;
 		Object[] tuple = null;
-		String author, title, venue, year, type, key, url;
+		String authorString, title, venue, year, type, key, url;
 		ArrayList<Object> authorsArray;
 		
 		object = (Object) ((JSONObject) info.get(AUTHORS)).get(AUTHOR);
@@ -39,6 +40,25 @@ public class PublicationJSONParser extends JSONParser {
 		url = (String) info.get(URL);
 		venue = (String) info.get(VENUE);
 		year = (String) info.get(YEAR);		
+		
+		/*String keyString;
+		Object obtainedObj;
+		System.out.println("test");
+		System.out.println("");
+		Iterator<String> iter = info.keys();		
+		while(iter.hasNext()) {
+			keyString = iter.next();
+			obtainedObj = info.get(keyString);
+			if(obtainedObj instanceof JSONObject) {
+				
+			} else if(obtainedObj instanceof JSONArray) {
+				
+			} else if(obtainedObj instanceof String) {
+				System.out.println((String) obtainedObj);
+			}
+		}
+		System.out.println("");
+		System.out.println("test"); */
 		
 		System.out.println("(" + (counter+1) + ")");
 		System.out.print("- Title: ");
@@ -51,11 +71,11 @@ public class PublicationJSONParser extends JSONParser {
 			this.displayAuthorsList(authorsArray);
 			tuple = new Object[] {authorsArray, title, url, year, venue, type, key};
 		} else if(object instanceof String) {
-			author = (String) ((JSONObject) info.get(AUTHORS)).get(AUTHOR);
+			authorString = (String) ((JSONObject) info.get(AUTHORS)).get(AUTHOR);
 			System.out.println("- Author: ");
-			System.out.println(author);
+			System.out.println(authorString);
 			authorsArray = new ArrayList<Object>();
-			authorsArray.add(author);
+			authorsArray.add(authorString);
 			tuple = new Object[] {authorsArray, title, url, year, venue, type, key};
 		}
 		

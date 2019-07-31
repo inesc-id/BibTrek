@@ -58,12 +58,13 @@ public class PublicationSearch extends Search {
 		return tupleArrayList;
 	}
 	
-	public void search(String title) throws PublicationSearchException {
+	public ArrayList<Object[]> search(String title) throws PublicationSearchException {
 		String query, userChoice, getRequest;		
 		PublicationJSONParser publicationJSONParser;	
 		ArrayList<Object[]> tupleArrayList;
 		SearchBranch searchBranch;
-				
+		ArrayList<Object[]> publicationsList = null;
+		
 		publicationJSONParser = new PublicationJSONParser();
 		searchBranch = new SearchBranch(this.choice, this.userInput);
 			 			
@@ -80,11 +81,12 @@ public class PublicationSearch extends Search {
 		tupleArrayList = publicationJSONParser.parseString();
 		if(!tupleArrayList.isEmpty()) {					
 			try {
-				searchBranch.choose(tupleArrayList);
+				publicationsList = searchBranch.choose(tupleArrayList);
 			} catch (SearchBranchException sbe) {
 				throw new PublicationSearchException("search(): could not search for publication.");
 			}			
 		}
+		return publicationsList;
 	}
 
 }
