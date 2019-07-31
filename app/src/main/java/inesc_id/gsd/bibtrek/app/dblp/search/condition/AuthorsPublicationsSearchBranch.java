@@ -43,7 +43,8 @@ public class AuthorsPublicationsSearchBranch {
 					while(true) {
 						boolean breakCycle = false;
 						System.out.println("");
-						System.out.print("(*) Do you want to fetch the publications of the other authors you have fetched? Type [Y|N]: ");											
+						System.out.print("(*) Do you want to fetch the publications of the other authors you have fetched? If so type \"Y\"."
+								+ " In case you want to abort the operation type \"N\".");											
 						continueChoice = this.userInput.nextLine();
 						switch(continueChoice) {
 							case "Y":							
