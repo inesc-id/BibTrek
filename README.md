@@ -14,19 +14,19 @@ With BibTrek we propose on creating a simple command line console program that f
 
 This repository is divided into 4 main sections. These sections are described below
 
-- api/
+- api/ <https://github.com/inesc-id/BibTrek/tree/master/api>
 
 Here we list the available web based libraries for scientific research papers and elaborate on the available APIs used to extract information from them.
 
-- app/
+- app/ <https://github.com/inesc-id/BibTrek/tree/master/app>
 
 In this folder we have the core of our prototype. We used Java to develop this application and Apache Maven in order to build it. We use multiple other repositories including the Apache Maven JSON and Neo4J repositories.
 
-- article/
+- article/ <https://github.com/inesc-id/BibTrek/tree/master/article>
 
 Here we present a scientific research paper written about the BibTrek prototype. Here we introduce our work on this project and comment on its current functionalities and how they fare and further functionalities to develop in the future.
 
-- db/
+- db/ <https://github.com/inesc-id/BibTrek/tree/master/db>
 
 This is a demo application that uses a previously created user generated database that gives us a brief example in how this application would interact with the Neo4J dataset. There are some aspects of this demo that be upgraded in the future, to provide a better understanding of the program to the users.
 
