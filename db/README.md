@@ -84,3 +84,16 @@ To run the demo Java application follow these steps.
   (a) First be sure to install maven on your computer. If you have not already install it, here is the download link https://maven.apache.org/download.cgi
   (b) To run the demo Java app open a terminal window
 
+# Future Work
+
+Even though this is a demo this has some bugs that I would like to see fixed. Right now the focus should be the following bug:
+
+- We can do a SQL Injection (in this case a NoSQL Injection ba-dum-tss) when we are querying the database with the current types of queries. Instead of adding the user input has a "String composition" we should add the user input as $parameters. An example is given in this link <https://neo4j.com/developer/java/>. The way they use *$message* field in the code snippet should be the way that we should be querying the example database.
+
+# Running the application
+
+To run the application simply use the command below in the db/ directory:
+    
+    mvn clean
+    mvn compile
+    mvn install 
