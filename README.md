@@ -6,7 +6,7 @@ Cybersecurity research publications. Currently our application is just a prototy
 # Goal
 With the increasing number of cyberattacks in the last few years it is becoming harder to find white-hat hackers capable of efectively countering the latest attacks. The cutting edge techniques used for carrying these attacks are mostly found on scientific research papers, authored by other researchers. Because of this, we have to navigate through the references of publications to find details on previous attacks and identify the most relevant paper for certain cybersecurity topic. Most of the time, the most relevant paper is the one with the most references to it.
 
-With **BibTrek** we created a simple console program that fetches publications from various web-based digital libraries and displays the information on a Neo4J graph database. Furthermore it relates information about the papers and its references, authors, the institutions involved and keywords, allowing us to easily navigate through the graph and finding the most appropriate publication for our research. This way we can easily learn more about the latest cyberattacks and, hopefully, twarth them effectively.
+With **BibTrek** we created a simple console program that fetches publications from various web-based digital libraries and displays the information on a [Neo4J graph database](https://neo4j.com/). Furthermore it relates information about the papers and its references, authors, the institutions involved and keywords, allowing us to easily navigate through the graph and finding the most appropriate publication for our research. This way we can easily learn more about the latest cyberattacks and, hopefully, twarth them effectively.
 
 # Sections
 
@@ -30,5 +30,8 @@ This is a demo application that uses a previously created user generated databas
 
 # Further Considerations
 
-This project was developed by José Brás with the guidance of [Professor Miguel L. Pardal](http://web.tecnico.ulisboa.pt/miguel.pardal/) during the developer's summer internship in association with [INESC-ID: Instituto de Engenharia de Sistemas e Computadores, Investigação e Desenvolvimento em Lisboa](https://www.inesc-id.pt/). This project was developed during the course of approximately 3 weeks. Needless is to say, that there is lots of work to do and further aspects of this program to develop in the future.
+This project was developed by José Brás with the guidance of [Miguel Pardal](http://web.tecnico.ulisboa.pt/miguel.pardal/) during the developer's summer internship in association with [INESC-ID: Instituto de Engenharia de Sistemas e Computadores, Investigação e Desenvolvimento em Lisboa](https://www.inesc-id.pt/). This project was developed during the course of approximately 3 weeks. Needless is to say, that there is lots of work to do and further aspects of this program to develop in the future.
 
+## Contact
+
+For inquiries about the tool, please contact [Miguel Pardal](http://web.tecnico.ulisboa.pt/miguel.pardal/).
